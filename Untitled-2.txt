@@ -1,0 +1,3 @@
+##synopis
+this project was to make a classic arcade game were the player has to move from one side to the other with out the bug cathing theme
+##code

@@ -78,8 +78,8 @@ function startGame() {
     document.getElementById('moves').textContent = moves;
     remainingMatches = 8;
 
-    document.getElementById('game').style.display = 'none';//TODO switch game and completed
-    document.getElementById('completed').style.display = 'block';
+    document.getElementById('game').style.display = 'block';//TODO switch game and completed
+    document.getElementById('completed').style.display = 'none';
 }
 
 function openCard(event) {

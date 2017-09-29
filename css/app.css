@@ -80,7 +80,25 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
+.deck .card.not-match {
+    cursor: default;
+    background: red;
+    font-size: 33px;
+}
 
+.replay{
+    background-color: #02ccba;
+     color:white;
+     width: 60%;
+     height:60px;
+     font-size: 25px;
+     border: none;
+     border-radius: 5.3px;
+}
+.fa fa-check-circle-o{
+    color: #02ccba;
+ 
+}
 /*
  * Styles for the Score Panel
  */
@@ -106,4 +124,11 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.wonmessage{
+    align-self: text;
+}
+.win{
+    background-color: white;
 }

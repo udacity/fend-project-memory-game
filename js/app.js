@@ -23,10 +23,11 @@ let deck = [
 
 let firstCardSelected;
 
-
 let moves = 0;
 
 let remainingMatches = 8;
+
+let stars = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -77,8 +78,8 @@ function startGame() {
     document.getElementById('moves').textContent = moves;
     remainingMatches = 8;
 
-    document.getElementById('game').style.display = 'block';
-    document.getElementById('completed').style.display = 'none';
+    document.getElementById('game').style.display = 'none';//TODO switch game and completed
+    document.getElementById('completed').style.display = 'block';
 }
 
 function openCard(event) {
@@ -101,51 +102,69 @@ function checkMatch(firstCard, secondCard) {
 
     const firstCardType = firstCard.childNodes[0].className;
     const secondCardType = secondCard.childNodes[0].className;
-    if (firstCardType === secondCardType && firstCard !== secondCard) {
-
-        firstCard.className = 'card match';
-        secondCard.className = 'card match';
-        firstCard.removeEventListener('click', openCard);
-        secondCard.removeEventListener('click', openCard);
-        remainingMatches--;
-        if (remainingMatches === 0) {
-            gameEnd();
-        }
-    } else {
-        firstCard.className = 'card';
-        secondCard.className = 'card';
-
+    if (firstCard !== secondCard) {
+        moves = moves + 1;
+        rating();
+        document.getElementById('moves').textContent = moves;
     }
-    moves = moves + 1;
-    rating();
-    document.getElementById('moves').textContent = moves;
+    setTimeout(function() {
+        if (firstCardType === secondCardType && firstCard !== secondCard) {
+            
+                    firstCard.className = 'card match';
+                    secondCard.className = 'card match';
+                    firstCard.removeEventListener('click', openCard);
+                    secondCard.removeEventListener('click', openCard);
+                    remainingMatches--;
+                    if (remainingMatches === 0) {
+                        gameEnd();
+                    }
+                } else {
+                    firstCard.className = 'card not-match';
+                    secondCard.className = 'card not-match';
+                    setTimeout(function() {
+                        firstCard.className = 'card';
+                        secondCard.className = 'card';
+                    }, 500);
+                   
+            
+                }
+    }, 700);
+    
+   
 }
 
 function gameEnd() {
     document.getElementById('game').style.display = 'none';
     document.getElementById('completed').style.display = 'block';
+    document.getElementById('tally').textContent = moves;
+    document.getElementById('stars').textContent = stars;
+
 }
 
 
 function rating() {
-    
+
 
     if (moves > 50) {
         document.getElementById('star1').className = 'fa fa-star-o';
         document.getElementById('star2').className = 'fa fa-star-o';
         document.getElementById('star3').className = 'fa fa-star-o';
+        stars = 0;
     } else if (moves > 32) {
         document.getElementById('star1').className = 'fa fa-star';
         document.getElementById('star2').className = 'fa fa-star-o';
         document.getElementById('star3').className = 'fa fa-star-o';
+        stars = 1;
     } else if (moves > 16) {
         document.getElementById('star1').className = 'fa fa-star';
         document.getElementById('star2').className = 'fa fa-star';
         document.getElementById('star3').className = 'fa fa-star-o';
+        stars = 2;
     } else {
         document.getElementById('star1').className = 'fa fa-star';
         document.getElementById('star2').className = 'fa fa-star';
         document.getElementById('star3').className = 'fa fa-star';
+        stars = 3;
     }
 }
 

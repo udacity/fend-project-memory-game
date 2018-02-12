@@ -28,11 +28,7 @@ body {
     flex-direction: column;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-}
-
+ 
 /*
  * Styles for the deck of cards
  */
@@ -71,6 +67,10 @@ h1 {
     cursor: default;
 }
 
+.deck .card.wrong{
+    background: #ff471a ;
+}
+
 .deck .card.show {
     font-size: 33px;
 }
@@ -87,7 +87,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 500px;
     margin-bottom: 10px;
 }
 

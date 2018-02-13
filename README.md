@@ -6,6 +6,10 @@
 
 ## Instructions
 
+This is a classic memory game tester. 
+Working with time and the least amount of moves, find each matching card(to complete a pair).
+To win, repeat until all cards are revealed.
+
 Open up index.html in your browser and enjoy.
 
 ## Contributing

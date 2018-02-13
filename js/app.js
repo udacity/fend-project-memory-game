@@ -24,7 +24,7 @@ let randomDeckArray;
 
 /* Intial function: Display the randomized hidden cards on the page*/
 (function(){ 
-	for(card of deckNodeList)
+	for(let card of deckNodeList)
 		cardArray.push(card);
 	randomizeDeck();
 }());
@@ -50,7 +50,7 @@ function restartGame(){
 	openCardList = [];//Clear selected List
 	gamePlay.timeNow = 0;//Timer restart
 	timerList[0].innerHTML = 0;
-	for(star of starsNodeList)//Stars restart
+	for(let star of starsNodeList)//Stars restart
 		star.style.display ='inline-block';
 	gamePlay.moves = 0;//Moves restart
 	gamePlay.matchedcards = 0;//Reset matched cards
@@ -61,7 +61,7 @@ function restartGame(){
 /*Randomize and hide the deck*/
 function randomizeDeck(){
 	randomDeckArray = shuffle(cardArray);//Randomize array ie cards
-	for(randomCard of randomDeckArray){
+	for(let randomCard of randomDeckArray){
 		randomCard.className = 'card';//Hide all cards
 	    fragment.appendChild(randomCard);//Attach card from randomized deck to a fragment
 	}
@@ -88,7 +88,7 @@ function cardClicked(event){
 /*Update the number of 'moves' variable and display on screen*/
 function updateMoves(){
 	gamePlay.moves++;
-	for(element of moveList)
+	for(let element of moveList)
 		element.innerHTML = gamePlay.moves;
 }
 
@@ -165,7 +165,7 @@ function bothCardsNowInOpen(){
 /*Stopwatch function*/
 setInterval(function(){
 	if(gamePlay.timerOn ){
-		for(element of timerList)
+		for(let element of timerList)
 			element.innerHTML = gamePlay.timeNow;
 		gamePlay.timeNow++;
 	}

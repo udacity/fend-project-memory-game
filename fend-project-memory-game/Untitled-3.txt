@@ -1,0 +1,3 @@
+##synpois
+this project is about testing a javascript file on jasmie framework 
+##code

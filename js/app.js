@@ -2,6 +2,24 @@
  * Create a list that holds all of your cards
  */
 
+ let cardList = [
+    "fa-anchor",
+    "fa-anchor",
+    "fa-bomb",
+    "fa-bomb",
+    "fa-bicycle",
+    "fa-bicycle",
+    "fa-bolt",
+    "fa-bolt",
+    "fa-cube",
+    "fa-cube",
+    "fa-diamond",
+    "fa-diamond",
+    "fa-leaf",
+    "fa-leaf",
+    "fa-paper-plane-o",
+    "fa-paper-plane-o"
+ ];
 
 /*
  * Display the cards on the page

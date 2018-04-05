@@ -30,9 +30,8 @@ const cardList = [
 
 const shuffledCardList = shuffle(cardList);
 
-const deckDiv = document.createElement('ul');
-deckDiv.className = "deck";
-
+const deckList = document.createElement('ul');
+deckList.className = "deck";
 
 for (const card of shuffledCardList) {
   const liElement = document.createElement('li');
@@ -40,10 +39,10 @@ for (const card of shuffledCardList) {
   const iElement = document.createElement('i');
   iElement.className = "fa " + card;
   liElement.appendChild(iElement);
-  deckDiv.appendChild(liElement);
+  deckList.appendChild(liElement);
 }
 
-document.querySelector('.container').appendChild(deckDiv);
+document.querySelector('.container').appendChild(deckList);
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -59,7 +58,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:

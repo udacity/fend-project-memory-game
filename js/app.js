@@ -7,6 +7,7 @@ const cards = deck.getElementsByTagName('li');
 let opened = [];
 let moves = 0;
 let matches = 0;
+const totalMatches = symbols.length / 2;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -69,7 +70,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-// Create function to add event listener to deck and delegate events to all cards
+// Create function to add event listener to deck and delegate events to all cards and only cards
 const cardListener = function(){
   deck.addEventListener('click', function(e){
     let card = e.target;
@@ -94,8 +95,8 @@ const cardListener = function(){
           if (cards[x].className === 'card open show') {
             cards[x].className = 'card match';
           }
-          matches++;
         }
+        matches++;
       // If the items do not match iterate through the cards and change class names back to just card add a delay so the user can see the second card they click on for a moment
       } else {
         setTimeout(function (){
@@ -109,6 +110,11 @@ const cardListener = function(){
       opened = [];
       moves++;
       document.querySelector('.moves').innerText = moves;
+    }
+
+    // Conditional to check to see if it's the end of the game
+    if (totalMatches === matches) {
+      alert("You've Won!");
     }
   });
 }

@@ -5,6 +5,8 @@ let symbols = ['diamond', 'paper-plane-o', 'anchor', 'bolt', 'cube', 'anchor', '
 const deck = document.querySelector('.deck');
 const cards = deck.getElementsByTagName('li');
 let opened = [];
+let moves = 0;
+let matches = 0;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -13,13 +15,19 @@ let opened = [];
  */
 
 function startGame(){
-  // Shuffle symbols
-  let shuffleDeck = shuffle(symbols);
-
   // Remove cards from previous game if any
   while (deck.firstChild){
     deck.removeChild(deck.firstChild);
   }
+
+  // Start all moves and card-matches at a default value of 0
+  matches = 0;
+  moves = 0;
+
+
+  // Shuffle symbols
+  let shuffleDeck = shuffle(symbols);
+
 
   // Loop through symbols and add cards to deck w/ icons
   for (let i = 0; i < shuffleDeck.length; i++) {
@@ -86,6 +94,7 @@ const cardListener = function(){
           if (cards[x].className === 'card open show') {
             cards[x].className = 'card match';
           }
+          matches++;
         }
       // If the items do not match iterate through the cards and change class names back to just card add a delay so the user can see the second card they click on for a moment
       } else {
@@ -98,6 +107,8 @@ const cardListener = function(){
         }, 500);
       };
       opened = [];
+      moves++;
+      document.querySelector('.moves').innerText = moves;
     }
   });
 }

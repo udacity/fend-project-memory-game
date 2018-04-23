@@ -8,6 +8,9 @@ let opened = [];
 let moves = 0;
 let matches = 0;
 const totalMatches = symbols.length / 2;
+let threeStars = 10;
+let twoStars = 15;
+let oneStar = 20;
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -83,10 +86,10 @@ const cardListener = function(){
     }
 
     // If card is true then push into opened array
-  if (card) {
-      card.className += ' open show';
-      opened.push(card);
-  }
+    if (card) {
+        card.className += ' open show';
+        opened.push(card);
+    }
     // Conditional that if opened has two items in array then run conditional to see if they match
     if (opened.length > 1){
       // If the items match then iterate through the cards in deck and change class names to card match

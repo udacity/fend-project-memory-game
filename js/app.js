@@ -1,21 +1,14 @@
-let symbols = [
+let symbol = [
   "diamond",
   "paper-plane-o",
   "anchor",
   "bolt",
   "cube",
-  "anchor",
-  "leaf",
-  "bicycle",
-  "diamond",
-  "bomb",
   "leaf",
   "bomb",
-  "bolt",
   "bicycle",
-  "paper-plane-o",
-  "cube"
 ];
+let symbols = [...symbol, ...symbol];
 const deck = document.querySelector(".deck");
 const cards = deck.getElementsByTagName("li");
 const stars = document.querySelector(".stars");

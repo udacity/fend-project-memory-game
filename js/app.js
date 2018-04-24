@@ -4,11 +4,12 @@
 let symbols = ['diamond', 'paper-plane-o', 'anchor', 'bolt', 'cube', 'anchor', 'leaf', 'bicycle', 'diamond', 'bomb', 'leaf', 'bomb', 'bolt', 'bicycle', 'paper-plane-o', 'cube'];
 const deck = document.querySelector('.deck');
 const cards = deck.getElementsByTagName('li');
+const stars = document.querySelector('.stars')
 let opened = [];
 let moves = 0;
 let matches = 0;
 const totalMatches = symbols.length / 2;
-let threeStars = 10;
+let threeStars = 9;
 let twoStars = 15;
 let oneStar = 20;
 /*
@@ -61,6 +62,16 @@ function shuffle(array) {
     return array;
 }
 
+// Function for star ratings
+function starRating(moves) {
+  if (moves >= threeStars && moves < twoStars) {
+    document.querySelector('#star_1').className = "fa fa-star-o";
+  } else if (moves >= twoStars && moves < oneStar) {
+    document.querySelector('#star_2').className = "fa fa-star-o";
+  } else if (moves > oneStar) {
+    document.querySelector('#star_3').className = "fa fa-star-o";
+  }
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -113,6 +124,7 @@ const cardListener = function(){
       opened = [];
       moves++;
       document.querySelector('.moves').innerText = moves;
+      starRating(moves);
     }
 
     // Conditional to check to see if it's the end of the game

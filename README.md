@@ -1,4 +1,4 @@
-# Memory Game
+# Concentration Game
 
 ## Project Purpose:
 

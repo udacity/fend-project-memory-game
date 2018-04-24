@@ -9,9 +9,7 @@ let opened = [];
 let moves = 0;
 let matches = 0;
 const totalMatches = symbols.length / 2;
-let threeStars = 9;
-let twoStars = 15;
-let oneStar = 20;
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -64,11 +62,11 @@ function shuffle(array) {
 
 // Function for star ratings
 function starRating(moves) {
-  if (moves >= threeStars && moves < twoStars) {
+  if (moves >= 10 && moves < 15) {
     document.querySelector('#star_1').className = "fa fa-star-o";
-  } else if (moves >= twoStars && moves < oneStar) {
+  } else if (moves >= 15 && moves < 20) {
     document.querySelector('#star_2').className = "fa fa-star-o";
-  } else if (moves > oneStar) {
+  } else if (moves >= 20) {
     document.querySelector('#star_3').className = "fa fa-star-o";
   }
 }

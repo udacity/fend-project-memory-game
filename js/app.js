@@ -1,21 +1,15 @@
-/*
- * Create a list that holds all of your cards
- */
 let symbols = ['diamond', 'paper-plane-o', 'anchor', 'bolt', 'cube', 'anchor', 'leaf', 'bicycle', 'diamond', 'bomb', 'leaf', 'bomb', 'bolt', 'bicycle', 'paper-plane-o', 'cube'];
 const deck = document.querySelector('.deck');
 const cards = deck.getElementsByTagName('li');
 const stars = document.querySelector('.stars')
+const restart = document.querySelector('.restart')
+const timer = document.querySelector('.timer')
+let seconds = 0;
 let opened = [];
 let moves = 0;
 let matches = 0;
 const totalMatches = symbols.length / 2;
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+let counter;
 
 function startGame(){
   // Remove cards from previous game if any
@@ -43,9 +37,13 @@ function startGame(){
   }
 
   cardListener();
+
+  resetTimer(counter);
+  seconds = 0;
+  startTimer();
+
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -70,17 +68,6 @@ function starRating(moves) {
     document.querySelector('#star_3').className = "fa fa-star-o";
   }
 }
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 
 // Create function to add event listener to deck and delegate events to all cards and only cards
 const cardListener = function(){
@@ -131,3 +118,30 @@ const cardListener = function(){
     }
   });
 }
+
+// Reset Game
+restart.addEventListener('click', function(){
+  const confirmation = confirm("Click OK to restart your game");
+  if (confirmation) {
+      startGame();
+  }
+});
+
+// Function to start timer
+function startTimer(){
+  counter = setInterval(function(){
+    timer.innerText = seconds;
+    seconds += 1;
+  }, 1000)
+}
+
+// Function to reset timer
+function resetTimer(counter){
+  if (counter) {
+    clearInterval(counter);
+  }
+}
+
+
+// Initialize game
+startGame();

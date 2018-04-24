@@ -39,6 +39,5 @@ On each turn:
 
 ## Contributing
 
-I am not accepting contribution at this time.
+I am not accepting contributions at this time.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

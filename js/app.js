@@ -67,6 +67,35 @@ function shuffle(array) {
   return array;
 }
 
+// Function to re-run game
+function rerunGame() {
+  // Remove cards from previous game if any
+  while (deck.firstChild) {
+    deck.removeChild(deck.firstChild);
+  }
+
+  // Shuffle symbols
+  let shuffleDeck = shuffle(symbols);
+
+  // Reset Stats Function call
+  resetStats();
+
+  // Loop through symbols and add cards to deck w/ icons
+  for (let i = 0; i < shuffleDeck.length; i++) {
+    let card = document.createElement("li");
+    card.className = "card";
+    let icon = document.createElement("i");
+    icon.className = "fa fa-" + shuffleDeck[i];
+    card.appendChild(icon);
+    deck.appendChild(card);
+  }
+
+  resetTimer(counter);
+  seconds = 0;
+  startTimer();
+}
+
+
 // Function for star ratings
 function starRater(moves) {
   starRating = 3;
@@ -164,7 +193,7 @@ restart.addEventListener("click", function() {
     dangerMode: true
   }).then(function(isConfirm) {
     if (isConfirm) {
-      startGame();
+      rerunGame();
     }
   });
 });
@@ -205,7 +234,7 @@ function endGame(moves, starRating) {
     buttons: ["Nope!", "Play Again!"]
   }).then(function(isConfirm) {
     if (isConfirm) {
-      startGame();
+      rerunGame();
     }
   });
   resetTimer(counter);

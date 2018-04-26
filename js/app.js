@@ -67,6 +67,35 @@ function shuffle(array) {
   return array;
 }
 
+// Function to re-run game
+function rerunGame() {
+  // Remove cards from previous game if any
+  while (deck.firstChild) {
+    deck.removeChild(deck.firstChild);
+  }
+
+  // Shuffle symbols
+  let shuffleDeck = shuffle(symbols);
+
+  // Reset Stats Function call
+  resetStats();
+
+  // Loop through symbols and add cards to deck w/ icons
+  for (let i = 0; i < shuffleDeck.length; i++) {
+    let card = document.createElement("li");
+    card.className = "card";
+    let icon = document.createElement("i");
+    icon.className = "fa fa-" + shuffleDeck[i];
+    card.appendChild(icon);
+    deck.appendChild(card);
+  }
+
+  resetTimer(counter);
+  seconds = 0;
+  startTimer();
+}
+
+
 // Function for star ratings
 function starRater(moves) {
   starRating = 3;
@@ -114,33 +143,38 @@ const cardListener = function() {
 
     // If card is true then push into opened array
     if (card) {
-      card.className += " open show";
+      card.className = "card open show animated flipInY";
       opened.push(card);
     }
     // Conditional that if opened has two items in array then run conditional to see if they match
     if (opened.length > 1) {
       // If the items match then iterate through the cards in deck and change class names to card match
       if (card.firstChild.className === opened[0].firstChild.className) {
-        for (let x = 0; x < cards.length; x++) {
-          if (cards[x].className === "card open show") {
-            cards[x].className = "card match";
+        setTimeout(function() {
+          for (let x = 0; x < cards.length; x++) {
+            if (cards[x].className === "card open show animated flipInY") {
+              cards[x].className = "card match animated pulse";
+            }
           }
-        }
+        }, 1000);
         matches++;
         // If the items do not match iterate through the cards and change class names back to just card add a delay so the user can see the second card they click on for a moment
       } else {
         setTimeout(function() {
           for (let x = 0; x < cards.length; x++) {
-            if (cards[x].className === "card open show") {
-              cards[x].className = "card";
-            }
+            if (cards[x].className === "card open show animated flipInY") {
+              cards[x].className = "card animated flipInX";
+              setTimeout(function(){
+                cards[x].className = "card";
+              }, 200);
+            };
           }
-        }, 500);
-      }
-      opened = [];
+        }, 1000);
+      };
       moves++;
       document.querySelector(".moves").innerText = moves;
       starRater(moves);
+      opened = [];
     }
 
     // Conditional to check to see if it's the end of the game
@@ -159,7 +193,7 @@ restart.addEventListener("click", function() {
     dangerMode: true
   }).then(function(isConfirm) {
     if (isConfirm) {
-      startGame();
+      rerunGame();
     }
   });
 });
@@ -179,6 +213,11 @@ function resetTimer(counter) {
   }
 }
 
+// // Function to reset cards
+// function resetCards(){
+//
+// }
+
 // End game function
 function endGame(moves, starRating) {
   swal({
@@ -195,7 +234,7 @@ function endGame(moves, starRating) {
     buttons: ["Nope!", "Play Again!"]
   }).then(function(isConfirm) {
     if (isConfirm) {
-      startGame();
+      rerunGame();
     }
   });
   resetTimer(counter);

@@ -1,20 +1,43 @@
-# Memory Game Project
+# Concentration Game
+
+## Project Purpose:
+
+This game was built as a Udacity Course project. The purpose of the project is to demonstrate HTML, CSS, and Javascript skill level.
 
 ## Table of Contents
 
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 
-## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+### How to Play
 
-To get started, open `js/app.js` and start building out the app's functionality
+The game board consists of 4x4 cards arranged randomly in a grid. The deck is made up of eight pairs of cards, each with different symbols on one side.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+On each turn:
+
+- The player flips one card over to reveal its underlying symbol
+- The player then turns over a second card, trying to find the corresponding card with the same symbol
+- If the cards match, both cards stay flipped over
+- If the cards do not match, both cards are flipped back
+- The game ends once all cards have been correctly matched and it will display 
+
+## Resources used to create the game:
+
+### Array shuffle:
+
+- <http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array>
+
+### Sweet Alert:
+
+- <https://sweetalert.js.org/guides/>
+
+### Font Awesome:
+
+- <https://fontawesome.com/>
+
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+I am not accepting contributions at this time.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -22,33 +22,9 @@ let matches = 0;
 const totalMatches = symbols.length / 2;
 let counter;
 
-function startGame() {
-  // Remove cards from previous game if any
-  while (deck.firstChild) {
-    deck.removeChild(deck.firstChild);
-  }
-
-  // Shuffle symbols
-  let shuffleDeck = shuffle(symbols);
-
-  // Reset Stats Function call
-  resetStats();
-
-  // Loop through symbols and add cards to deck w/ icons
-  for (let i = 0; i < shuffleDeck.length; i++) {
-    let card = document.createElement("li");
-    card.className = "card";
-    let icon = document.createElement("i");
-    icon.className = "fa fa-" + shuffleDeck[i];
-    card.appendChild(icon);
-    deck.appendChild(card);
-  }
-
+function initGame() {
+  runGame();
   cardListener();
-
-  resetTimer(counter);
-  seconds = 0;
-  startTimer();
 }
 
 function shuffle(array) {
@@ -68,7 +44,7 @@ function shuffle(array) {
 }
 
 // Function to re-run game
-function rerunGame() {
+function runGame() {
   // Remove cards from previous game if any
   while (deck.firstChild) {
     deck.removeChild(deck.firstChild);
@@ -193,7 +169,7 @@ restart.addEventListener("click", function() {
     dangerMode: true
   }).then(function(isConfirm) {
     if (isConfirm) {
-      rerunGame();
+      runGame();
     }
   });
 });
@@ -234,11 +210,11 @@ function endGame(moves, starRating) {
     buttons: ["Nope!", "Play Again!"]
   }).then(function(isConfirm) {
     if (isConfirm) {
-      rerunGame();
+      runGame();
     }
   });
   resetTimer(counter);
 }
 
 // Initialize game
-startGame();
+initGame();

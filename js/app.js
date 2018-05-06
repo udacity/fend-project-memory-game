@@ -1,8 +1,11 @@
 /*
  * Create a list that holds all of your cards
  */
+let cards = document.querySelectorAll(".deck .card");
+let cardsArray = Array.from(cards);
 var cardsList = document.querySelectorAll(".card .fa");
 var cardsListArray = [];
+// All cards appear randomly
 for(var i = 0;i < cardsList.length;i++)
 {
     cardsListArray.push(cardsList[i].className);
@@ -20,6 +23,14 @@ for(var i = 0;i < cardsList.length;i++)
    cardsList[i].className = newCardList[i];
     
 }
+// All cards appear randomly
+// Add eventlistener to every card item
+var handler = function (event) {
+    var target = event.target;
+    show(target);
+}
+cardsArray.forEach(e => e.addEventListener("click", handler));
+// Add eventlistener to every card item
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -33,6 +44,36 @@ function shuffle(array) {
     }
 
     return array;
+}
+// when the card is clicked, this function will be called,this function will show the card symbol to player,
+//  start the timer,if there are 2 cards opened,the 2 cards will be tested with function checkCards,
+//  test if the game will immediately finish and call the gameover function. 
+function show(element) {
+    if (called === false) {
+        called = true;
+        interval = setInterval(function () {
+            gameBegin = ++gameBegin
+            gameTime.innerHTML =
+                gameBegin;
+        }, 1000);
+
+    }
+    element.className += " open";
+    element.className += " show";
+    openCardList.push(element);
+    if (matchedCardList.length === 14) {
+        matchedCardList.push(element);
+    }
+    else if (matchedCardList.length === 15) {
+        setTimeout(checkCards, 400, openCardList);
+        clearInterval(interval);
+        setTimeout(gameOver, 1000);
+
+
+    }
+    else if (openCardList.length === 2) {
+        setTimeout(checkCards, 300, openCardList);
+    }
 }
 
 

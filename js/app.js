@@ -124,6 +124,7 @@ function show(element) {
     element.className += " open";
     element.className += " show";
     openCardList.push(element);
+    element.removeEventListener("click",handler);
     if (matchedCardList.length === 14) {
         matchedCardList.push(element);
     }
@@ -153,14 +154,7 @@ function checkCards(cardsList) {
             matchedCardList.push(openCardList[i]);
             openCardList.pop();
         }
-        /* remove listener since cards matched already */
-        for (var i = 0; i < matchedCardList.length; i++) {
-            let index = cardsArray.indexOf(matchedCardList[i]);
-            if (index > -1) {
-                cardsArray[index].removeEventListener("click", handler);
-                cardsArray.splice(index, 1);
-            }
-        }
+       
     }
     else {
         for (var i = 0; i < openCardList.length; i++) {
@@ -200,7 +194,12 @@ function RatingGame() {
  */
 function CardsNotMatch() {
     for (var i = openCardList.length - 1; i >= 0; i--) {
-
+        let index = cardsArray.indexOf(openCardList[i]);
+        if(index > -1)
+       {
+            cardsArray[index].addEventListener("click",handler);
+           
+        }
         openCardList[i].className = "card";
         openCardList.pop();
 

@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -36,33 +37,36 @@ h1 {
 /*
  * Styles for the deck of cards
  */
+
 @keyframes shake {
-    10%, 90% {
+    10%,
+    90% {
         transform: translate3d(-1px, 0, 0);
     }
-
-    20%, 80% {
+    20%,
+    80% {
         transform: translate3d(2px, 0, 0);
     }
-
-    30%, 50%, 70% {
+    30%,
+    50%,
+    70% {
         transform: translate3d(-4px, 0, 0);
     }
-
-    40%, 60% {
+    40%,
+    60% {
         transform: translate3d(4px, 0, 0);
     }
 }
 
 @keyframes cardScale {
     from {
-        transform: scale(0.7,0.7);
+        transform: scale(0.7, 0.7);
     }
-
     to {
-        transform: scale(1,1);
+        transform: scale(1, 1);
     }
 }
+
 .deck {
     width: 660px;
     min-height: 680px;
@@ -91,29 +95,30 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-    .deck .card.open {
-        transform: rotateY(360deg);
-        transition-duration: 0.3s;
-        background: #02b3e4;
-        cursor: default;
-    }
+.deck .card.open {
+    transform: rotateY(360deg);
+    transition-duration: 0.3s;
+    background: #02b3e4;
+    cursor: default;
+}
 
 .deck .card.show {
     font-size: 33px;
 }
 
-    .deck .card.match {
-        animation: cardScale 0.32s;
-        transform: scale(1,1);
-        cursor: default;
-        background: #02ccba;
-        font-size: 33px;
-    }
-    .deck .card.notMatch {
-        animation: shake 0.82s;
-        transform: translate3d(0,0,0);
-        background-color: rgb(250, 104, 19);
-    }
+.deck .card.match {
+    animation: cardScale 0.32s;
+    transform: scale(1, 1);
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+
+.deck .card.notMatch {
+    animation: shake 0.82s;
+    transform: translate3d(0, 0, 0);
+    background-color: rgb(250, 104, 19);
+}
 
 /*
  * Styles for the Score Panel
@@ -141,6 +146,7 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
 .gameover i::before {
     font-size: 10em;
     color: green;
@@ -153,26 +159,26 @@ h1 {
     height: 100%;
 }
 
-    .gameover h3 {
-        position: absolute;
-        top: 48%;
-        left: 34.5%;
-    }
+.gameover h3 {
+    position: absolute;
+    top: 48%;
+    left: 34.5%;
+}
 
-    .gameover p {
-        position: absolute;
-        top: 55%;
-        left: 45%;
-    }
+.gameover p {
+    position: absolute;
+    top: 55%;
+    left: 45%;
+}
 
-    .gameover button {
-        position: absolute;
-        top: 70%;
-        left: 45%;
-        background-color: turquoise;
-        font-size: 1.5em;
-        border-radius: 10px;
-    }
+.gameover button {
+    position: absolute;
+    top: 70%;
+    left: 45%;
+    background-color: turquoise;
+    font-size: 1.5em;
+    border-radius: 10px;
+}
 
 .timer {
     width: 20%;
@@ -181,9 +187,9 @@ h1 {
     margin-left: 30px;
 }
 
-    .timer h5 {
-        margin: 0px;
-    }
+.timer h5 {
+    margin: 0px;
+}
 
 .timernumber {
     margin-left: 10px;

@@ -1,59 +1,59 @@
-@media screen and (min-width: 1025px)
-{
-    .deck{
+@media screen and (min-width: 1025px) {
+    .deck {
         width: 1000px;
     }
-    .deck .card{
+    .deck .card {
         width: 220px;
         height: 145px;
     }
 }
-@media screen and (max-width: 700px) and (min-width: 499px)
-{
-    .deck{
+
+@media screen and (max-width: 700px) and (min-width: 499px) {
+    .deck {
         width: 480px;
     }
-    .deck .card{
+    .deck .card {
         height: 100px;
         width: 100px;
     }
-    .gameover i::before{
+    .gameover i::before {
         left: 35%;
     }
-    .gameover h3{
+    .gameover h3 {
         left: 8.5%;
     }
-    .gameover p{
+    .gameover p {
         left: 30%;
     }
-    .gameover button{
+    .gameover button {
         left: 35%;
     }
 }
+
 @media screen and (max-width: 498px) {
     .score-panel {
         width: 255px;
     }
-    .deck{
+    .deck {
         width: 290px;
     }
-    .deck .card{
+    .deck .card {
         height: 80px;
         width: 50px;
     }
-    .gameover i::before{
+    .gameover i::before {
         left: 25%;
         top: 20%;
     }
-    .gameover p{
+    .gameover p {
         left: 20%;
     }
-    .gameover h3{
+    .gameover h3 {
         font-size: 1.1em;
         left: 15.5%;
         top: 45%;
     }
-    .gameover button{
+    .gameover button {
         left: 25%;
     }
 }

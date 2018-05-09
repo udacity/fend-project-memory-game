@@ -13,6 +13,8 @@
 // Shuffle function from http://stackoverflow.com/a/2450976
 let moves = 0;
 let icons = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle', 'fa-diamond', 'fa-bomb', 'fa-leaf', 'fa-bomb', 'fa-bolt', 'fa-bicycle', 'fa-paper-plane-o', 'fa-cube'];
+let matched = 0;
+var sec = 0;
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -30,6 +32,7 @@ function shuffle(array) {
 
 function restart(evt){
   moves = 0;
+  sec = 0;
   icons = shuffle(icons);
   document.querySelector('.moves').textContent = moves;
   cardElement = document.querySelectorAll('.card');
@@ -41,7 +44,8 @@ function restart(evt){
     for (var i = 0 ; i < 16; i++){
       cardElement[i].classList.value = "card";
     }
-  }, 3000);
+  }, 2000);
+  
 }
 
 document.addEventListener('DOMContentLoaded', restart); 
@@ -50,7 +54,10 @@ document.querySelector('.restart').addEventListener('click', restart);
 
 document.querySelector('.deck').addEventListener('click', function (evt) {
   if(evt.target.nodeName == 'LI'){
-      
+      var duration = setInterval(function() {
+        sec++;
+        document.querySelector('.time').textContent = sec + " sec";
+      }, 1000);
       if (evt.target.classList.contains('show')){
           evt.target.classList.value = "card";
       }
@@ -63,7 +70,9 @@ document.querySelector('.deck').addEventListener('click', function (evt) {
               evt.target.classList.add('match');
               opened_icon.add('match');
               opened_icon.remove('open','show');
-          } else {
+              moves++;
+              ++matched == 8 ? document.querySelector('body').innerHTML = '<div class="container" > <div class="score"> <h1> Congratulations!!! </h1>  <p class="fa fa-smile-o smily"> </p> <br/> <h3> Moves:-' + moves + '</h3><div> <p><button type="button" class="button" onclick="reload()">Try Again!!</button> <p></div></div>' :  console.log('matched items :- ' + matched);
+               } else {
               opened_icon.value = "card wrong show";
               evt.target.classList.add('wrong', 'show');
 
@@ -71,12 +80,18 @@ document.querySelector('.deck').addEventListener('click', function (evt) {
                   evt.target.classList.remove('show', 'wrong');
                   opened_icon.value = "card";
               }, 800);
-
+              moves++;
           }
-          document.querySelector('.moves').textContent = ++moves;
+          document.querySelector('.moves').textContent = moves;
       }
    }
 });
+
+function reload(){
+      location.reload();     
+}
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

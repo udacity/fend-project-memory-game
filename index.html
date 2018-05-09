@@ -1,13 +1,17 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -16,17 +20,26 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <ul class="stars">
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+                <li>
+                    <i class="fa fa-star"></i>
+                </li>
+            </ul>
 
-        	<span class="moves">3</span> Moves
-
+            <span class="moves">3</span> Moves
+            <div class="timer">
+                <h5>Time:</h5>
+                <span class="timernumber">0</span>s
+            </div>
             <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+                <i class="fa fa-repeat"></i>
+            </div>
         </section>
 
         <ul class="deck">
@@ -80,7 +93,19 @@
             </li>
         </ul>
     </div>
-
+    <div class="gameover" style="display:none">
+        <i class="fa fa-check-circle"></i>
+        <h3>Congratulations! You Won this game in
+            <span class="time"></span> seconds!</h3>
+        <p>
+            with
+            <span class="moves"></span> Moves and
+            <span class="star"></span>
+            <br> Woooooo!
+        </p>
+        <button>Play again!</button>
+    </div>
     <script src="js/app.js"></script>
 </body>
+
 </html>

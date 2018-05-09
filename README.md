@@ -1,17 +1,17 @@
 # Memory Game Project
 
-## Table of Contents
+** a simple card game for train your memory designed by Udacity.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+The simple card game bases on the static Udacity/fend-project-memory-game on github.
 
-## Instructions
+It was extended by interactive javascript functions so you can enjoy playing and train your memory.
+The goal of this game is to find all card pairs. Try to find all pairs with as less moves as possible.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Features :
+- flip effects
+- time and move counter
+- "won game" page
+- play on smartphone, desktop, tablet --> play anywhere!
 
 ## Contributing
 

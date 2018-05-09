@@ -11,6 +11,9 @@
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+let moves = 0;
+let icons = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle', 'fa-diamond', 'fa-bomb', 'fa-leaf', 'fa-bomb', 'fa-bolt', 'fa-bicycle', 'fa-paper-plane-o', 'fa-cube'];
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -25,7 +28,55 @@ function shuffle(array) {
     return array;
 }
 
+function restart(evt){
+  moves = 0;
+  icons = shuffle(icons);
+  document.querySelector('.moves').textContent = moves;
+  cardElement = document.querySelectorAll('.card');
+  for (var i = 0 ; i < 16; i++){
+    cardElement[i].classList.value = "card show";
+    cardElement[i].firstElementChild.classList.value = "fa " + icons[i];
+  }
+  setTimeout(function() {
+    for (var i = 0 ; i < 16; i++){
+      cardElement[i].classList.value = "card";
+    }
+  }, 3000);
+}
 
+document.addEventListener('DOMContentLoaded', restart); 
+
+document.querySelector('.restart').addEventListener('click', restart);
+
+document.querySelector('.deck').addEventListener('click', function (evt) {
+  if(evt.target.nodeName == 'LI'){
+      
+      if (evt.target.classList.contains('show')){
+          evt.target.classList.value = "card";
+      }
+      else if (document.querySelector('.show') == null){
+          evt.target.classList.add('show', 'open');
+      }
+      else if(!evt.target.classList.contains('match')){
+          var opened_icon = document.querySelector('.show').classList;
+          if(evt.target.firstElementChild.classList.value === document.querySelector('.show').firstElementChild.classList.value){
+              evt.target.classList.add('match');
+              opened_icon.add('match');
+              opened_icon.remove('open','show');
+          } else {
+              opened_icon.value = "card wrong show";
+              evt.target.classList.add('wrong', 'show');
+
+              setTimeout(function() {
+                  evt.target.classList.remove('show', 'wrong');
+                  opened_icon.value = "card";
+              }, 800);
+
+          }
+          document.querySelector('.moves').textContent = ++moves;
+      }
+   }
+});
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

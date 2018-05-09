@@ -11,7 +11,7 @@ let moveCounter = document.querySelector(".moves");
 let reStart = document.querySelector(".restart i");
 let playAgainButton = document.querySelector(".gameover button");
 let cards = document.querySelectorAll(".deck .card");
-var cardsList = document.querySelectorAll(".card .fa");
+let cardsList = document.querySelectorAll(".card .fa");
 
 /* init variables we need  */
 let gameBegin = 0;
@@ -20,7 +20,7 @@ let starsNumber = 3;
 let called = false;
 let openCardList = [];
 let matchedCardList = [];
-var cardsListArray = [];
+let cardsListArray = [];
 
 /* definitions without init */
 let interval;
@@ -36,8 +36,7 @@ moveCounter.innerHTML = counter;
     copy cards to array
     copy to ensure they are 2 separate memory spaces
 */
-for(var i = 0;i < cardsList.length;i++)
-{
+for (var i = 0; i < cardsList.length; i++) {
     cardsListArray.push(cardsList[i].className);
 }
 
@@ -49,14 +48,13 @@ for(var i = 0;i < cardsList.length;i++)
  */
 let newCardList = shuffle(cardsListArray);
 
-for(var i = 0;i < cardsList.length;i++)
-{
-   cardsList[i].className = newCardList[i];
+for (var i = 0; i < cardsList.length; i++) {
+    cardsList[i].className = newCardList[i];
 }
 
 /* create event listener for cards */
-var handler = function (event) {
-    var target = event.target;
+let handler = function (event) {
+    let target = event.target;
     show(target);
 }
 /* Add eventlistener to every card item */
@@ -75,14 +73,13 @@ reStart.addEventListener("click", gameStart);
 
 /*
  * Add eventlistener to document When the DOM is loaded,all cards will be not showed.
- * */
+ */
 document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < cards.length; i++) {
         if (cards[i].classList.contains("match") || cards[i].classList.contains("open")) {
             if (cards[i].classList.contains("open")) {
                 cards[i].className = "card";
-            }
-            else {
+            } else {
                 cards[i].className = "card";
             }
         }
@@ -91,9 +88,10 @@ document.addEventListener("DOMContentLoaded", function () {
 /*
  * magical function from stackoveerflow which shuffle an arry
  * Shuffle function from http://stackoverflow.com/a/2450976
- * */
+ */
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -110,7 +108,7 @@ function shuffle(array) {
  * this function will show the card symbol to player, start the timer
  * if there are 2 cards opened,the 2 cards will be tested with function checkCards,
  * and test if the game will immediately finish and call the gameover function.
- * */
+ */
 function show(element) {
     if (called === false) {
         called = true;
@@ -124,18 +122,16 @@ function show(element) {
     element.className += " open";
     element.className += " show";
     openCardList.push(element);
-    element.removeEventListener("click",handler);
+    element.removeEventListener("click", handler);
     if (matchedCardList.length === 14) {
         matchedCardList.push(element);
-    }
-    else if (matchedCardList.length === 15) {
+    } else if (matchedCardList.length === 15) {
         setTimeout(checkCards, 400, openCardList);
         clearInterval(interval);
         setTimeout(gameOver, 1000);
 
 
-    }
-    else if (openCardList.length === 2) {
+    } else if (openCardList.length === 2) {
         setTimeout(checkCards, 300, openCardList);
     }
 }
@@ -146,7 +142,7 @@ function show(element) {
  * if the number of the moves reach specific point,the function RatingGame will be called.
  * when the card's symbol are the same,the click eventlistener will be removed.
  * when the card's symbol are not the same,the function cardsNotMatch will be called.
- * */
+ */
 function checkCards(cardsList) {
     if (cardsList[0].children[0].className === cardsList[1].children[0].className) {
         for (var i = openCardList.length - 1; i >= 0; i--) {
@@ -154,9 +150,8 @@ function checkCards(cardsList) {
             matchedCardList.push(openCardList[i]);
             openCardList.pop();
         }
-       
-    }
-    else {
+
+    } else {
         for (var i = 0; i < openCardList.length; i++) {
             openCardList[i].className = "card open show notMatch";
         }
@@ -173,17 +168,15 @@ function checkCards(cardsList) {
 /*
  * update star view
  * function reduce the showed stars at some point and decrease the number of the stars.
- * */
+ */
 function RatingGame() {
     if (counter === 16) {
         starArray[2].className = "fa fa-star-o";
         starsNumber = 2;
-    }
-    else if (counter === 24) {
+    } else if (counter === 24) {
         starArray[1].className = "fa fa-star-o";
         starsNumber = 1;
-    }
-    else {
+    } else {
         starArray[0].className = "fa fa-star-o";
         starsNumber = 0;
     }
@@ -195,10 +188,9 @@ function RatingGame() {
 function CardsNotMatch() {
     for (var i = openCardList.length - 1; i >= 0; i--) {
         let index = cardsArray.indexOf(openCardList[i]);
-        if(index > -1)
-       {
-            cardsArray[index].addEventListener("click",handler);
-           
+        if (index > -1) {
+            cardsArray[index].addEventListener("click", handler);
+
         }
         openCardList[i].className = "card";
         openCardList.pop();
@@ -210,7 +202,7 @@ function CardsNotMatch() {
  * the congratulation page will appear with how much time it took to win the game
  * and what the star rating was and the number of the moves the player has made .
  * and ask the player if he wants to play again
- * */
+ */
 function gameOver() {
     container.style.display = "none";
     gameover.style.display = "block";
@@ -221,8 +213,7 @@ function gameOver() {
     let stars = document.querySelector(".gameover .star");
     if (starsNumber === 1) {
         stars.innerHTML = starsNumber + " Star."
-    }
-    else {
+    } else {
         stars.innerHTML = starsNumber + " Stars.";
     }
 }

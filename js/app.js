@@ -9,6 +9,12 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+let symbols = Array.prototype.slice.call(document.querySelectorAll('.card'));
+let moves = document.querySelector('.moves');
+const card = document.querySelector('.card');
+const deck = document.querySelector('.deck');
+console.log(symbols)
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -25,6 +31,35 @@ function shuffle(array) {
     return array;
 }
 
+// New game start will reset all the classes , shuffle the cards and reset the moves
+function newGame(){
+	resetClasses();
+	shuffleCards();
+	resetMoves();
+}
+
+// function for reseting the classes
+function resetClasses(){
+	for(let i = 0 ; i < symbols.length ; i++){
+		symbols[i].className = "card";
+	}
+}
+
+// function for shuffling the cards
+function shuffleCards(){
+	let shuffled = shuffle(symbols);
+	for(let i = 0 ; i < symbols.length ; i++){
+		deck.appendChild(symbols[i]);
+	}
+}
+
+//function for resetting moves
+function resetMoves(){
+	moves.innerHTML = 0;
+}
+
+
+newGame();
 
 /*
  * set up the event listener for a card. If a card is clicked:

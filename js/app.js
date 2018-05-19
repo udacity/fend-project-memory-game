@@ -19,6 +19,7 @@ let secondCardSymbol = '';
 let isReady = true;
 const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
+const reset = document.querySelector('.restart');
 console.log(symbols)
 
 
@@ -68,6 +69,7 @@ function resetMoves(){
 //event listeners
 
 deck.addEventListener("click", makeMove);
+reset.addEventListener("click", newGame);
 
 
 // make move function defined
@@ -131,20 +133,12 @@ function compareCards(){
 }
 
 
-/*function cardOpened(){
-	if (card.hasClass('open')){
-		return true;
-	} 
-}
 
 
 
-//check if element has class src http://sonnyt.com/blog/development/javascript-check-if-element-has-class
 
-Element.prototype.hasClass = function(className) {
-    return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
-};
-*/
+
+
 newGame();
 
 /*

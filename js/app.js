@@ -12,8 +12,11 @@
 let symbols = Array.prototype.slice.call(document.querySelectorAll('.card'));
 let moves = document.querySelector('.moves');
 let cardClickCounter = 1;
-let card1 = '';
-let card2 = '';
+let firstCard = '';
+let secondCard = '';
+let firstCardSymbol = '';
+let secondCardSymbol = '';
+let isReady = true;
 const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
 console.log(symbols)
@@ -71,19 +74,21 @@ deck.addEventListener("click", makeMove);
 
 function makeMove(event){
 
-	if(event.target.className == "card"){
-		
+	if(event.target.className == "card" && isReady == true){
+
 		if(cardClickCounter < 2){
 
 			event.target.className += " open show"
-			card1 = event.target.firstElementChild.className;
+			firstCard = event.target;
+			firstCardSymbol = event.target.firstElementChild.className;
 			cardClickCounter++;
 			
 		} else if (cardClickCounter == 2){
 
 			event.target.className += " open show"
 			cardClickCounter = 1;
-			card2 = event.target.firstElementChild.className;
+			secondCard = event.target;
+			secondCardSymbol = event.target.firstElementChild.className;
 			moves.innerHTML ++;
 			compareCards();
 
@@ -95,10 +100,32 @@ function makeMove(event){
 function compareCards(){
 
 
-	if(card1 === card2){
-		event.target.className = "card open match show"
+	if(firstCardSymbol === secondCardSymbol){
+		firstCard.className += " animated wobble match";
+		secondCard.className += " animated wobble match";
+		
+		//reset values
+		firstCard = '';
+		secondCard = '';
+		firstCardSymbol = '';
+		secondCardSymbol = '';
 	} else {
-		setTimeout(resetClasses(), 3000)
+
+			isReady = false;
+
+		setTimeout(function(){
+
+			firstCard.className += " animated shake"
+			secondCard.className += " animated shake"}
+			, 300);
+
+		setTimeout(function(){
+
+			firstCard.className = "card"
+			secondCard.className = "card"
+			isReady = true;
+
+		}, 1600)
 	}
 
 }

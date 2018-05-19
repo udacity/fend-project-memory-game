@@ -11,6 +11,9 @@
  */
 let symbols = Array.prototype.slice.call(document.querySelectorAll('.card'));
 let moves = document.querySelector('.moves');
+let cardClickCounter = 1;
+let card1 = '';
+let card2 = '';
 const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
 console.log(symbols)
@@ -59,6 +62,62 @@ function resetMoves(){
 }
 
 
+//event listeners
+
+deck.addEventListener("click", makeMove);
+
+
+// make move function defined
+
+function makeMove(event){
+
+	if(event.target.className == "card"){
+		
+		if(cardClickCounter < 2){
+
+			event.target.className += " open show"
+			card1 = event.target.firstElementChild.className;
+			cardClickCounter++;
+			
+		} else if (cardClickCounter == 2){
+
+			event.target.className += " open show"
+			cardClickCounter = 1;
+			card2 = event.target.firstElementChild.className;
+			moves.innerHTML ++;
+			compareCards();
+
+		}
+	}
+}
+
+
+function compareCards(){
+
+
+	if(card1 === card2){
+		event.target.className = "card open match show"
+	} else {
+		setTimeout(resetClasses(), 3000)
+	}
+
+}
+
+
+/*function cardOpened(){
+	if (card.hasClass('open')){
+		return true;
+	} 
+}
+
+
+
+//check if element has class src http://sonnyt.com/blog/development/javascript-check-if-element-has-class
+
+Element.prototype.hasClass = function(className) {
+    return this.className && new RegExp("(^|\\s)" + className + "(\\s|$)").test(this.className);
+};
+*/
 newGame();
 
 /*

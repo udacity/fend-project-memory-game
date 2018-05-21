@@ -5,8 +5,6 @@
 var list = document.querySelector('.deck');
 var restart = document.getElementsByClassName('restart');
 restart[0].addEventListener('click', function() {
-    console.log(list);
-    console.log('clicked with HTMLcollection');
     nodes = Array.prototype.slice.call(list.children);
     nodes = shuffle(nodes);
     var i = 0;
@@ -15,7 +13,6 @@ restart[0].addEventListener('click', function() {
         list.appendChild(nodes[i]);
         ++i;
     }
-    console.log(list);
 });
 
 /*
@@ -54,3 +51,9 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+var card = document.querySelectorAll(".card i");
+console.log(card)
+card.addEventListener('click', function(event){
+console.log(event)
+})

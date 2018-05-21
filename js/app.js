@@ -2,22 +2,20 @@
  * Create a list that holds all of your cards
  */
 
-//works with numbers
-var num = [8,3,4,5,9];
-var restart = document.getElementsByClassName('restart');
-restart[0].addEventListener('click', function() {
-    console.log(num);
-    console.log('clicked');
-    console.log(shuffle(num));
-});
-
-//doesn't work with HTMLcollection
-var list = document.getElementsByClassName('card');
+var list = document.querySelector('.deck');
 var restart = document.getElementsByClassName('restart');
 restart[0].addEventListener('click', function() {
     console.log(list);
     console.log('clicked with HTMLcollection');
-    console.log(shuffle(list));
+    nodes = Array.prototype.slice.call(list.children);
+    nodes = shuffle(nodes);
+    var i = 0;
+    while(i < nodes.length)
+    {
+        list.appendChild(nodes[i]);
+        ++i;
+    }
+    console.log(list);
 });
 
 /*

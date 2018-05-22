@@ -6,6 +6,7 @@ var list = document.querySelector('.deck');
 var restart = document.getElementsByClassName('restart');
 restart[0].addEventListener('click', function() {
     nodes = Array.prototype.slice.call(list.children);
+    console.log(nodes);
     nodes = shuffle(nodes);
     var i = 0;
     while(i < nodes.length)
@@ -52,8 +53,11 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-var card = document.querySelectorAll(".card i");
-console.log(card)
-card.addEventListener('click', function(event){
-console.log(event)
-})
+var cards = document.querySelectorAll(".card");
+console.log(cards);
+for(var x = 0; x < cards.length; x++) {
+  console.log('cards before event listener' + cards[x])
+  cards[x].addEventListener('click', function(event){
+    event.path[0].className += (' match');
+  })
+}

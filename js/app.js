@@ -52,24 +52,35 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-var list = "";
+var firstCard = "";
 var cards = document.querySelectorAll(".card");
 for(var x = 0; x < cards.length; x++) {
     cards[x].addEventListener('click', function(event) {
-        var x = event.path[0].className += (' open show');
+    var open = document.querySelectorAll(".open").length;
+    if(open != 0 && open % 2 == 0) {
+      
+      } else {
+        event.path[0].className += (' open show');
         if(document.querySelectorAll(".show").length > 1) {
-            if(list == event.path[0].childNodes[1].className) {
+            if(firstCard.path[0].childNodes[1].className == event.path[0].childNodes[1].className) {
               event.path[0].className += (' match');
+              firstCard.path[0].className += (' match');
+              firstCard.path[0].classList.remove('open');
+              firstCard.path[0].classList.remove('show');
+              event.path[0].classList.remove('show');
+              event.path[0].classList.remove('open');
             }
             else {
                  setTimeout(function(){
                  event.path[0].classList.remove('open');
                  event.path[0].classList.remove('show');
-                 }, 1500)
+                 firstCard.path[0].classList.remove('open');
+                 firstCard.path[0].classList.remove('show');
+                 }, 800)
              }
+        } else {
+          firstCard = event
         }
-        else{
-          list = event.path[0].childNodes[1].className;
-        }
+      }
   })
 }

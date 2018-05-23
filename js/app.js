@@ -102,6 +102,7 @@ for(var x = 0; x < cards.length; x++) {
     function count(num) {
     var moves = document.getElementsByClassName('moves')[0]
     moves.innerHTML = num 
+    number = num;
 }
 (function (event) {
     var stars = document.getElementsByClassName('stars');

@@ -7,12 +7,12 @@ var restart = document.getElementsByClassName('restart');
 restart[0].addEventListener('click', function(event) {
     nodes = Array.prototype.slice.call(list.children);
     nodes = shuffle(nodes);
-    //    number = 0;
+    count(0);
     var i = 0;
     while(i < nodes.length)
     {
         list.appendChild(nodes[i]);
-        //Flip all cards upside down1
+        //Flip all cards upside down
                  nodes[i].classList.remove('open');
                  nodes[i].classList.remove('show');
                  nodes[i].classList.remove('incorrect');
@@ -58,13 +58,13 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-//var number = 0;
+    number = 0;
 var firstCard = "";
 var cards = document.querySelectorAll(".card");
 for(var x = 0; x < cards.length; x++) {
     cards[x].addEventListener('click', function(event) {
-//    number += 1;
-//    count(number);
+    number += 1;
+    count(number);
     var open = document.querySelectorAll(".open").length;
     if(open != 0 && open % 2 == 0) {
       // DO noting 
@@ -99,12 +99,11 @@ for(var x = 0; x < cards.length; x++) {
       }
   })
 }
-    /*function count(num) {
+    function count(num) {
     var moves = document.getElementsByClassName('moves')[0]
     moves.innerHTML = num 
-    console.log(moves)
 }
 (function (event) {
     var stars = document.getElementsByClassName('stars');
     console.log(stars[0].lastChild.previousElementSibling.style.cssText = 'color: white; background-color: black')
-})();*/
+})();

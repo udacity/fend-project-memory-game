@@ -58,7 +58,7 @@ for(var x = 0; x < cards.length; x++) {
     cards[x].addEventListener('click', function(event) {
     var open = document.querySelectorAll(".open").length;
     if(open != 0 && open % 2 == 0) {
-      
+      // DO noting 
       } else {
         event.path[0].className += (' open show');
         if(document.querySelectorAll(".show").length > 1) {
@@ -71,11 +71,18 @@ for(var x = 0; x < cards.length; x++) {
               event.path[0].classList.remove('open');
             }
             else {
+                 
+                 event.path[0].className += (' incorrect');
+                 event.path[0].className += (' incorrect');
+                 firstCard.path[0].className += (' incorrect');
+                 firstCard.path[0].className += (' incorrect');
                  setTimeout(function(){
                  event.path[0].classList.remove('open');
                  event.path[0].classList.remove('show');
+                 event.path[0].classList.remove('incorrect');
                  firstCard.path[0].classList.remove('open');
                  firstCard.path[0].classList.remove('show');
+                 firstCard.path[0].classList.remove('incorrect');
                  }, 800)
              }
         } else {

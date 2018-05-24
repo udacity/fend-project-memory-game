@@ -13,13 +13,21 @@ restart[0].addEventListener('click', function(event) {
     {
         list.appendChild(nodes[i]);
         //Flip all cards upside down
-                 nodes[i].classList.remove('open');
-                 nodes[i].classList.remove('show');
-                 nodes[i].classList.remove('incorrect');
-                 nodes[i].classList.remove('match');
+        nodes[i].classList.remove('open');
+        nodes[i].classList.remove('show');
+        nodes[i].classList.remove('incorrect');
+        nodes[i].classList.remove('match');
         ++i;
     }
     fullstars = 5;
+    for (var c = 4; c >= 0; c--) {
+        //    console.log(stars[c]);
+        if(stars[c].classList.contains('fa-star-o')) {
+            stars[c].classList.remove('fa-star-o');
+        }
+
+    }
+    //   console.log(stars[0].className -=('fa-star-0'));
 });
 
 /*
@@ -30,22 +38,22 @@ restart[0].addEventListener('click', function(event) {
  */
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
 
-  return array;
+    return array;
 }
 
 /*
@@ -59,49 +67,49 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-    number = 0;
+number = 0;
 var fullstars = 5;
 var stars = document.getElementsByClassName('fa-star');
 var firstCard = "";
 var cards = document.querySelectorAll(".card");
 for(var x = 0; x < cards.length; x++) {
     cards[x].addEventListener('click', function(event) {
-    number += 1;
-    count(number);
-    star(number);
-    var open = document.querySelectorAll(".open").length;
-    if(open != 0 && open % 2 == 0) {
-      // DO noting 
-      } else {
-        event.path[0].className += (' open show');
-        if(document.querySelectorAll(".show").length > 1) {
-            if(firstCard.path[0].childNodes[1].className == event.path[0].childNodes[1].className) {
-              event.path[0].className += (' match');
-              firstCard.path[0].className += (' match');
-              firstCard.path[0].classList.remove('open');
-              firstCard.path[0].classList.remove('show');
-              event.path[0].classList.remove('show');
-              event.path[0].classList.remove('open');
-            }
-            else {
-                 event.path[0].className += (' incorrect');
-                 event.path[0].className += (' incorrect');
-                 firstCard.path[0].className += (' incorrect');
-                 firstCard.path[0].className += (' incorrect');
-                 setTimeout(function(){
-                 event.path[0].classList.remove('open');
-                 event.path[0].classList.remove('show');
-                 event.path[0].classList.remove('incorrect');
-                 firstCard.path[0].classList.remove('open');
-                 firstCard.path[0].classList.remove('show');
-                 firstCard.path[0].classList.remove('incorrect');
-                 }, 800)
-             }
+        number += 1;
+        count(number);
+        star(number);
+        var open = document.querySelectorAll(".open").length;
+        if(open != 0 && open % 2 == 0) {
+            // DO noting 
         } else {
-          firstCard = event
+            event.path[0].className += (' open show');
+            if(document.querySelectorAll(".show").length > 1) {
+                if(firstCard.path[0].childNodes[1].className == event.path[0].childNodes[1].className) {
+                    event.path[0].className += (' match');
+                    firstCard.path[0].className += (' match');
+                    firstCard.path[0].classList.remove('open');
+                    firstCard.path[0].classList.remove('show');
+                    event.path[0].classList.remove('show');
+                    event.path[0].classList.remove('open');
+                }
+                else {
+                    event.path[0].className += (' incorrect');
+                    event.path[0].className += (' incorrect');
+                    firstCard.path[0].className += (' incorrect');
+                    firstCard.path[0].className += (' incorrect');
+                    setTimeout(function(){
+                        event.path[0].classList.remove('open');
+                        event.path[0].classList.remove('show');
+                        event.path[0].classList.remove('incorrect');
+                        firstCard.path[0].classList.remove('open');
+                        firstCard.path[0].classList.remove('show');
+                        firstCard.path[0].classList.remove('incorrect');
+                    }, 800)
+                }
+            } else {
+                firstCard = event
+            }
         }
-      }
-  })
+    })
 }
 function count(num) {
     var moves = document.getElementsByClassName('moves')[0];
@@ -109,8 +117,10 @@ function count(num) {
     number = num;
 }
 function star(number) {
-    if (number % 5 == 0) {
-        fullstars-=1;
-        stars[fullstars].className += ('-o')
+    if(number % 17 == 0) {
+        if(fullstars > 0) {
+            fullstars-=1;
+            stars[fullstars].classList.add('fa-star-o')
+        }
     }
 };

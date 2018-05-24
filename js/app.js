@@ -19,6 +19,7 @@ restart[0].addEventListener('click', function(event) {
                  nodes[i].classList.remove('match');
         ++i;
     }
+    fullstars = 5;
 });
 
 /*
@@ -59,12 +60,15 @@ function shuffle(array) {
  */
 
     number = 0;
+var fullstars = 5;
+var stars = document.getElementsByClassName('fa-star');
 var firstCard = "";
 var cards = document.querySelectorAll(".card");
 for(var x = 0; x < cards.length; x++) {
     cards[x].addEventListener('click', function(event) {
     number += 1;
     count(number);
+    star(number);
     var open = document.querySelectorAll(".open").length;
     if(open != 0 && open % 2 == 0) {
       // DO noting 
@@ -99,12 +103,14 @@ for(var x = 0; x < cards.length; x++) {
       }
   })
 }
-    function count(num) {
-    var moves = document.getElementsByClassName('moves')[0]
-    moves.innerHTML = num 
+function count(num) {
+    var moves = document.getElementsByClassName('moves')[0];
+    moves.innerHTML = num;
     number = num;
 }
-(function (event) {
-    var stars = document.getElementsByClassName('stars');
-    console.log(stars[0].lastChild.previousElementSibling.style.cssText = 'color: white; background-color: black')
-})();
+function star(number) {
+    if (number % 5 == 0) {
+        fullstars-=1;
+        stars[fullstars].className += ('-o')
+    }
+};

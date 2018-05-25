@@ -2,6 +2,33 @@
  * Create a list that holds all of your cards
  */
 
+var list = document.querySelector('.deck');
+var restart = document.getElementsByClassName('restart');
+restart[0].addEventListener('click', function(event) {
+    nodes = Array.prototype.slice.call(list.children);
+    nodes = shuffle(nodes);
+    count(0);
+    var i = 0;
+    while(i < nodes.length)
+    {
+        list.appendChild(nodes[i]);
+        //Flip all cards upside down
+        nodes[i].classList.remove('open');
+        nodes[i].classList.remove('show');
+        nodes[i].classList.remove('incorrect');
+        nodes[i].classList.remove('match');
+        ++i;
+    }
+    fullstars = 5;
+    for (var c = 4; c >= 0; c--) {
+        //    console.log(stars[c]);
+        if(stars[c].classList.contains('fa-star-o')) {
+            stars[c].classList.remove('fa-star-o');
+        }
+
+    }
+    //   console.log(stars[0].className -=('fa-star-0'));
+});
 
 /*
  * Display the cards on the page
@@ -9,14 +36,18 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
+
+        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
@@ -24,7 +55,6 @@ function shuffle(array) {
 
     return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +66,61 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+number = 0;
+var fullstars = 5;
+var stars = document.getElementsByClassName('fa-star');
+var firstCard = "";
+var cards = document.querySelectorAll(".card");
+for(var x = 0; x < cards.length; x++) {
+    cards[x].addEventListener('click', function(event) {
+        number += 1;
+        count(number);
+        star(number);
+        var open = document.querySelectorAll(".open").length;
+        if(open != 0 && open % 2 == 0) {
+            // DO noting 
+        } else {
+            event.path[0].className += (' open show');
+            if(document.querySelectorAll(".show").length > 1) {
+                if(firstCard.path[0].childNodes[1].className == event.path[0].childNodes[1].className) {
+                    event.path[0].className += (' match');
+                    firstCard.path[0].className += (' match');
+                    firstCard.path[0].classList.remove('open');
+                    firstCard.path[0].classList.remove('show');
+                    event.path[0].classList.remove('show');
+                    event.path[0].classList.remove('open');
+                }
+                else {
+                    event.path[0].className += (' incorrect');
+                    event.path[0].className += (' incorrect');
+                    firstCard.path[0].className += (' incorrect');
+                    firstCard.path[0].className += (' incorrect');
+                    setTimeout(function(){
+                        event.path[0].classList.remove('open');
+                        event.path[0].classList.remove('show');
+                        event.path[0].classList.remove('incorrect');
+                        firstCard.path[0].classList.remove('open');
+                        firstCard.path[0].classList.remove('show');
+                        firstCard.path[0].classList.remove('incorrect');
+                    }, 800)
+                }
+            } else {
+                firstCard = event
+            }
+        }
+    })
+}
+function count(num) {
+    var moves = document.getElementsByClassName('moves')[0];
+    moves.innerHTML = num;
+    number = num;
+}
+function star(number) {
+    if(number % 17 == 0) {
+        if(fullstars > 0) {
+            fullstars-=1;
+            stars[fullstars].classList.add('fa-star-o')
+        }
+    }
+};

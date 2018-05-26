@@ -11,7 +11,7 @@
  */
 let symbols = Array.prototype.slice.call(document.querySelectorAll('.card'));
 let moves = document.querySelector('.moves');
-let cardClickCounter = 1;
+let cardClickCounter = 0;
 let firstCard = '';
 let secondCard = '';
 let firstCardSymbol = '';
@@ -20,6 +20,7 @@ let isReady = true;
 const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
 const reset = document.querySelector('.restart');
+const stars = document.querySelector('.stars');
 console.log(symbols)
 
 
@@ -43,6 +44,7 @@ function newGame(){
 	resetClasses();
 	shuffleCards();
 	resetMoves();
+	cardClickCounter = 0;
 }
 
 // function for reseting the classes
@@ -78,17 +80,17 @@ function makeMove(event){
 
 	if(event.target.className == "card" && isReady == true){
 
-		if(cardClickCounter < 2){
+		if(cardClickCounter == 0){
 
 			event.target.className += " open show"
 			firstCard = event.target;
 			firstCardSymbol = event.target.firstElementChild.className;
 			cardClickCounter++;
 			
-		} else if (cardClickCounter == 2){
+		} else if (cardClickCounter == 1){
 
 			event.target.className += " open show"
-			cardClickCounter = 1;
+			cardClickCounter = 0;
 			secondCard = event.target;
 			secondCardSymbol = event.target.firstElementChild.className;
 			moves.innerHTML ++;
@@ -134,6 +136,13 @@ function compareCards(){
 
 
 
+function ratingStar(){
+	let movesMade = moves.innerHTML;
+
+	if(movesMade > 7){
+		
+	}
+}
 
 
 

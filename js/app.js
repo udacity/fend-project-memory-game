@@ -51,6 +51,9 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+ let moves = 0;
+ let moveCounter = document.querySelector('.moves');
+
 function initGame() {
   let deck = document.querySelector('.deck');
   //shuffle cards array and iterate over the array to create game board
@@ -59,6 +62,14 @@ function initGame() {
   });
 
   deck.innerHTML = cardHTML.join('');
+  moveCounter.innerText = moves;
+
+}
+
+function nextMove() {
+     openCards = [];
+     moves += 1;
+     moveCounter.innerText = moves;
 }
 
 initGame();
@@ -80,15 +91,15 @@ allCards.forEach(function(card) {
         if (openCards[0].dataset.card == openCards[1].dataset.card) {
           openCards[0].classList.add('match', 'open', 'show');
           openCards[1].classList.add('match', 'open', 'show');
-          openCards = [];
+          nextMove();
         } else {
           //If no match, hide
           setTimeout(function() {
             openCards.forEach(function(card) {
               card.classList.remove('open', 'show');
             });
-            openCards = [];
-          }, 1000);
+            nextMove();
+       }, 400);
         }
       }
     }

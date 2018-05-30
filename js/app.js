@@ -12,6 +12,7 @@ var cards = [
   'fa-bomb', 'fa-bomb'
 ];
 
+//Create html for game cards using cards array
 function generateCard(card) {
   return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
@@ -52,6 +53,7 @@ function shuffle(array) {
  */
 function initGame() {
   let deck = document.querySelector('.deck');
+  //shuffle cards array and iterate over the array to create game board
   let cardHTML = shuffle(cards).map(function(card) {
     return generateCard(card);
   });
@@ -72,8 +74,9 @@ allCards.forEach(function(card) {
       openCards.push(card);
       card.classList.add('open', 'show');
 
-      //if cards don't match, go away
+      //when 2 cards are clicked
       if (openCards.length == 2) {
+        //if cards match
         if (openCards[0].dataset.card == openCards[1].dataset.card) {
           openCards[0].classList.add('match', 'open', 'show');
           openCards[1].classList.add('match', 'open', 'show');

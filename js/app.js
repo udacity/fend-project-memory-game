@@ -1,7 +1,20 @@
 /*
  * Create a list that holds all of your cards
  */
+var cards = [
+     'fa-diamond', 'fa-diamond',
+     'fa-paper-plane-o', 'fa-paper-plane-o',
+     'fa-anchor', 'fa-anchor',
+     'fa-bolt', 'fa-bolt',
+     'fa-cube', 'fa-cube',
+     'fa-leaf', 'fa-leaf',
+     'fa-bicycle', 'fa-bicycle',
+     'fa-bomb', 'fa-bomb'
+     ];
 
+function generateCard(card) {
+     return `<li class="card">+<i class="fa ${card}"></i></li>`;
+}
 
 /*
  * Display the cards on the page
@@ -36,3 +49,40 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+function initGame() {
+     let deck = document.querySelector('.deck');
+     let cardHTML = cards.map(function(card) {
+          return generateCard(card);
+     });
+
+     cardHTML.join('');
+}
+
+//initGame();
+
+
+let allCards = document.querySelectorAll('.card');
+let openCards = [];
+
+allCards.forEach(function(card) {
+     card.addEventListener('click', function(e) {
+
+          if (!card.classList.contains('open') && !card.classList.contains('show') && !card.classList.contains('match')) {
+               openCards.push(card);
+               card.classList.add('open', 'show');
+
+               //check if they match
+
+               //if cards don't match, go away
+               if (openCards.length == 2) {
+                    //hide
+                    setTimeout(function() {
+                         openCards.forEach(function(card){
+                              card.classList.remove('open', 'show');
+                         });
+                         openCards = [];
+                    }, 1000);
+               }
+          }
+     });
+});

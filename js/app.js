@@ -59,6 +59,8 @@ restartBtn.addEventListener('click', function(e) {
 
 let matches = 0; //track number of matches made
 let moves = 0; //1 move = clicking two seperate tiles
+let starCount = 3; //Start with 3 star rating
+let time = 0; //placeholder @// TODO: store time to print at end game
 let moveCounter = document.querySelector('.moves');
 
 //initial game board creation
@@ -82,6 +84,13 @@ function nextMove() {
      moveCounter.innerText = moves;
 }
 
+function endGame() {
+     moves += 1;
+     moveCounter.innerText = moves;
+     alert(`Congrats! You won the game in ${moves} moves.\nYou got a ${starCount} star rating.\nYou completed the game in ${time}!`);
+     location.reload();
+}
+
 initGame();
 
 
@@ -103,7 +112,12 @@ allCards.forEach(function(card) {
                          openCards[0].classList.add('match', 'open', 'show');
                          openCards[1].classList.add('match', 'open', 'show');
                          matches += 1;
-                         nextMove();
+                         //it takes 8 matches to win the game
+                         if (matches == 8) {
+                              endGame();
+                         } else { //keep going if less than 8 matches
+                              nextMove();
+                         }
                     } else {
                          //If no match, hide
                          setTimeout(function() {

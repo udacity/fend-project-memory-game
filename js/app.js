@@ -28,13 +28,6 @@ function generateCard(card) {
      return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
      var currentIndex = array.length,
@@ -59,9 +52,11 @@ restartBtn.addEventListener('click', function(e) {
 
 let matches = 0; //track number of matches made
 let moves = 0; //1 move = clicking two seperate tiles
-let starCount = 3; //Start with 3 star rating
-let time = 0; //placeholder @// TODO: store time to print at end game
 let moveCounter = document.querySelector('.moves');
+let stars = 3; //Start with 3 star rating
+let starCount = document.querySelector('.stars');
+let time = 0; //placeholder @// TODO: store time to print at end game
+
 
 //initial game board creation
 function initGame() {
@@ -77,17 +72,35 @@ function initGame() {
 
 }
 
+//remove star from the page when certain move thresholds are reached
+function removeStar() {
+  let li = document.querySelector('.star');
+  let star = document.querySelector('.fa-star');
+
+  li.removeChild(star);
+  starCount.removeChild(li);
+  //decrease global scope count for final message
+  stars -= 1;
+}
+
 //reset the open card tracker, increase moves, write moves to page
 function nextMove() {
      openCards = [];
      moves += 1;
      moveCounter.innerText = moves;
+     if (moves === 18) {
+       removeStar();
+     }
+     if (moves === 12) {
+       removeStar();
+     }
 }
 
 function endGame() {
      moves += 1;
      moveCounter.innerText = moves;
-     alert(`Congrats! You won the game in ${moves} moves.\nYou got a ${starCount} star rating.\nYou completed the game in ${time}!`);
+     alert(`Congrats! You won the game in ${moves} moves.\nYou got a ${stars} star rating.\nYou completed the game in ${time}!`);
+
      location.reload();
 }
 
@@ -106,7 +119,7 @@ allCards.forEach(function(card) {
                card.classList.add('open', 'show');
 
                //when 2 cards are clicked
-               if (openCards.length == 2) {
+               if (openCards.length === 2) {
                     //if cards match
                     if (openCards[0].dataset.card == openCards[1].dataset.card) {
                          openCards[0].classList.add('match', 'open', 'show');
@@ -118,7 +131,9 @@ allCards.forEach(function(card) {
                          } else { //keep going if less than 8 matches
                               nextMove();
                          }
-                    } else {
+                    }
+
+                    else {
                          //If no match, hide
                          setTimeout(function() {
                               openCards.forEach(function(card) {

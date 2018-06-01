@@ -28,6 +28,18 @@ function generateCard(card) {
      return `<li class="card" data-card="${card}"><i class="fa ${card}"></i></li>`;
 }
 
+function startTimer() {
+  let sec = 0;
+
+    function pad(val) {
+        return val > 9 ? val : "0" + val;
+    }
+    timer = setInterval(function () {
+        document.getElementById("seconds").innerHTML = pad(++sec % 60);
+        document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10));
+    }, 1000);
+}
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
      var currentIndex = array.length,
@@ -55,8 +67,9 @@ let moves = 0; //1 move = clicking two seperate tiles
 let moveCounter = document.querySelector('.moves');
 let stars = 3; //Start with 3 star rating
 let starCount = document.querySelector('.stars');
-let time = 0; //placeholder @// TODO: store time to print at end game
-
+let timer = 0;
+let minutes = 0; //placeholder @// TODO: store time to print at end game
+let seconds = 0;
 
 //initial game board creation
 function initGame() {
@@ -69,6 +82,8 @@ function initGame() {
      deck.innerHTML = cardHTML.join('');
      moves = 0;
      moveCounter.innerText = moves;
+
+     startTimer();
 
 }
 
@@ -99,13 +114,18 @@ function nextMove() {
 function endGame() {
      moves += 1;
      moveCounter.innerText = moves;
-     alert(`Congrats! You won the game in ${moves} moves.\nYou got a ${stars} star rating.\nYou completed the game in ${time}!`);
+     //stop timer and store time in global vars for end message
+     clearInterval(timer);
+     minutes = document.getElementById('minutes').innerHTML;
+     seconds = document.getElementById('seconds').innerHTML;
 
+     alert(`Congrats! You won the game in ${moves} moves.\nYou got a ${stars} star rating.\nYou completed the game in ${minutes}:${seconds}!`);
+
+     alert('Press OK to play again.')
      location.reload();
 }
 
 initGame();
-
 
 let allCards = document.querySelectorAll('.card');
 //Where face up cards are stored and tracked
@@ -127,7 +147,8 @@ allCards.forEach(function(card) {
                          matches += 1;
                          //it takes 8 matches to win the game
                          if (matches == 8) {
-                              endGame();
+                           setTimeout(endGame, 1000);
+
                          } else { //keep going if less than 8 matches
                               nextMove();
                          }

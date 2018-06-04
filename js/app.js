@@ -1,37 +1,49 @@
 /*
  * Create a list that holds all of your cards
  */
-const chess_cards = ['chess', 'chess-bishop', 'chess-board', 'chess-king',
-	'chess-knight', 'chess-pawn', 'chess-queen', 'chess-rook'
+const chess_cards = ['fas fa-chess', 'fas fa-chess-bishop',
+	'fas fa-chess-board', 'fas fa-chess-king',
+	'fas fa-chess-knight', 'fas fa-chess-pawn', 'fas fa-chess-queen',
+	'fas fa-chess-rook'
 ];
-const geek_cards = ['android', 'empire', 'galactic-republic', 'galactic-senate',
-	'gamepad', 'gitkraken', 'jedi-order', 'linux', 'mandalorian',
-	'nintendo-switch', 'old-republic', 'phoenix-squadron', 'python', 'quidditch',
-	'rebel', 'reddit-alien', 'sith',
-	'steam', 'trade-federation', 'wolf-pack-battalion'
+const geek_cards = ['fab fa-android', 'fab fa-gitkraken', 'fab fa-linux',
+	'fab fa-mandalorian', 'fab fa-nintendo-switch', 'fab fa-phoenix-squadron',
+	'fab fa-python', 'fab fa-reddit-alien', 'fab fa-steam',
+	'fab fa-wolf-pack-battalion'
 ];
-const possible_cards = ['allergies', 'ambulance', 'anchor', 'angelist', 'at',
-	'balance-scale', 'bath', 'bell', 'bicycle', 'binoculars',
-	'birthday-cake', 'bomb', 'briefcase-medical', 'bug', 'bullhorn', 'bullseye',
-	'bus', 'calculator', 'camera-retro',
-	'car', 'child', 'clock', 'cloud', 'code', 'coffee', 'compass', 'cogs',
-	'couch', 'crow', 'crown', 'cubes', 'cut',
-	'dna', 'dove', 'earlybirds', 'eject', 'eraser', 'eye-dropper', 'feather',
-	'fighter-jet', 'film', 'fire-extinguisher',
-	'first-aid', 'flask', 'fly', 'font-awesome', 'frog', 'gas-pump', 'gift',
-	'grav', 'grunt', 'heart', 'heartbeat',
-	'helicopter', 'home', 'kiwi-bird', 'leaf', 'lemon', 'lightbulb', 'magic',
-	'meh', 'motorcycle', 'music', 'newspaper',
-	'optin-monster', 'paint-brush', 'palette', 'parachute-box', 'paw',
-	'pied-piper-hat', 'pied-piper-alt', 'piggy-bank',
-	'plug', 'puzzle-piece', 'road', 'robot', 'rocket', 'school', 'ship',
-	'shipping-fast', 'shoe-prints', 'skull', 'smile',
-	'snowflake', 'space-shuttle', 'star', 'sticker-mule', 'stopwatch', 'store',
-	'sun', 'table-tennis', 'taxi', 'thermometer',
-	'thumbs-up', 'thumbtack', 'ticket-alt', 'train', 'tree', 'trophy', 'truck',
-	'tshirt', 'university', 'user-astronaut',
-	'user-graduate', 'user-md', 'user-secret', 'walking', 'warehouse',
-	'wheelchair', 'whmcs', 'wifi', 'wrench', 'x-ray'
+const star_wars_cards = ['fab fa-empire', 'fab fa-galactic-republic',
+	'fab fa-galactic-senate', 'fab fa-jedi-order', 'fab fa-old-republic',
+	'fab fa-rebel', 'fab fa-sith', 'fab fa-trade-federation'
+];
+const possible_cards = ['fas fa-allergies', 'fas fa-ambulance', 'fas fa-anchor',
+	'fab fa-angellist', 'fas fa-at', 'fas fa-balance-scale', 'fas fa-bath',
+	'fas fa-bell', 'fas fa-bicycle', 'fas fa-binoculars', 'fas fa-birthday-cake',
+	'fas fa-bomb', 'fas fa-briefcase-medical', 'fas fa-bug', 'fas fa-bullhorn',
+	'fas fa-bullseye', 'fas fa-bus', 'fas fa-calculator', 'fas fa-camera-retro',
+	'fas fa-car', 'fas fa-child', 'fas fa-clock', 'fas fa-cloud', 'fas fa-code',
+	'fas fa-coffee', 'fas fa-compass', 'fas fa-cogs', 'fas fa-couch',
+	'fas fa-crow', 'fas fa-crown', 'fas fa-cubes', 'fas fa-cut', 'fas fa-dna',
+	'fas fa-dove', 'fab fa-earlybirds', 'fas fa-eject', 'fas fa-eraser',
+	'fas fa-eye-dropper', 'fas fa-feather', 'fas fa-fighter-jet', 'fas fa-film',
+	'fas fa-fire-extinguisher', 'fas fa-first-aid', 'fas fa-flask', 'fas fa-fly',
+	'fas fa-font-awesome', 'fas fa-frog', 'fas fa-gas-pump', 'fas fa-gift',
+	'fab fa-grav', 'fab fa-grunt', 'fas fa-heart', 'fas fa-heartbeat',
+	'fas fa-helicopter', 'fas fa-home', 'fas fa-kiwi-bird', 'fas fa-leaf',
+	'fas fa-lemon', 'fas fa-lightbulb', 'fas fa-magic', 'fas fa-meh',
+	'fas fa-motorcycle', 'fas fa-music', 'fas fa-newspaper', 'fas fa-paint-brush',
+	'fas fa-palette', 'fas fa-parachute-box', 'fas fa-paw',
+	'fab fa-pied-piper-alt', 'fab fa-pied-piper-hat', 'fas fa-piggy-bank',
+	'fas fa-plug', 'fas fa-puzzle-piece', 'fas fa-road', 'fas fa-robot',
+	'fas fa-rocket', 'fas fa-school', 'fas fa-ship', 'fas fa-shipping-fast',
+	'fas fa-shoe-prints', 'fas fa-skull', 'fas fa-smile', 'fas fa-snowflake',
+	'fas fa-space-shuttle', 'fas fa-star', 'fab fa-sticker-mule',
+	'fas fa-stopwatch', 'fas fa-store', 'fas fa-sun', 'fas fa-table-tennis',
+	'fas fa-taxi', 'fas fa-thermometer', 'fas fa-thumbs-up', 'fas fa-thumbtack',
+	'fas fa-ticket-alt', 'fas fa-train', 'fas fa-tree', 'fas fa-trophy',
+	'fas fa-truck', 'fas fa-tshirt', 'fas fa-university', 'fas fa-user-astronaut',
+	'fas fa-user-graduate', 'fas fa-user-md', 'fas fa-user-secret',
+	'fas fa-walking', 'fas fa-warehouse', 'fas fa-wheelchair', 'fas fa-wifi',
+	'fas fa-wrench', 'fas fa-x-ray'
 ];
 
 
@@ -100,7 +112,7 @@ function displayCards(array) {
 	// Loop through the array and add the html
 	for (let i = 0; i < array.length; ++i) {
 		newCard = array[i];
-		deck.append(`<li class='card'><i class='fa fa-${newCard}'></li>`);
+		deck.append(`<li class='card open show'><i class='${newCard}'></li>`);
 	}
 
 }

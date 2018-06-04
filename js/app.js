@@ -21,7 +21,6 @@ const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
 const reset = document.querySelector('.restart');
 const stars = document.querySelector('.stars');
-console.log(symbols)
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -45,6 +44,7 @@ function newGame(){
 	shuffleCards();
 	resetMoves();
 	cardClickCounter = 0;
+	stopTimer = true;
 }
 
 // function for reseting the classes
@@ -79,9 +79,14 @@ reset.addEventListener("click", newGame);
 function makeMove(event){
 
 	if(event.target.className == "card" && isReady == true){
-
+		
 		if(cardClickCounter == 0){
-
+			
+			if(moves.innerHTML == 0){
+				stopTimer = false;
+				timerStart();
+			}
+			
 			event.target.className += " open show"
 			firstCard = event.target;
 			firstCardSymbol = event.target.firstElementChild.className;
@@ -100,6 +105,9 @@ function makeMove(event){
 	}
 }
 
+
+
+// Comaparing the cards
 
 function compareCards(){
 
@@ -142,6 +150,35 @@ function ratingStar(){
 	if(movesMade > 7){
 		
 	}
+}
+
+
+
+// Timer
+
+function timerStart() {
+		var timer = 0;
+		var hour = 0;
+		var minute = 0;
+		var second = 0;
+		window.setInterval (function() {
+		  ++timer;
+		  hour = Math.floor(timer / 3600);
+		  minute = Math.floor((timer - hour * 3600) / 60);
+		  second = timer - hour * 3600 - minute * 60;
+		  if (hour < 10) hour = '0' + hour;
+		  if (minute < 10) minute = '0' + minute;
+		  if (second < 10) second = '0' + second;
+		  document.querySelector('#timer').innerHTML = hour + ':' + minute + ':' + second;
+		  if(stopTimer) {
+			document.querySelector('#timer').innerHTML = "00:00:00";
+			timer = 0;
+			hour = 0;
+			minute = 0;
+			second = 0;
+			return;
+		  }
+		}, 1000);
 }
 
 

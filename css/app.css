@@ -109,4 +109,5 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+    padding: 5px;
 }

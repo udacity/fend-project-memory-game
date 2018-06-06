@@ -31,8 +31,10 @@ function playGame() {
 	let matched = false;
 	let moveCounter = 0;
 	let currentCard;
+	let starCount = 3;
 	const deck = $('#deck');
 	const moves = $('#moves');
+	const restart = $('#restart');
 	const currentCards = [];
 	const chessCards = ['fas fa-chess', 'fas fa-chess-bishop',
 		'fas fa-chess-board', 'fas fa-chess-king',
@@ -124,7 +126,6 @@ function playGame() {
 
 	function displayCards(array) {
 		let newCard = '';
-		let deck = $('#deck');
 
 		// If the card list is longer than 8, pick 8 cards for this game.
 		if (array.length > 8) {
@@ -137,13 +138,15 @@ function playGame() {
 		// Loop through the array and add the html
 		for (let i = 0; i < array.length; ++i) {
 			newCard = array[i];
-			deck.append(`<li class='card'><i class='${newCard}'></li>`);
+			deck.append(
+				`<li class="card" data-card="${newCard}" data-id="${i}"><i class="${newCard}"></li>`
+			);
 		}
 	}
 
 	// Check to see if the user has a match
 	function check(array) {
-		if (array[0] == array[1]) {
+		if (array[0][0].dataset.card === array[1][0].dataset.card) {
 			return true;
 		} else {
 			return false;
@@ -166,39 +169,72 @@ function playGame() {
 		moves.text(`${moveCounter}`);
 	}
 
-	// Set up the Game
-	displayCards(possibleCards);
-	moves.text(`${moveCounter}`);
+	function resetStars() {
+		return true;
+	}
 
-	// Set up event listener
+	function clearDeck() {
+		deck.empty();
+	}
+
+	// Set up the Game
+	function startGame(array) {
+		displayCards(array);
+		moveCounter = 0;
+		moves.text(`${moveCounter}`);
+		if (starCount !== 3) {
+			resetStars();
+		}
+	}
+
+	startGame(possibleCards);
+
+	// Set up event listener for the deck
 	deck.on('click', function(e) {
 		currentCard = $(e.target);
+		//check to see if the target is a card
+		if (currentCard[0].className !== 'card') {
+			return;
+		}
+
+		// Don't let the same card get selected twice
+		if ((currentCards.length === 1) &&
+			(currentCard[0].dataset.id === currentCards[0][0].dataset.id)) {
+			return;
+		}
 		currentCard.addClass('up');
 		currentCard.addClass('show');
+
 		updateMoveCounter();
-		currentCards.push(e.target.firstChild);
-		console.log(e.target.firstChild);
+
+		currentCards.push(currentCard);
 		if (currentCards.length === 2) {
+
 			matched = check(currentCards);
 			if (matched) {
-				currentCard.addClass('match');
+				currentCards[0].addClass('match');
+				currentCards[1].addClass('match');
 				unmatchedPairs -= 1;
+				clearArray(currentCards);
 			} else {
 				setTimeout(function() {
-					for (let i = 0; i <= currentCards.length; ++i) {
+					for (let i = 0; i < currentCards.length; ++i) {
 						currentCards[i].removeClass('up');
 						currentCards[i].removeClass('show');
-						currentCards[i].addClass('down');
 					}
-				}, 5000);
+					clearArray(currentCards);
+				}, 2000);
 
 			}
-			clearArray(currentCards);
+
 		}
 
 	});
 
-
+	restart.on('click', function() {
+		clearDeck();
+		startGame(possibleCards);
+	});
 
 }
 

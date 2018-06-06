@@ -20,8 +20,8 @@ let isReady = true;
 const card = document.querySelector('.card');
 const deck = document.querySelector('.deck');
 const reset = document.querySelector('.restart');
-const stars = document.querySelector('.stars');
-
+const stars = document.getElementsByClassName('fa-star');
+const winModal = document.querySelector(".winModal");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -43,6 +43,7 @@ function newGame(){
 	resetClasses();
 	shuffleCards();
 	resetMoves();
+	resetStars();
 	cardClickCounter = 0;
 	stopTimer = true;
 }
@@ -67,12 +68,24 @@ function resetMoves(){
 	moves.innerHTML = 0;
 }
 
+//function for resetting stars
+function resetStars(){
+	let newStars = document.getElementsByClassName('fa-star-o');
+	for(i=0; i < newStars.length ; i++){
+		newStars[i].className = 'fa fa-star';
+	}
+}
+
 
 //event listeners
 
 deck.addEventListener("click", makeMove);
 reset.addEventListener("click", newGame);
-
+document.querySelector('.newGame').addEventListener("click",function(event){
+	event.preventDefault();
+	winModal.className = 'winModal';
+	newGame();
+})
 
 // make move function defined
 
@@ -99,6 +112,7 @@ function makeMove(event){
 			secondCard = event.target;
 			secondCardSymbol = event.target.firstElementChild.className;
 			moves.innerHTML ++;
+			checkMove();
 			compareCards();
 
 		}
@@ -115,6 +129,9 @@ function compareCards(){
 	if(firstCardSymbol === secondCardSymbol){
 		firstCard.className += " animated wobble match";
 		secondCard.className += " animated wobble match";
+		
+		//checkWin
+		checkWin();
 		
 		//reset values
 		firstCard = '';
@@ -143,12 +160,13 @@ function compareCards(){
 }
 
 
-
-function ratingStar(){
+// check move for rating 
+function checkMove(){
 	let movesMade = moves.innerHTML;
-
-	if(movesMade > 7){
-		
+	if(movesMade == 20){
+		stars[2].className = 'fa fa-star-o';
+	} else if(movesMade == 30){
+		stars[1].className = 'fa fa-star-o';
 	}
 }
 
@@ -183,6 +201,29 @@ function timerStart() {
 
 
 
+//Finish Game
+function checkWin(){
+	
+	let matchedCards = document.getElementsByClassName('card open show animated wobble match');
+	let winMoves = document.querySelector('.winMoves');
+	let winTime = document.querySelector('.winTime');
+	let timer = document.querySelector('#timer');
+	let winStarsCon = document.querySelector('.winStars');
+	let starsCount = document.querySelector(".stars");
+	
+	
+	
+	if (matchedCards.length == 16) {
+	   setTimeout (function() {winModal.className += " open"}, 1000);
+	   stopTimer = true;
+	 }
+
+	 winStarsCon.innerHTML = starsCount.innerHTML; 
+	 winMoves.innerText = moves.innerText;
+	 winTime.innerText = timer.innerHTML;
+	
+		
+}
 
 
 newGame();

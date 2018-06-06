@@ -117,3 +117,57 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+
+.winModal{
+	width:100%;
+	height:100%;
+	position:absolute;
+	left:0;
+	opacity:0;
+	visibility:hidden;
+	top:0;
+	z-index:100;
+	background:rgba(0,0,0,.6);
+	transition:.3s ease all;
+}
+
+.winModal.open{
+	opacity:1;
+	visibility:visible;
+}
+
+.winBox{
+	width:600px;
+	height:300px;
+	background:#fff;
+	position:absolute;
+	padding:20px;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	text-align:center;
+}
+
+.winBox .winStars{
+	list-style:none;
+	margin:0 auto;
+	display:inline-block;
+	padding:0;
+}
+
+.winBox .winStars li{
+	float:left;
+	font-size:32px;
+	margin-right:5px;
+}
+
+.newGame{
+	text-decoration:none;
+	background:#333;
+	color:#fff;
+	padding:20px 40px;
+	margin-top:40px;
+	display:block;
+}
+

@@ -2,14 +2,11 @@ html {
     box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: inherit;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
     margin: 0;
@@ -17,7 +14,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -65,10 +63,15 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
 }
 
-.deck .card.open {
-    transform: rotateY(0);
+.deck .card.down {
+    background: #2e3d49;
+}
+
+.deck .card.up {
+    transform: rotateY(90);
     background: #02b3e4;
     cursor: default;
+    transition: transform 1s;
 }
 
 .deck .card.show {
@@ -87,23 +90,34 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 400px;
     margin-bottom: 10px;
 }
 
+.score-panel .moves {
+    font-family: tahoma;
+}
+
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    padding: 0;
 }
 
 .score-panel .stars li {
-    list-style: none;
     display: inline-block;
+    list-style: none;
+}
+
+.score-panel .timer {
+    display: inline-block;
+    font-family: tahoma;
+    margin: 0 15px 0 15px;
 }
 
 .score-panel .restart {
-    float: right;
     cursor: pointer;
+    float: right;
+    font-family: tahoma;
+    padding: 0 0 0 15px;
 }

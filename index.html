@@ -18,7 +18,7 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars" id="score">
+        	<ul class="stars" id="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
@@ -26,13 +26,23 @@
 
         	<span class="moves" id="moves"></span> Moves
 
+            <span class="timer" id="timer"></span>
+
             <div class="restart" id="restart">
-        		<i class="fas fa-redo">      Start a new game.</i>
+        		<i class="fas fa-redo"><span class="restart">New Game</span></i>
         	</div>
         </section>
 
         <ul class="deck" id="deck">
         </ul>
+
+        <dialog id="winner">
+            <p id="winnerMessage"></p>
+            <menu>
+                <button id="newGame">Start A New Game</button>
+                <button id="cancel">Close</button>
+            </menu>
+        </dialog>
     </div>
 
     <script src="js/app.js"></script>

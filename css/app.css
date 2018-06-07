@@ -90,24 +90,34 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 400px;
     margin-bottom: 10px;
 }
 
+.score-panel .moves {
+    font-family: tahoma;
+}
+
 .score-panel .stars {
-    margin: 0;
-    padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    padding: 0;
 }
 
 .score-panel .stars li {
-    list-style: none;
     display: inline-block;
+    list-style: none;
+}
+
+.score-panel .timer {
+    display: inline-block;
+    font-family: tahoma;
+    margin: 0 15px 0 15px;
 }
 
 .score-panel .restart {
-    float: right;
     cursor: pointer;
-    padding: 5px;
+    float: right;
+    font-family: tahoma;
+    padding: 0 0 0 15px;
 }

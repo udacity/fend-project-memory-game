@@ -25,17 +25,32 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 function playGame() {
-	const numPairs = 8;
-	let unmatchedPairs = numPairs;
+	const maxPairs = 8;
+	let unmatchedPairs = maxPairs;
 	let exit = false;
 	let matched = false;
 	let moveCounter = 0;
 	let currentCard;
 	let starCount = 3;
+	let inTimeout = false;
+	let clearTime;
+	let seconds = 0;
+	let minutes = 0;
+	let secs = "";
+	let mins = "";
+	let time = "";
+	let timer;
+	let nextStar;
+	const closeModal = document.getElementById('cancel');
+	const nextGame = document.getElementById('newGame');
+	const winDialog = document.getElementById('winner');
+	const maxStars = 3;
+	const stars = $('#stars');
 	const deck = $('#deck');
 	const moves = $('#moves');
 	const restart = $('#restart');
 	const currentCards = [];
+
 	const chessCards = ['fas fa-chess', 'fas fa-chess-bishop',
 		'fas fa-chess-board', 'fas fa-chess-king',
 		'fas fa-chess-knight', 'fas fa-chess-pawn', 'fas fa-chess-queen',
@@ -87,7 +102,7 @@ function playGame() {
 		let currentIndex;
 		const trimmedArray = [];
 
-		for (let i = 0; i < numPairs; ++i) {
+		for (let i = 0; i < maxPairs; ++i) {
 			currentIndex = Math.floor(Math.random() * numCards);
 			if (trimmedArray.includes(array[currentIndex])) {
 				--i; // If the card already exists in the trimmedArray, then decrement i
@@ -144,6 +159,48 @@ function playGame() {
 		}
 	}
 
+	function startTimer() {
+		seconds = 0;
+		minutes = 0;
+		mins = (minutes < 10) ? (`0${minutes} : `) : (`${minutes} : `);
+		secs = (seconds < 10) ? (`0${seconds}`) : (`${seconds}`);
+		// display the stopwatch
+		document.getElementById('timer').textContent = `Time: ${mins}${secs}`;
+
+	}
+	// startTimer())
+
+	function runTimer() {
+		if (seconds === 60) {
+			seconds = 0;
+			minutes = minutes + 1;
+		}
+		/* you use the javascript tenary operator to format how the minutes
+		   should look and add 0 to minutes if less than 10 */
+		mins = (minutes < 10) ? (`0${minutes} : `) : (`${minutes} : `);
+		secs = (seconds < 10) ? (`0${seconds}`) : (`${seconds}`);
+		// display the stopwatch
+		document.getElementById('timer').textContent = `Time: ${mins}${secs}`;
+		/* call the seconds counter after displaying the stop watch and increment
+		seconds by +1 to keep it counting */
+		seconds++;
+	}
+
+	//create a function to stop the time
+	function stopTimer() {
+		time = mins + secs;
+		// reset the stop watch
+		seconds = 0;
+		minutes = 0;
+		secs = '0' + seconds;
+		mins = '0' + minutes + ': ';
+		/* clear the stop watch using the setTimeout( )
+		   return value 'clearTime' as ID */
+		clearInterval(timer);
+		return time;
+	}
+	// stopTime()
+
 	// Check to see if the user has a match
 	function check(array) {
 		if (array[0][0].dataset.card === array[1][0].dataset.card) {
@@ -154,7 +211,8 @@ function playGame() {
 	}
 
 	function clearArray(array) {
-		for (let i = 0; i <= array.length; ++i) {
+		let numItems = array.length;
+		for (let i = 0; i < numItems; ++i) {
 			array.pop();
 		}
 	}
@@ -163,18 +221,75 @@ function playGame() {
 		console.log("Waiting for the user to see the cards.");
 	}
 
+	// Show the clicked cards
+	function showCard(currentCard) {
+		currentCard.addClass('up');
+		currentCard.addClass('show');
+	}
+
 	//Update the moves moveCounter
 	function updateMoveCounter() {
 		moveCounter += 1;
 		moves.text(`${moveCounter}`);
 	}
 
+	function updateStars() {
+		switch (moveCounter) {
+			case 31:
+			case 41:
+			case 55:
+				nextStar = stars[0].children[0];
+				nextStar.remove();
+				starCount -= 1;
+		}
+	}
+
 	function resetStars() {
-		return true;
+		for (let i = starCount; i < maxStars; i++) {
+			stars.append('<li><i class="fa fa-star"></i></li>');
+		}
+		return starCount;
 	}
 
 	function clearDeck() {
 		deck.empty();
+	}
+
+	function gameWon() {
+		winningTime = stopTimer();
+		winningStars = resetStars();
+		$('#winnerMessage').empty();
+		$('#winnerMessage').append(
+			`You won the game in ${winningTime} using ${moveCounter} moves.  You earned ${winningStars} stars.`
+		)
+		winDialog.showModal();
+		starCount = maxStars;
+		unmatchedPairs = maxPairs;
+
+	}
+
+	function invalidClick(currentCard, inTimeout) {
+		//check to see if the target is a card
+		if (currentCard[0].className !== 'card') {
+			return true;
+		}
+
+		// Don't let the same card get selected twice
+		if ((currentCards.length === 1) &&
+			(currentCard[0].dataset.id === currentCards[0][0].dataset.id)) {
+			return true;
+		}
+
+		// Don't let a matched card get selected
+		if (currentCard[0].classList.contains('match')) {
+			return true;
+		}
+
+		// Don't let more clicks register if waiting for the 2 second inTimeout
+		if (inTimeout) {
+			return true;
+		}
+		return false;
 	}
 
 	// Set up the Game
@@ -182,30 +297,41 @@ function playGame() {
 		displayCards(array);
 		moveCounter = 0;
 		moves.text(`${moveCounter}`);
-		if (starCount !== 3) {
+		startTimer();
+		timer = setInterval(function() {
+			runTimer();
+		}, 1000);
+		if (starCount < 3) {
 			resetStars();
 		}
 	}
 
 	startGame(possibleCards);
 
+	// Close the winning modal.
+	closeModal.addEventListener('click', function() {
+		winDialog.close();
+	});
+
+	// Start the next game from the winning modal.
+	nextGame.addEventListener('click', function() {
+		winDialog.close();
+		clearDeck();
+		startGame(possibleCards);
+	});
+
 	// Set up event listener for the deck
 	deck.on('click', function(e) {
 		currentCard = $(e.target);
-		//check to see if the target is a card
-		if (currentCard[0].className !== 'card') {
+
+		// Check to see if it's an invalid click.
+		if (invalidClick(currentCard, inTimeout)) {
 			return;
 		}
 
-		// Don't let the same card get selected twice
-		if ((currentCards.length === 1) &&
-			(currentCard[0].dataset.id === currentCards[0][0].dataset.id)) {
-			return;
-		}
-		currentCard.addClass('up');
-		currentCard.addClass('show');
-
+		showCard(currentCard);
 		updateMoveCounter();
+		updateStars();
 
 		currentCards.push(currentCard);
 		if (currentCards.length === 2) {
@@ -216,14 +342,19 @@ function playGame() {
 				currentCards[1].addClass('match');
 				unmatchedPairs -= 1;
 				clearArray(currentCards);
+				if (unmatchedPairs === 0) {
+					gameWon();
+				}
 			} else {
+				inTimeout = true;
 				setTimeout(function() {
 					for (let i = 0; i < currentCards.length; ++i) {
 						currentCards[i].removeClass('up');
 						currentCards[i].removeClass('show');
 					}
 					clearArray(currentCards);
-				}, 2000);
+					inTimeout = false;
+				}, 1000);
 
 			}
 

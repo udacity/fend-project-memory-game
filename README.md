@@ -2,19 +2,27 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [Overview](#overview)
+* [Download/Install](#download/install)
 * [Contributing](#contributing)
+* [License](#license)
 
-## Instructions
+## Overview
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Memomry game works on the concept of matching two cards from the list of 16 cards. It has the feature for reseting the game at any point , tracking the total time of the user while he go through the game. Giving him feeback in the form of stars based on , in how many moves he completed the game. 
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Download/Install
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+### Quick Start
+
+Simply fork/clone the repository or download it as a zip. Run index.html and you can play/modify the game.
+
+The project is based on 3 files. The index.html, app.js , app.css & animate.css. Index have all the html code in and app.js consist of all the javascript used to develop the game. Styling is done in app.css whereas animate.css is used for basic css animations.
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+Please read [CONTRIBUTING.md.](CONTRIBUTING.md)
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## License
+
+Feel free to use and edit it. But it would be good if you can credit me for it.

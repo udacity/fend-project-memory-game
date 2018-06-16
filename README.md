@@ -1,20 +1,31 @@
-# Memory Game Project
+# Memory Game
+This is an browser based card game to use your memory! There are 16 cards so 8 pairs to find. The game will time your play, count your moves and give you a star rating .  When you click on a card a symbol is revealed and if the next card you click has a matching symbol the cards will remain face up, if not they do not. Each time you start over and play again the game will shuffle the cards so you came play over and over!
 
-## Table of Contents
+##Usability
+All application components are usable across desktop, tablet and phone browsers.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+##Installing
+*clone or download from: https://github.com/deboutlaw/fend-project-memory-game
+*navigate to your folder
+*open `index.html` in your browser
 
-## Instructions
+##Forks
+Available at:
+https://github.com/deboutlaw/fend-project-memory-game
+https://repl.it/@deboutlaw/Project-Memory-Game
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+##Functionality
+This game relies on `JavaScript` and `jQuery`  to function.
+The code does this by:
+*creating a list of cards that are then looped through to create their HTML which is then added to the page
+*an event listener is used so when a card is clicked  multiple functions are called to run
+*functions are created to:
+	-deal with the cards clicked
+	-update the scoreboard
+	-create the modal functionality
+	-check if game over
+	-create timer functionality
+	-shuffle the cards
+	-restart game
 
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+###Hat tip to my mentor and the ppl on fb group "Udacity Front-End Web Developer Nanodegree Support" and Udacity for the webinars!

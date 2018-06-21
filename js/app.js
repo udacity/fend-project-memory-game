@@ -1,3 +1,7 @@
+
+const deck = document.querySelector('.deck');
+
+
 /*
  * Create a list that holds all of your cards
  */
@@ -24,6 +28,16 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
+deck.addEventListener('click', function(e) {
+    let li = event.target;
+    if (li.classList.contains('card')) {
+        li.classList.toggle('open');
+        li.classList.toggle('show');
+    }
+});
 
 
 /*

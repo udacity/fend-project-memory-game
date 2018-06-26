@@ -5,6 +5,8 @@
 const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 
+let flippedCards = [];
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -14,11 +16,35 @@ const deck = document.querySelector('.deck');
 
 deck.addEventListener('click', e => {
   const clicked = e.target;
-  if (clicked.classList.contains('card')) {
-    clicked.classList.toggle('open');
-    clicked.classList.toggle('show');
+  if (clicked.classList.contains('card') && flippedCards.length < 2) {
+    flipCard(clicked);
+    addFlippedCard(clicked);
+    if (flippedCards.length === 2) {
+      checkMatch(clicked);
+    }
   }
 });
+
+function flipCard(clicked) {
+  clicked.classList.add('open', 'show');
+}
+
+function addFlippedCard(clicked) {
+  flippedCards.push(clicked);
+}
+
+function checkMatch() {
+  if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
+    console.log('match');
+  } else {
+    console.log('no match');
+  }
+}
+
+
+
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

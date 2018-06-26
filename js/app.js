@@ -29,15 +29,23 @@ function flipCard(clicked) {
   clicked.classList.add('open', 'show');
 }
 
+function matchedCards() {
+  flippedCards[0].classList.add('match');
+  flippedCards[1].classList.add('match');
+  flippedCards = [];
+}
+
 function addFlippedCard(clicked) {
   flippedCards.push(clicked);
 }
 
 function checkMatch() {
   if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
-    console.log('match');
+    matchedCards();
+    flippedCards = [];
   } else {
     console.log('no match');
+    flippedCards = [];
   }
 }
 

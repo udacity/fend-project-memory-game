@@ -16,7 +16,7 @@ let flippedCards = [];
 
 deck.addEventListener('click', e => {
   const clicked = e.target;
-  if (clicked.classList.contains('card') && flippedCards.length < 2) {
+  if (checkFlip(clicked)) {
     flipCard(clicked);
     addFlippedCard(clicked);
     if (flippedCards.length === 2) {
@@ -24,6 +24,11 @@ deck.addEventListener('click', e => {
     }
   }
 });
+
+function checkFlip(clicked) {
+  return (clicked.classList.contains('card') && !clicked.classList.contains('match') &&
+    flippedCards.length < 2 && !flippedCards.includes(clicked));
+}
 
 function flipCard(clicked) {
   clicked.classList.add('open', 'show');

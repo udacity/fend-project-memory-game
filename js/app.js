@@ -10,6 +10,7 @@ let time = 0;
 let flippedCards = [];
 let turns = 0;
 let timerOff = true;
+let timerVar;
 
 /*
  * Display the cards on the page
@@ -125,19 +126,25 @@ function startTimer() {
   }, 1000);
 }
 
+// stop timer
+function stopTimer() {
+  clearInterval(timerVar);
+}
 
 // show timer
 function showTimer() {
-  const clock = document.querySelector('.clock');
+  const timer = document.querySelector('.timer');
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   // clock.innerHTML = time;
   if (seconds < 10) {
-    clock.innerHTML = `${minutes}:0${seconds}`;
+    timer.innerHTML = `${minutes}:0${seconds}`;
   } else {
-    clock.innerHTML = `${minutes}:${seconds}`;
+    timer.innerHTML = `${minutes}:${seconds}`;
   }
 }
+
+
 
 
 

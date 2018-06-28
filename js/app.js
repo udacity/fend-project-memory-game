@@ -24,6 +24,7 @@ deck.addEventListener('click', e => {
     if (flippedCards.length === 2) {
       checkMatch(clicked);
       countTurns();
+      loseStars();
     }
   }
 });
@@ -80,6 +81,23 @@ function countTurns() {
   counter.innerHTML = turns;
 }
 
+// stars
+function loseStars() {
+  if (turns === 10 || turns === 20) {
+    takeAwayStar();
+  }
+}
+
+// take away star
+function takeAwayStar() {
+  const stars = document.querySelectorAll('.stars li');
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      star.style.display = 'none';
+      break;
+    }
+  }
+}
 
 
 

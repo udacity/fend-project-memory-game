@@ -6,6 +6,7 @@ const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 
 let flippedCards = [];
+let turns = 0;
 
 /*
  * Display the cards on the page
@@ -13,6 +14,7 @@ let flippedCards = [];
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+// event listener for clicking cards
 
 deck.addEventListener('click', e => {
   const clicked = e.target;
@@ -21,29 +23,35 @@ deck.addEventListener('click', e => {
     addFlippedCard(clicked);
     if (flippedCards.length === 2) {
       checkMatch(clicked);
+      countTurns();
     }
   }
 });
 
+// check if flip is valid
 function checkFlip(clicked) {
   return (clicked.classList.contains('card') && !clicked.classList.contains('match') &&
     flippedCards.length < 2 && !flippedCards.includes(clicked));
 }
 
+// flips card
 function flipCard(clicked) {
   clicked.classList.add('open', 'show');
 }
 
+// shows matched cards
 function matchedCards() {
   flippedCards[0].classList.add('match');
   flippedCards[1].classList.add('match');
   flippedCards = [];
 }
 
+// adds flipped cards to array
 function addFlippedCard(clicked) {
   flippedCards.push(clicked);
 }
 
+// checks for match
 function checkMatch() {
   if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
     matchedCards();
@@ -54,6 +62,7 @@ function checkMatch() {
   }
 }
 
+// shuffles deck
 function shuffleCards() {
   const cardsInDeck = Array.from(document.querySelectorAll('.deck li'));
   const cardsShuffled = shuffle(cardsInDeck);
@@ -64,6 +73,12 @@ function shuffleCards() {
 
 shuffleCards();
 
+// count turns
+function countTurns() {
+  turns++;
+  const counter = document.querySelector('.moves');
+  counter.innerHTML = turns;
+}
 
 
 

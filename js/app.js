@@ -4,9 +4,12 @@
 
 const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
+let time = 0;
+
 
 let flippedCards = [];
 let turns = 0;
+let timerOff = true;
 
 /*
  * Display the cards on the page
@@ -19,6 +22,12 @@ let turns = 0;
 deck.addEventListener('click', e => {
   const clicked = e.target;
   if (checkFlip(clicked)) {
+    if (timerOff) {
+      startTimer();
+
+      timerOff = false;
+    }
+
     flipCard(clicked);
     addFlippedCard(clicked);
     if (flippedCards.length === 2) {
@@ -105,6 +114,28 @@ function takeAwayStar() {
       star.style.display = 'none';
       break;
     }
+  }
+}
+
+// start timer
+function startTimer() {
+  let timerVar = setInterval(() => {
+    time++;
+    showTimer();
+  }, 1000);
+}
+
+
+// show timer
+function showTimer() {
+  const clock = document.querySelector('.clock');
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  // clock.innerHTML = time;
+  if (seconds < 10) {
+    clock.innerHTML = `${minutes}:0${seconds}`;
+  } else {
+    clock.innerHTML = `${minutes}:${seconds}`;
   }
 }
 

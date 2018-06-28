@@ -5,12 +5,12 @@
 const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 let time = 0;
-
-
 let flippedCards = [];
 let turns = 0;
 let timerOff = true;
 let timerVar;
+
+gameInit();
 
 /*
  * Display the cards on the page
@@ -25,10 +25,8 @@ deck.addEventListener('click', e => {
   if (checkFlip(clicked)) {
     if (timerOff) {
       startTimer();
-
       timerOff = false;
     }
-
     flipCard(clicked);
     addFlippedCard(clicked);
     if (flippedCards.length === 2) {
@@ -38,6 +36,34 @@ deck.addEventListener('click', e => {
     }
   }
 });
+
+// modal buttons functions
+document.querySelector('.modal_exit').addEventListener('click', () => {
+  showModal();
+});
+
+document.querySelector('.modal_replay').addEventListener('click', () => {
+  gameInit();
+});
+
+// restart icon
+document.querySelector('.restart').addEventListener('click', () => {
+  gameInit();
+})
+
+// initialize game
+function gameInit() {
+  stopTimer();
+  time = 0;
+  showTimer();
+  turns = 0;
+  const counter = document.querySelector('.moves');
+  counter.innerHTML = turns;
+  stars = 0;
+  showStars();
+  flipDeck();
+  shuffleCards();
+}
 
 // check if flip is valid
 function checkFlip(clicked) {
@@ -91,7 +117,15 @@ function shuffleCards() {
   }
 }
 
-shuffleCards();
+
+
+// resets deck
+function flipDeck() {
+  const allCards = document.querySelectorAll('.deck li');
+  for (card of allCards) {
+    card.classList.remove('match', 'show', 'open');
+  }
+}
 
 // count turns
 function countTurns() {
@@ -104,6 +138,14 @@ function countTurns() {
 function loseStars() {
   if (turns === 10 || turns === 20) {
     takeAwayStar();
+  }
+}
+
+// show stars
+function showStars() {
+  const stars = document.querySelectorAll('.stars li');
+  for (star of stars) {
+    star.style.display = 'inline';
   }
 }
 
@@ -136,7 +178,6 @@ function showTimer() {
   const timer = document.querySelector('.timer');
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-  // clock.innerHTML = time;
   if (seconds < 10) {
     timer.innerHTML = `${minutes}:0${seconds}`;
   } else {
@@ -173,6 +214,8 @@ function countStars() {
   }
   return starNumber;
 }
+
+
 
 
 

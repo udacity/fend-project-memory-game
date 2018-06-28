@@ -110,7 +110,8 @@ h1 {
   position: absolute;
   height: 350px;
   width: 350px;
-  background-color: white;
+  background-color: lightBlue;
+  border-radius: 20%;
 }
 
 .modal_title {
@@ -129,4 +130,8 @@ h1 {
 .modal_buttons {
   display: flex;
   justify-content: space-evenly;
+}
+
+.hide {
+  display: none;
 }

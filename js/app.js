@@ -144,6 +144,13 @@ function showTimer() {
   }
 }
 
+// show modal
+function showModal() {
+  const modal = document.querySelector('.modal');
+  modal.classList.toggle('hide')
+}
+
+
 
 
 

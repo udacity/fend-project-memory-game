@@ -54,6 +54,16 @@ function checkMatch() {
   }
 }
 
+function shuffleCards() {
+  const cardsInDeck = Array.from(document.querySelectorAll('.deck li'));
+  const cardsShuffled = shuffle(cardsInDeck);
+  for (card of cardsShuffled) {
+    deck.appendChild(card);
+  }
+}
+
+shuffleCards();
+
 
 
 

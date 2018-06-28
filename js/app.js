@@ -52,14 +52,23 @@ function addFlippedCard(clicked) {
   flippedCards.push(clicked);
 }
 
+// unflip card if no match
+function unFlipCard(clicked) {
+  clicked.classList.remove('open', 'show');
+}
+
 // checks for match
 function checkMatch() {
   if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
     matchedCards();
     flippedCards = [];
   } else {
-    console.log('no match');
-    flippedCards = [];
+    setTimeout(() => {
+
+      unFlipCard(flippedCards[0]);
+      unFlipCard(flippedCards[1]);
+      flippedCards = [];
+    }, 1000);
   }
 }
 

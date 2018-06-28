@@ -150,8 +150,29 @@ function showModal() {
   modal.classList.toggle('hide')
 }
 
+// show results on modal
+function modalResults() {
+  const timeResults = document.querySelector('.modal_time');
+  const clockResults = document.querySelector('.timer').innerHTML;
+  const turnsResults = document.querySelector('.modal_moves');
+  const starsResults = document.querySelector('.modal_stars');
+  const stars = countStars();
 
+  timeResults.innerHTML = `Time: ${clockResults}`;
+  turnsResults.innerHTML = `Moves: ${turns}`;
+  starsResults.innerHTML = `Stars: ${stars}`;
+}
 
+function countStars() {
+  stars = document.querySelectorAll('.stars li');
+  starNumber = 0;
+  for (star of stars) {
+    if (star.style.display !== 'none') {
+      starNumber++;
+    }
+  }
+  return starNumber;
+}
 
 
 

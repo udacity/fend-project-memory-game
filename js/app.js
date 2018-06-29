@@ -11,7 +11,7 @@ const cardArr = ["fa-diamond", "fa-diamond", "fa-paper-plane-o",  "fa-paper-plan
 const cardsContainer = document.querySelector(".deck");
 
 // create cards
-for (var i = 0; i < cardArr.length; i++) {
+for (let i = 0; i < cardArr.length; i++) {
   const card = document.createElement("li");
   card.classList.add("card");
   card.innerHTML = `<i class="${cardsContainer[i]}"></i>`;

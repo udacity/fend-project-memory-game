@@ -15,7 +15,7 @@ const cardsContainer = document.querySelector(".deck");
 for (let i = 0; i < cardArr.length; i++) {
   const card = document.createElement("li");
   card.classList.add("card");
-  card.innerHTML = `<i class="${cardsContainer[i]}"></i>`;
+  card.innerHTML = `<i class="${cardArr[i]}"></i>`;
 cardsContainer.appendChild(card);
 }
 

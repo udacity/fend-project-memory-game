@@ -1,6 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
+//create array to hold the cards
 const cardArr = ["fa-diamond", "fa-diamond", "fa-paper-plane-o",  "fa-paper-plane-o", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf","fa-bicycle", "fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
 
 /*
@@ -9,6 +7,16 @@ const cardArr = ["fa-diamond", "fa-diamond", "fa-paper-plane-o",  "fa-paper-plan
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+const cardsContainer = document.querySelector(".deck");
+
+// create cards
+for (var i = 0; i < cardArr.length; i++) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+cardsContainer.appendChild(card);
+}
+ 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

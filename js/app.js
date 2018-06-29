@@ -154,7 +154,7 @@ function resetTurns() {
 
 // stars counter
 function loseStars() {
-  if (turns === 10 || turns === 20) {
+  if (turns === 16 || turns === 24) {
     takeAwayStar();
   }
 }

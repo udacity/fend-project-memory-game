@@ -2,6 +2,7 @@
  * Create a list that holds all of your cards
  */
 
+// global variables
 const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
 let time = 0;
@@ -10,16 +11,14 @@ let turns = 0;
 let timerOff = true;
 let timerVar;
 
-gameInit();
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-// event listener for clicking cards
 
+// event listener for clicking cards
 deck.addEventListener('click', e => {
   const clicked = e.target;
   if (checkFlip(clicked)) {
@@ -41,28 +40,18 @@ deck.addEventListener('click', e => {
 document.querySelector('.modal_exit').addEventListener('click', () => {
   showModal();
 });
-
-document.querySelector('.modal_replay').addEventListener('click', () => {
-  gameInit();
-});
+document.querySelector('.modal_replay').addEventListener('click', gameRestart);
 
 // restart icon
-document.querySelector('.restart').addEventListener('click', () => {
-  gameInit();
-})
+document.querySelector('.restart').addEventListener('click', gameRestart);
 
-// initialize game
-function gameInit() {
-  stopTimer();
-  time = 0;
-  showTimer();
-  turns = 0;
-  const counter = document.querySelector('.moves');
-  counter.innerHTML = turns;
-  stars = 0;
-  showStars();
-  flipDeck();
+// restart game
+function gameRestart() {
+  resetTimer();
+  resetStars();
+  resetTurns();
   shuffleCards();
+  flipDeck();
 }
 
 // check if flip is valid
@@ -100,7 +89,6 @@ function checkMatch() {
     flippedCards = [];
   } else {
     setTimeout(() => {
-
       unFlipCard(flippedCards[0]);
       unFlipCard(flippedCards[1]);
       flippedCards = [];
@@ -117,8 +105,6 @@ function shuffleCards() {
   }
 }
 
-
-
 // resets deck
 function flipDeck() {
   const allCards = document.querySelectorAll('.deck li');
@@ -134,7 +120,13 @@ function countTurns() {
   counter.innerHTML = turns;
 }
 
-// stars
+// resets turns
+function resetTurns() {
+  turns = 0;
+  document.querySelector('.moves').innerHTML = turns;
+}
+
+// stars counter
 function loseStars() {
   if (turns === 10 || turns === 20) {
     takeAwayStar();
@@ -160,9 +152,18 @@ function takeAwayStar() {
   }
 }
 
+// resets stars
+function resetStars() {
+  starNumber = 0;
+  const stars = document.querySelectorAll('.stars li');
+  for (star of stars) {
+    star.style.display = 'inline';
+  }
+}
+
 // start timer
 function startTimer() {
-  let timerVar = setInterval(() => {
+  timerVar = setInterval(() => {
     time++;
     showTimer();
   }, 1000);
@@ -185,6 +186,14 @@ function showTimer() {
   }
 }
 
+// resets Timer
+function resetTimer() {
+  stopTimer();
+  timerOff = true;
+  time = 0;
+  showTimer();
+}
+
 // show modal
 function showModal() {
   const modal = document.querySelector('.modal');
@@ -204,6 +213,7 @@ function modalResults() {
   starsResults.innerHTML = `Stars: ${stars}`;
 }
 
+// counts stars for modal
 function countStars() {
   stars = document.querySelectorAll('.stars li');
   starNumber = 0;
@@ -214,11 +224,6 @@ function countStars() {
   }
   return starNumber;
 }
-
-
-
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

@@ -61,6 +61,7 @@ function gameRestart() {
   resetTurns();
   shuffleCards();
   flipDeck();
+  match = 0;
 }
 
 // replay game

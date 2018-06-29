@@ -8,6 +8,7 @@ const cardArr = ["fa-diamond", "fa-diamond", "fa-paper-plane-o",  "fa-paper-plan
  *   - add each card's HTML to the page
  */
 
+//set the deck class as container for the cards themselves (dynamic cards instead of static)
 const cardsContainer = document.querySelector(".deck");
 
 // create cards

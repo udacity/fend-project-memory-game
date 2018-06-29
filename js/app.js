@@ -12,11 +12,12 @@ const cardsContainer = document.querySelector(".deck");
 
 // create cards
 for (var i = 0; i < cardArr.length; i++) {
-  const card = document.createElement("div");
+  const card = document.createElement("li");
   card.classList.add("card");
+  card.innerHTML = `<i class="${cardsContainer[i]}"></i>`;
 cardsContainer.appendChild(card);
 }
- 
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

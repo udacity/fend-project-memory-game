@@ -5,11 +5,15 @@
 // global variables
 const cards = document.querySelectorAll('.card');
 const deck = document.querySelector('.deck');
+const PAIRS = 8;
+
 let time = 0;
 let flippedCards = [];
 let turns = 0;
 let timerOff = true;
 let timerVar;
+let match = 0;
+
 
 /*
  * Display the cards on the page
@@ -19,6 +23,11 @@ let timerVar;
  */
 
 // event listener for clicking cards
+
+// initial shuffle
+shuffleCards();
+
+// click on cards
 deck.addEventListener('click', e => {
   const clicked = e.target;
   if (checkFlip(clicked)) {
@@ -40,7 +49,7 @@ deck.addEventListener('click', e => {
 document.querySelector('.modal_exit').addEventListener('click', () => {
   showModal();
 });
-document.querySelector('.modal_replay').addEventListener('click', gameRestart);
+document.querySelector('.modal_replay').addEventListener('click', replay);
 
 // restart icon
 document.querySelector('.restart').addEventListener('click', gameRestart);
@@ -52,6 +61,19 @@ function gameRestart() {
   resetTurns();
   shuffleCards();
   flipDeck();
+}
+
+// replay game
+function replay() {
+  gameRestart();
+  showModal();
+}
+
+// end game when won
+function endGame() {
+  stopTimer();
+  modalResults();
+  showModal();
 }
 
 // check if flip is valid
@@ -87,6 +109,10 @@ function checkMatch() {
   if (flippedCards[0].firstElementChild.className === flippedCards[1].firstElementChild.className) {
     matchedCards();
     flippedCards = [];
+    match++;
+    if (match === PAIRS) {
+      endGame();
+    }
   } else {
     setTimeout(() => {
       unFlipCard(flippedCards[0]);
@@ -224,6 +250,8 @@ function countStars() {
   }
   return starNumber;
 }
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

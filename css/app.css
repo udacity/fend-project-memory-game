@@ -108,10 +108,11 @@ h1 {
 
 .modal {
   position: absolute;
-  height: 350px;
-  width: 350px;
+  height: 450px;
+  width: 450px;
   background-color: lightBlue;
   border-radius: 20%;
+  z-index: 1
 }
 
 .modal_title {

@@ -27,7 +27,7 @@ function shuffle(array) {
 
     let tiles = document.querySelectorAll('li.card').forEach(function(card){
         card.addEventListener('click', function(e){
-            console.log('hi');
+            card.classList.add('open', 'show');
         })
     })
 

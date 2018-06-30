@@ -49,7 +49,7 @@ function click(card){
       } else {
     //no opened cards
       currentCard
-      .classList.add("open", "show");
+      .classList.add("open", "show", "disable");
       openedCards.push(this);
       }
 
@@ -76,10 +76,10 @@ function compare(currentCard, previousCard){
 
   //1000ms wait to display clicked card
     setTimeout(function(){
-      currentCard.classList.remove("open", "show");
-      previousCard.classList.remove("open", "show");
+      currentCard.classList.remove("open", "show", "disable");
+      previousCard.classList.remove("open", "show", "disable");
       openedCards = [];
-    }, 1000);
+    }, 500);
 
   }
 }
@@ -89,6 +89,17 @@ function winState(){
     alert("Game Over!");
   }
 }
+
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener("click", function(){
+    //remove all cards
+    cardsContainer.innerHTML = "";
+
+    //init new game
+    init();
+    //reset any related variables
+    matchedCards = [];
+})
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976

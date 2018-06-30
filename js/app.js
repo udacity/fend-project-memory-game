@@ -25,6 +25,15 @@ function shuffle(array) {
     return array;
 }
 
+    let tiles = document.querySelectorAll('li.card').forEach(function(card){
+        card.addEventListener('click', function(e){
+            console.log('hi');
+        })
+    })
+
+let container = document.querySelector('deck');
+deck = ['anchor', 'cube', 'bolt', 'leaf']
+deck.push(... deck);
 
 /*
  * set up the event listener for a card. If a card is clicked:

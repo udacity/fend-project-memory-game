@@ -1,5 +1,5 @@
 //create array to hold the cards
-const cardArr = ["fa-diamond", "fa-diamond", "fa-paper-plane-o",  "fa-paper-plane-o", "fa-anchor", "fa-anchor", "fa-bolt", "fa-bolt", "fa-cube", "fa-cube", "fa-leaf", "fa-leaf","fa-bicycle", "fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
+const cardArr = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o",  "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf","fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"];
 
 /*
  * Display the cards on the page
@@ -21,7 +21,9 @@ for (let i = 0; i < cardArr.length; i++) {
   //card click event
   card.addEventListener("click", function(){
     console.log(card.innerHTML);
-  })
+
+      card.classList.add("open", "show")
+      });
 }
 
 

@@ -47,42 +47,46 @@ function click(card){
           card.classList.add("open", "show");
           openedCards.push(this);
         //compare cards
-      if(currentCard.innerHTML === previousCard.innerHTML){
+        compare(currentCard, previousCard);
 
-        currentCard.classList.add("match");
-        previousCard.classList.add("match");
 
-        matchedCards.push(currentCard, previousCard);
+      } else {
+    //no opened cards
+      currentCard
+      .classList.add("open", "show");
+      openedCards.push(this);
+      }
 
-        //resets the counter on openedCards to zero to allow multiple matches
+  });
 
-        openedCards = [];
+};
 
-  //check for game Over
+function compare(currentCard, previousCard){
+  if(currentCard.innerHTML === previousCard.innerHTML){
+
+    currentCard.classList.add("match");
+    previousCard.classList.add("match");
+
+    matchedCards.push(currentCard, previousCard);
+
+    //resets the counter on openedCards to zero to allow multiple matches
+
+    openedCards = [];
+
+    //check for game Over
     winState();
 
-      } else {
+  } else {
 
-        //1000ms wait to display clicked card
-          setTimeout(function(){
-            currentCard.classList.remove("open", "show");
-            previousCard.classList.remove("open", "show");
-            openedCards = [];
-          }, 1000);
+  //1000ms wait to display clicked card
+    setTimeout(function(){
+      currentCard.classList.remove("open", "show");
+      previousCard.classList.remove("open", "show");
+      openedCards = [];
+    }, 1000);
 
-        }
-
-      } else {
-  //no opened cards
-          currentCard
-          .classList.add("open", "show");
-          openedCards.push(this);
-        }
-
-        });
-
+  }
 }
-
 function winState(){
   if(matchedCards.length == cardArr.length){
     alert("Game Over!");

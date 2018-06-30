@@ -15,15 +15,20 @@ let openedCards = [];
 let matchedCards = [];
 
 // create cards
-for (let i = 0; i < cardArr.length; i++) {
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML = `<i class="${cardArr[i]}"></i>`;
-  cardsContainer.appendChild(card);
-    // call click event to each card
-    click(card);
-}
+init();
 
+
+//initialize the game - creates cards and canvas
+function init(){
+  for (let i = 0; i < cardArr.length; i++) {
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.innerHTML = `<i class="${cardArr[i]}"></i>`;
+    cardsContainer.appendChild(card);
+      // call click event to each card
+      click(card);
+  }
+}
 /*
 click event
 */
@@ -64,7 +69,6 @@ function click(card){
             previousCard.classList.remove("open", "show");
             openedCards = [];
           }, 1000);
-
 
         }
 

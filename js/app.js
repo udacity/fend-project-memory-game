@@ -40,17 +40,28 @@ for (let i = 0; i < cardArr.length; i++) {
       previousCard.classList.add("match");
 
       matchedCards.push(currentCard, previousCard);
+
 //resets the counter on openedCards to zero to allow multiple matches
+
       openedCards = [];
+
+//check for game Over
+winState();
 
     } else {
-      currentCard.classList.remove("open", "show");
-      previousCard.classList.remove("open", "show");
 
-      openedCards = [];
-    }
 
-      } else {
+//1000ms wait to display clicked card
+        setTimeout(function(){
+          currentCard.classList.remove("open", "show");
+          previousCard.classList.remove("open", "show");
+          openedCards = [];
+        }, 1000);
+
+
+      }
+
+    } else {
 //no opened cards
         currentCard
         .classList.add("open", "show");
@@ -60,8 +71,10 @@ for (let i = 0; i < cardArr.length; i++) {
       });
 }
 
-function gameOver(){
-
+function winState(){
+  if(matchedCards.length == cardArr.length){
+    alert("Game Over!");
+  }
 }
 
 

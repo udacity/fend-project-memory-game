@@ -17,7 +17,6 @@ let matchedCards = [];
 // create cards
 init();
 
-
 //initialize the game - creates cards and canvas
 function init(){
   for (let i = 0; i < cardArr.length; i++) {
@@ -29,9 +28,6 @@ function init(){
       click(card);
   }
 }
-/*
-click event
-*/
 
 function click(card){
   //card click event
@@ -44,7 +40,7 @@ function click(card){
         if(openedCards.length === 1){
 
 
-          card.classList.add("open", "show");
+          card.classList.add("open", "show", "disable");
           openedCards.push(this);
         //compare cards
         compare(currentCard, previousCard);
@@ -87,6 +83,7 @@ function compare(currentCard, previousCard){
 
   }
 }
+
 function winState(){
   if(matchedCards.length == cardArr.length){
     alert("Game Over!");

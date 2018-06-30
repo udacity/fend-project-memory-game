@@ -16,7 +16,7 @@ let matchedCards = [];
 
 // create cards
 init();
-
+restartGame();
 //initialize the game - creates cards and canvas
 function init(){
   for (let i = 0; i < cardArr.length; i++) {
@@ -27,6 +27,7 @@ function init(){
       // call click event to each card
       click(card);
   }
+
 }
 
 function click(card){
@@ -36,22 +37,22 @@ function click(card){
       const currentCard = this;
       const previousCard = openedCards[0];
 
-        //existing opened card
-        if(openedCards.length === 1){
+          //existing opened card
+          if(openedCards.length === 1){
 
 
-          card.classList.add("open", "show", "disable");
-          openedCards.push(this);
-        //compare cards
-        compare(currentCard, previousCard);
+            card.classList.add("open", "show", "disable");
+            openedCards.push(this);
+            //compare cards
+            compare(currentCard, previousCard);
 
 
-      } else {
-    //no opened cards
-      currentCard
+          } else {
+            //no opened cards
+            currentCard
       .classList.add("open", "show", "disable");
       openedCards.push(this);
-      }
+    }
 
   });
 
@@ -74,14 +75,15 @@ function compare(currentCard, previousCard){
 
   } else {
 
-  //1000ms wait to display clicked card
+  //500ms wait to display clicked card
     setTimeout(function(){
       currentCard.classList.remove("open", "show", "disable");
       previousCard.classList.remove("open", "show", "disable");
       openedCards = [];
     }, 500);
-
   }
+  //add moves
+  addMove();
 }
 
 function winState(){
@@ -90,17 +92,25 @@ function winState(){
   }
 }
 
-const restartBtn = document.querySelector(".restart");
-restartBtn.addEventListener("click", function(){
-    //remove all cards
-    cardsContainer.innerHTML = "";
+function restartGame(){
+    const restartBtn = document.querySelector(".restart");
+      restartBtn.addEventListener("click", function(){
+        //remove all cards
+      cardsContainer.innerHTML = "";
 
-    //init new game
-    init();
-    //reset any related variables
-    matchedCards = [];
-})
+      //init new game
+      init();
+      //reset any related variables
+      matchedCards = [];
+    });
+  };
 
+const movesContainer = document.querySelector(".moves");
+let moves = 0;
+function addMove(){
+    moves++
+    movesContainer.innerHTML = moves;
+  }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

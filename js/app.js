@@ -22,10 +22,25 @@ for (let i = 0; i < cardArr.length; i++) {
 
   //card click event
   card.addEventListener("click", function(){
-    console.log(card.innerHTML);
+  
+    //existing opened card
+      if(openedCards.length === 1){
+        card.classList.add("open", "show");
+        openedCards.push(this);
 
-      card.classList.add("open", "show");
-      openedCards.push(this);
+    //compare cards
+    if(this.innerHTML === openedCards[0].innerHTML){
+      console.log("matched");
+    } else {
+      console.log("not a match");
+    }
+
+      } else {
+    //no opened cards
+        card.classList.add("open", "show");
+        openedCards.push(this);
+      }
+
       });
 }
 

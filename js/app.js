@@ -20,55 +20,63 @@ for (let i = 0; i < cardArr.length; i++) {
   card.classList.add("card");
   card.innerHTML = `<i class="${cardArr[i]}"></i>`;
   cardsContainer.appendChild(card);
+    // call click event to each card
+    click(card);
+}
 
-//card click event
-  card.addEventListener("click", function(){
+/*
+click event
+*/
 
-    const currentCard = this;
-    const previousCard = openedCards[0];
-//existing opened card
-      if(openedCards.length === 1){
+function click(card){
+  //card click event
+    card.addEventListener("click", function(){
 
+      const currentCard = this;
+      const previousCard = openedCards[0];
 
-        card.classList.add("open", "show");
-        openedCards.push(this);
-
-//compare cards
-    if(currentCard.innerHTML === previousCard.innerHTML){
-
-      currentCard.classList.add("match");
-      previousCard.classList.add("match");
-
-      matchedCards.push(currentCard, previousCard);
-
-//resets the counter on openedCards to zero to allow multiple matches
-
-      openedCards = [];
-
-//check for game Over
-winState();
-
-    } else {
+        //existing opened card
+        if(openedCards.length === 1){
 
 
-//1000ms wait to display clicked card
-        setTimeout(function(){
-          currentCard.classList.remove("open", "show");
-          previousCard.classList.remove("open", "show");
-          openedCards = [];
-        }, 1000);
+          card.classList.add("open", "show");
+          openedCards.push(this);
+        //compare cards
+      if(currentCard.innerHTML === previousCard.innerHTML){
+
+        currentCard.classList.add("match");
+        previousCard.classList.add("match");
+
+        matchedCards.push(currentCard, previousCard);
+
+        //resets the counter on openedCards to zero to allow multiple matches
+
+        openedCards = [];
+
+  //check for game Over
+    winState();
+
+      } else {
+
+        //1000ms wait to display clicked card
+          setTimeout(function(){
+            currentCard.classList.remove("open", "show");
+            previousCard.classList.remove("open", "show");
+            openedCards = [];
+          }, 1000);
 
 
-      }
+        }
 
-    } else {
-//no opened cards
-        currentCard
-        .classList.add("open", "show");
-        openedCards.push(this);
-      }
+      } else {
+  //no opened cards
+          currentCard
+          .classList.add("open", "show");
+          openedCards.push(this);
+        }
 
-      });
+        });
+
 }
 
 function winState(){

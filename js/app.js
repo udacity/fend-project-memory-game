@@ -11,6 +11,8 @@ const cardArr = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o",  "fa f
 //set the deck class as container for the cards themselves (dynamic cards instead of static)
 const cardsContainer = document.querySelector(".deck");
 
+let openedCards = [];
+
 // create cards
 for (let i = 0; i < cardArr.length; i++) {
   const card = document.createElement("li");
@@ -22,7 +24,8 @@ for (let i = 0; i < cardArr.length; i++) {
   card.addEventListener("click", function(){
     console.log(card.innerHTML);
 
-      card.classList.add("open", "show")
+      card.classList.add("open", "show");
+      openedCards.push(this);
       });
 }
 

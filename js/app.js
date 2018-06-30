@@ -10,6 +10,7 @@ const cardArr = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o",  "fa f
 
 //set the deck class as container for the cards themselves (dynamic cards instead of static)
 const cardsContainer = document.querySelector(".deck");
+const starsContainer = document.querySelector(".stars");
 
 let openedCards = [];
 let matchedCards = [];
@@ -88,7 +89,7 @@ function compare(currentCard, previousCard){
 
 function winState(){
   if(matchedCards.length == cardArr.length){
-    alert("Game Over!");
+    alert("Game Over!", rating);
   }
 }
 
@@ -102,15 +103,40 @@ function restartGame(){
       init();
       //reset any related variables
       matchedCards = [];
+      moves = 0;
+      movesContainer.innerHTML = 0;
+      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>`
     });
   };
 
-const movesContainer = document.querySelector(".moves");
-let moves = 0;
+  const movesContainer = document.querySelector(".moves");
+  let moves = 0;
+  movesContainer.innerHTML = moves;
+
 function addMove(){
     moves++
     movesContainer.innerHTML = moves;
+
+    //update rating
+    rating();
   }
+
+function rating(){
+  switch(moves){
+    case 10:
+      starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
+                                  <li><i class="fa fa-star"></i></li>`;
+    break;
+    case 25:
+    starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>`;
+    break;
+  }
+
+}
+
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

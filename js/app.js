@@ -19,7 +19,7 @@ for (let i = 0; i < cardArr.length; i++) {
   cardsContainer.appendChild(card);
 
   //card click event
-  card.addEventListener("click)", function(){
+  card.addEventListener("click", function(){
     console.log(card.innerHTML);
   })
 }

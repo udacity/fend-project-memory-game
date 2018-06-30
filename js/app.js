@@ -15,6 +15,7 @@ const starsContainer = document.querySelector(".stars");
 let openedCards = [];
 let matchedCards = [];
 
+
 // create cards
 init();
 restartGame();
@@ -25,6 +26,7 @@ function init(){
     card.classList.add("card");
     card.innerHTML = `<i class="${cardArr[i]}"></i>`;
     cardsContainer.appendChild(card);
+    shuffle(cardArr);
       // call click event to each card
       click(card);
   }
@@ -90,6 +92,7 @@ function compare(currentCard, previousCard){
 function winState(){
   if(matchedCards.length == cardArr.length){
     alert("Game Over!", rating);
+
   }
 }
 
@@ -136,7 +139,9 @@ function rating(){
 
 }
 
+function timer(){
 
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {

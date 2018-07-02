@@ -14,7 +14,7 @@ const starsContainer = document.querySelector(".stars");
 
 let openedCards = [];
 let matchedCards = [];
-
+let seconds = 0;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -44,10 +44,11 @@ function init(){
 
       // call click event to each card
       click(card);
+      stopWatch();
   }
 
 }
-
+//actions for clicking cards
 function click(card){
   //card click event
     card.addEventListener("click", function(){
@@ -75,7 +76,7 @@ function click(card){
   });
 
 };
-
+//compare the two cards selected against each other
 function compare(currentCard, previousCard){
   if(currentCard.innerHTML === previousCard.innerHTML){
 
@@ -103,14 +104,14 @@ function compare(currentCard, previousCard){
   //add moves
   addMove();
 }
-
+//is the game over function
 function winState(){
   if(matchedCards.length == cardArr.length){
     alert("Game Over!", rating);
 
   }
 }
-
+//restart game
 function restartGame(){
     const restartBtn = document.querySelector(".restart");
       restartBtn.addEventListener("click", function(){
@@ -133,7 +134,7 @@ function restartGame(){
   let moves = 0;
   movesContainer.innerHTML = moves;
     updateCards();
-
+//add move to counter
 function addMove(){
     moves++
     movesContainer.innerHTML = moves;
@@ -141,7 +142,7 @@ function addMove(){
     //update rating
     rating();
   }
-
+//determine rating
 function rating(){
   switch(moves){
     case 10:
@@ -154,7 +155,7 @@ function rating(){
   }
 
 }
-
+//update card contents
 function updateCards(){
     //cardArr = shuffle(cardArr);
     var index = 0;
@@ -164,8 +165,12 @@ function updateCards(){
     });
       resetTimer();
 }
-
-function timer(){
+//timer functionality
+function stopWatch(){
+  	currentseconds = setInterval(function () {
+  		$timer.text(`${second}`)
+  		second = second + 1
+  	}, 1000);
 
 }
 

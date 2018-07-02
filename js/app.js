@@ -15,7 +15,6 @@ const starsContainer = document.querySelector(".stars");
 let openedCards = [];
 let matchedCards = [];
 
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -31,18 +30,18 @@ function shuffle(array) {
     return array;
 }
 
-
 // create cards
 init();
 restartGame();
 //initialize the game - creates cards and canvas
 function init(){
+    shuffle(cardArr);
   for (let i = 0; i < cardArr.length; i++) {
     const card = document.createElement("li");
     card.classList.add("card");
     card.innerHTML = `<i class="${cardArr[i]}"></i>`;
     cardsContainer.appendChild(card);
-    shuffle(cardArr);
+
       // call click event to each card
       click(card);
   }
@@ -133,7 +132,7 @@ function restartGame(){
   const movesContainer = document.querySelector(".moves");
   let moves = 0;
   movesContainer.innerHTML = moves;
-  updateCards();
+    updateCards();
 
 function addMove(){
     moves++
@@ -157,13 +156,14 @@ function rating(){
 }
 
 function updateCards(){
-    cardArr = shuffle(cardArr);
+    //cardArr = shuffle(cardArr);
     var index = 0;
-    $.each($(".card i"), function(){
+      $.each($(".card i"), function(){
       $(this).attr("class", "fa " + cardArr[index]);
       index++;
     });
-};
+      resetTimer();
+}
 
 function timer(){
 

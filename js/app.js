@@ -45,6 +45,34 @@ function shuffle(array) {
     });
 
 
+
+let minutes = 0;
+let seconds = 0;
+
+
+function startTimer() {
+
+    timer = setInterval(function() {
+        seconds++;
+
+    if(seconds== 60){
+        minutes++;
+        seconds = 0;
+    }
+    console.log(formatTimer());
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+};
+
+function formatTimer() {
+    let sec = seconds > 9 ? String(seconds) : '0' + String(seconds);
+    let mins = minutes > 9 ? String(minutes) : '0' + String(minutes);
+
+    return mins + ':' + sec;
+}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

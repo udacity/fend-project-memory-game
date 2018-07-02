@@ -24,16 +24,26 @@ function shuffle(array) {
 
     return array;
 }
+    let openCards = [];
 
     let tiles = document.querySelectorAll('li.card').forEach(function(card){
         card.addEventListener('click', function(e){
-            card.classList.add('open', 'show');
-        })
-    })
+                      openCards.push('card');
+                      card.classList.add('open', 'show');
 
-let container = document.querySelector('deck');
-deck = ['anchor', 'cube', 'bolt', 'leaf']
-deck.push(... deck);
+                      if ( openCards.length == 2) {
+                       setTimeout(function() {
+                        openCards.forEach(function(card) {
+                            card.classList.remove('open', 'show');
+                        });
+
+                       }, 1000);
+                      } else {
+                      }
+
+        });
+    });
+
 
 /*
  * set up the event listener for a card. If a card is clicked:

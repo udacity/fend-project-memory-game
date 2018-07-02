@@ -16,6 +16,22 @@ let openedCards = [];
 let matchedCards = [];
 
 
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+
 // create cards
 init();
 restartGame();
@@ -117,6 +133,7 @@ function restartGame(){
   const movesContainer = document.querySelector(".moves");
   let moves = 0;
   movesContainer.innerHTML = moves;
+  updateCards();
 
 function addMove(){
     moves++
@@ -139,24 +156,19 @@ function rating(){
 
 }
 
+function updateCards(){
+    cardArr = shuffle(cardArr);
+    var index = 0;
+    $.each($(".card i"), function(){
+      $(this).attr("class", "fa " + cardArr[index]);
+      index++;
+    });
+};
+
 function timer(){
 
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
 
 
 /*

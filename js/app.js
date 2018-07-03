@@ -25,6 +25,8 @@ function shuffle(array) {
 
     return array;
 }
+
+ newGame = shuffle(shapes);
     let openCards = [];
 
     let tiles = document.querySelectorAll('li.card').forEach(function(card){
@@ -51,6 +53,18 @@ function shuffle(array) {
 
         });
     });
+
+    const restart = function() {
+ let tiles = document.querySelectorAll('li.card')
+ let shuffledArray = shuffle(shapes);
+         tiles.forEach(function(card, index, array) {
+         card.classList.remove('match', 'open', 'show', 'clicked')
+         card.querySelector('i').className = shuffledArray[index]
+ })
+}
+             document.querySelector('.restart').addEventListener('click', (e)=>{
+     restart();
+})
 
 var timer = newTimer();
 timer.start();

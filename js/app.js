@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
+let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
 
 /*
  * Display the cards on the page
@@ -29,45 +29,36 @@ function shuffle(array) {
 
     let tiles = document.querySelectorAll('li.card').forEach(function(card){
         card.addEventListener('click', function(e){
-                      openCards.push('card');
+                      openCards.push(card);
                       card.classList.add('open', 'show');
 
                     if (openCards.length === 2) {
                       console.log('start comparing');
+                      let match = openCards[0].querySelector('i').className === openCards[1].querySelector('i').className
+                     if(!match) {
+                         // flip back
+                     openCards[0].classList.remove('show', 'open', 'clicked')
+                     openCards[1].classList.remove('show', 'open', 'clicked')
+
+                     }else {
+                       openCards[0].classList.add('match')
+                       openCards[1].classList.add('match')
+                     }
+
+                     //clear the array
+                     openCards = []
                     }
 
         });
     });
 
+var timer = newTimer();
+timer.start();
+timer.addEventListener('secondsUpdated', function (e) {
+    $('#basicUsage').html(timer.getTimeValues().toString());
+});
 
 
-let minutes = 0;
-let seconds = 0;
-
-
-function startTimer() {
-
-    timer = setInterval(function() {
-        seconds++;
-
-    if(seconds== 60){
-        minutes++;
-        seconds = 0;
-    }
-    console.log(formatTimer());
-    }, 1000);
-}
-
-function stopTimer() {
-    clearInterval(timer);
-};
-
-function formatTimer() {
-    let sec = seconds > 9 ? String(seconds) : '0' + String(seconds);
-    let mins = minutes > 9 ? String(minutes) : '0' + String(minutes);
-
-    return mins + ':' + sec;
-}
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

@@ -66,7 +66,7 @@ function shuffle(array) {
      restart();
 })
 
-var timer = newTimer();
+const timer = newTimer();
 timer.start();
 timer.addEventListener('secondsUpdated', function (e) {
     $('#basicUsage').html(timer.getTimeValues().toString());

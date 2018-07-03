@@ -35,7 +35,7 @@ function shuffle(array) {
 
 // create cards
 init();
-restartGame();
+//restartGame();
 //initialize the game - creates cards and canvas
 function init(){
     shuffle(cardArr);
@@ -47,10 +47,10 @@ function init(){
 
       // call click event to each card
       click(card);
-      clearTimer();
-      setTimer();
-  }
 
+  }
+  clearTimer();
+  setTimer();
 }
 //actions for clicking cards
 function click(card){
@@ -110,9 +110,9 @@ function compare(currentCard, previousCard){
 }
 //is the game over function
 function winState(){
-  if(matchedCards.length == cardArr.length){
-    clearTimer();
-    alert("Game Over!", rating);
+    if(matchedCards.length == cardArr.length){
+      clearTimer();
+      alert("Game Over!", rating);
 
   }
 }
@@ -133,7 +133,7 @@ function restartGame(){
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
       clearTimer();
-      setTimer();
+
     });
 
   };
@@ -171,23 +171,24 @@ function updateCards(){
       $(this).attr("class", "fa " + cardArr[index]);
       index++;
     });
-      
+
 }
 //timer functionality
 function setTimer(){
+    timer = setInterval(function (){
+        time++
+          timerContainer.innerHTML = time;
+          console.log(time);
+        }, 1000);}
 
-  timer = setInterval(function (){
-    time++
-    timerContainer.innerHTML = time
-   }, 1000);
-}
-function firstClick(){
+/*function firstClick(){
   $(".card").one("click", function(){
     setTimer;
   });
 }
+*/
 function clearTimer(){
-  clearInterval(timer);
+  clearInterval(time);
 }
 
 

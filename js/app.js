@@ -47,10 +47,9 @@ function init(){
 
       // call click event to each card
       click(card);
-
-  }
+}
   clearTimer();
-  setTimer();
+  firstClick();
 }
 //actions for clicking cards
 function click(card){
@@ -132,10 +131,10 @@ function restartGame(){
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
-      clearTimer();
+
 
     });
-
+      clearTimer();
   };
 
   const movesContainer = document.querySelector(".moves");
@@ -181,12 +180,12 @@ function setTimer(){
           console.log(time);
         }, 1000);}
 
-/*function firstClick(){
-  $(".card").one("click", function(){
-    setTimer;
+function firstClick(){
+  $(".deck").one("click", function(){
+    setTimer();
   });
 }
-*/
+
 function clearTimer(){
   clearInterval(time);
 }

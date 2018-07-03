@@ -11,10 +11,13 @@ const cardArr = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o",  "fa f
 //set the deck class as container for the cards themselves (dynamic cards instead of static)
 const cardsContainer = document.querySelector(".deck");
 const starsContainer = document.querySelector(".stars");
+const timerContainer = document.querySelector(".timer");
 
 let openedCards = [];
 let matchedCards = [];
-let seconds = 0;
+var time = 0;
+var timer;
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -44,7 +47,8 @@ function init(){
 
       // call click event to each card
       click(card);
-      stopWatch();
+      clearTimer();
+      setTimer();
   }
 
 }
@@ -107,6 +111,7 @@ function compare(currentCard, previousCard){
 //is the game over function
 function winState(){
   if(matchedCards.length == cardArr.length){
+    clearTimer();
     alert("Game Over!", rating);
 
   }
@@ -127,7 +132,10 @@ function restartGame(){
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
+      clearTimer();
+      setTimer();
     });
+
   };
 
   const movesContainer = document.querySelector(".moves");
@@ -163,15 +171,23 @@ function updateCards(){
       $(this).attr("class", "fa " + cardArr[index]);
       index++;
     });
-      resetTimer();
+      
 }
 //timer functionality
-function stopWatch(){
-  	currentseconds = setInterval(function () {
-  		$timer.text(`${second}`)
-  		second = second + 1
-  	}, 1000);
+function setTimer(){
 
+  timer = setInterval(function (){
+    time++
+    timerContainer.innerHTML = time
+   }, 1000);
+}
+function firstClick(){
+  $(".card").one("click", function(){
+    setTimer;
+  });
+}
+function clearTimer(){
+  clearInterval(timer);
 }
 
 

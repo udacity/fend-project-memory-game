@@ -33,9 +33,10 @@ function shuffle(array) {
     return array;
 }
 
+
 // create cards
 init();
-//restartGame();
+restartGame();
 //initialize the game - creates cards and canvas
 function init(){
     shuffle(cardArr);
@@ -48,7 +49,6 @@ function init(){
       // call click event to each card
       click(card);
 }
-  clearTimer();
   firstClick();
 }
 //actions for clicking cards
@@ -110,7 +110,6 @@ function compare(currentCard, previousCard){
 //is the game over function
 function winState(){
     if(matchedCards.length == cardArr.length){
-      clearTimer();
       alert("Game Over!", rating);
 
   }
@@ -119,23 +118,27 @@ function winState(){
 function restartGame(){
     const restartBtn = document.querySelector(".restart");
       restartBtn.addEventListener("click", function(){
-        //remove all cards
+      //reset timer to 0 - DOES NOT STOP THE TIMER ENTIRELY
+      clearTimer();
+      time = -1;
+
+      //remove all cards
+
       cardsContainer.innerHTML = "";
 
       //init new game
       init();
-      //reset any related variables
+
+      //reset any [remaining] related variables
       matchedCards = [];
       moves = 0;
       movesContainer.innerHTML = 0;
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
-
-
+                                  firstClick();
     });
-      clearTimer();
-  };
+};
 
   const movesContainer = document.querySelector(".moves");
   let moves = 0;

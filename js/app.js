@@ -36,15 +36,21 @@ function shuffle(array) {
 
                     if (openCards.length === 2) {
                       console.log('start comparing');
-                      let match = openCards[0].querySelector('i').className === openCards[1].querySelector('i').className
+                      let match = openCards[0].querySelector('i').className ===
+                      openCards[1].querySelector('i').className;
+                      let firstCard = openCards [0];
+                      let secondCard = openCards [1];
                      if(!match) {
                          // flip back
-                     openCards[0].classList.remove('show', 'open', 'clicked')
-                     openCards[1].classList.remove('show', 'open', 'clicked')
-
+                         setTimeout(function() {
+                    firstCard.classList.remove('show', 'open')
+                     secondCard.classList.remove('show', 'open')
+                       }, 1000);
                      }else {
-                       openCards[0].classList.add('match')
-                       openCards[1].classList.add('match')
+                        setTimeout(function() {
+                       firstCard.classList.add('match')
+                       secondCard.classList.add('match')
+                   }, 1000);
                      }
 
                      //clear the array

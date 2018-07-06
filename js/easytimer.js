@@ -1,4 +1,4 @@
-easytimer.js
+
 
 var module,Timer=function(a){"use strict";
 function b(){return"undefined"!=typeof document}

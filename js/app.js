@@ -94,7 +94,11 @@ function isOver () {
     }
 }
 
-
+const movesContainer = document.querySelector('.moves');
+let moves = 0;
+()=> addMove()
+    moves++;
+    movesContainer.innerHTML = moves;
 
 
 

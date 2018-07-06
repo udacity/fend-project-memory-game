@@ -81,6 +81,11 @@ h1 {
     font-size: 33px;
 }
 
+
+/*
+*double click fix
+*/
+
 .deck .card.disable {
     pointer-events: none;
 }

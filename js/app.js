@@ -32,7 +32,7 @@ function shuffle(array) {
     let tiles = document.querySelectorAll('li.card').forEach(function(card){
         card.addEventListener('click', function(e){
                       openCards.push(card);
-                      card.classList.add('open', 'show');
+                      card.classList.add('open', 'show', 'disable');
 
                     if (openCards.length === 2) {
                       console.log('start comparing');
@@ -43,8 +43,8 @@ function shuffle(array) {
                      if(!match) {
                          // flip back
                          setTimeout(function() {
-                    firstCard.classList.remove('show', 'open')
-                     secondCard.classList.remove('show', 'open')
+                    firstCard.classList.remove('show', 'open', 'disable')
+                     secondCard.classList.remove('show', 'open', 'disable')
                        }, 1000);
                      }else {
                         setTimeout(function() {
@@ -88,7 +88,11 @@ timer.addEventListener('secondsUpdated', function (e) {
 })
 
 
-
+function isOver () {
+    if(match.length === shapes.length) {
+        alert('Game Over');
+    }
+}
 
 
 

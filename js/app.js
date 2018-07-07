@@ -121,15 +121,10 @@ function restartGame(){
       //reset timer to 0 - DOES NOT STOP THE TIMER ENTIRELY
       clearTimer();
       time = -1;
-
       //remove all cards
-
       cardsContainer.innerHTML = "";
-
       //init new game
       init();
-
-
       //reset any [remaining] related variables
       matchedCards = [];
       moves = 0;
@@ -137,13 +132,12 @@ function restartGame(){
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
-
     });
 };
 
   const movesContainer = document.querySelector(".moves");
-  let moves = 0;
-  movesContainer.innerHTML = moves;
+    let moves = 0;
+      movesContainer.innerHTML = moves;
     updateCards();
 //add move to counter
 function addMove(){
@@ -195,6 +189,31 @@ function clearTimer(){
 }
 
 
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:

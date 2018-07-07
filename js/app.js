@@ -36,7 +36,7 @@ function shuffle(array) {
 
 // create cards
 init();
-restartGame();
+
 //initialize the game - creates cards and canvas
 function init(){
     shuffle(cardArr);
@@ -129,6 +129,7 @@ function restartGame(){
       //init new game
       init();
 
+
       //reset any [remaining] related variables
       matchedCards = [];
       moves = 0;
@@ -136,7 +137,7 @@ function restartGame(){
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
-                                  firstClick();
+
     });
 };
 

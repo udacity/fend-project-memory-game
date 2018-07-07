@@ -1,9 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
-let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
-
+ let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -35,7 +33,6 @@ function shuffle(array) {
                       card.classList.add('open', 'show', 'disable');
 
                     if (openCards.length === 2) {
-                      console.log('start comparing');
                       let match = openCards[0].querySelector('i').className ===
                       openCards[1].querySelector('i').className;
                       let firstCard = openCards [0];
@@ -52,9 +49,17 @@ function shuffle(array) {
                        secondCard.classList.add('match')
                    }, 1000);
                      }
-
                      //clear the array
                      openCards = []
+                     const movesContainer = document.querySelector('.moves');
+                     let moves = 0;
+
+                     function addMoves () {
+                      moves++;
+                      movesContainer.innerHTML = moves;
+                     }
+
+
                     }
 
                 })
@@ -93,14 +98,6 @@ function isOver () {
         alert('Game Over');
     }
 }
-
-const movesContainer = document.querySelector('.moves');
-let moves = 0;
-()=> addMove()
-    moves++;
-    movesContainer.innerHTML = moves;
-
-
 
 
 

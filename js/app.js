@@ -2,6 +2,31 @@
  * Create a list that holds all of your cards
  */
  let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
+
+const starsContainer = document.querySelector('.stars');
+
+const moveContainer = document.querySelector('.moves');
+
+let moves = 0;
+
+
+//move counter
+function addMoves () {
+  moves++;
+  moveContainer.innerHTML = moves;
+}
+
+
+// star rating function
+
+function rating () {
+  if (moves === 13) {
+    starsContainer.innerHTML = '    <li><i class="fa fa-star"></i></li>' +
+            '<li><i class="fa fa-star"></i></li>';
+  } else if (moves === 18) {
+    starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>';
+  }
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -49,30 +74,12 @@ function shuffle(array) {
                        secondCard.classList.add('match')
                    }, 1000);
                      }
+
                      //clear the array
                      openCards = []
 
-
-                     // counter function
-                     const moveContainer = document.querySelector('.moves');
-                     let moves = 0;
-                     function addMove () {
-                      moves++
-                      moveContainer.innerHTML = moves;
-                     }
-
-
-
-
-
-                     //game over function
-                     function isOver () {
-                       if(match.length === shapes.length) {
-                          alert('Game Over');
-                      }
-                    }
-
-
+                     addMoves();
+                     rating();
                     }
 
                 })
@@ -113,26 +120,12 @@ function isOver () {
 }
 
 
-// star rating function
-
-rating ();
 
 
-const starsContainer = document.querySelector('.stars');
-let moves = 0;
-  function rating () {
-    if (moves < 12) {
-      starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>'
-            '<li><i class="fa fa-star"></i></li>',
-            '<li><i class="fa fa-star"></i></li>';
-    } else if (moves < 20) {
-          stars.innerHTML = '<li><i class="fa fa-star"></i></li>',
-            '<li><i class="fa fa-star"></i></li>';
-    } else {
-      stars.innerHTML =  '<li><i class="fa fa-star"></i></li>';
 
-    }
-  }
+
+
+
 
 
 

@@ -9,7 +9,8 @@ const moveContainer = document.querySelector('.moves');
 
 let moves = 0;
 
-let match = 16;
+let matches = 0;
+
 //move counter
 function addMoves () {
   moves++;
@@ -32,8 +33,9 @@ function rating () {
 
 //game over function
 function isOver () {
-    if(match.length === shapes.length) {
-        alert('Game Over');
+   matches++
+    if(matches === 8) {
+        alert(' CONGRADULATIONS !!! WINNER GAME OVER');
     }
 }
 

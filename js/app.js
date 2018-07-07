@@ -49,7 +49,7 @@ function shuffle(array) {
 
 // create cards
 init();
-
+restartGame();
 //initialize the game - creates cards and canvas
 function init(){
     shuffle(cardArr);
@@ -58,7 +58,8 @@ function init(){
     card.classList.add("card");
     card.innerHTML = `<i class="${cardArr[i]}"></i>`;
     cardsContainer.appendChild(card);
-
+    stopStopwatch();
+    resetStopwatch();
       // call click event to each card
       click(card);
 }
@@ -124,20 +125,15 @@ function compare(currentCard, previousCard){
 function winState(){
     if(matchedCards.length == cardArr.length){
           modal.style.display = "block";
-
+          stopStopwatch();
+          showFinalScore();
     }
 }
 //restart game
 function restartGame(){
-    const restartBtn = document.querySelector(".restart");
-      restartBtn.addEventListener("click", function(){
-      //reset timer to 0 - DOES NOT STOP THE TIMER ENTIRELY
-      clearTimer();
-      time = -1;
+    $('.restart').click(function() {
       //remove all cards
       cardsContainer.innerHTML = "";
-      //init new game
-      init();
       //reset any [remaining] related variables
       matchedCards = [];
       moves = 0;
@@ -145,8 +141,11 @@ function restartGame(){
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`
+                                  init();
     });
 };
+
+
 
   const movesContainer = document.querySelector(".moves");
     let moves = 0;
@@ -184,7 +183,6 @@ function updateCards(){
 
 }
 
-
 //oldTimer functionality
 /*function setTimer(){
     timer = setInterval(function (){
@@ -204,8 +202,7 @@ function clearTimer(){
   clearInterval(time);
 }
 
-// New Timer functionality built from:
-
+// New Timer functionality built from: https://www.cssscript.com/a-minimal-pure-javascript-stopwatch/
 
 function startStopwatch() {
 //buttonStart.onclick = function() {
@@ -227,7 +224,6 @@ function resetStopwatch() {
     appendSeconds.innerHTML = seconds;
     started = false;
 }
-
 
   function startTimer () {
     tens++;
@@ -255,10 +251,21 @@ function resetStopwatch() {
 
   }
 
+  //win screen
+  function showFinalScore() {
+
+      let finalMessage = "Congratulations! You won!<br/>Time: " + seconds + ":" + tens + "<br/>Rating: <ul class='stars-modal'>";
+
+      finalMessage += "<li><i class='fa fa-star'></i></li></ul><br/> Want to <span class='modal-restart'>play again</span>?";
+
+      document.getElementById("modalText").innerHTML = finalMessage;
 
 
-
-
+      $('.modal-restart').click(function() {
+      modal.style.display = "none";
+      init();
+  });
+  }
 // Get the modal
 var modal = document.getElementById('myModal');
 

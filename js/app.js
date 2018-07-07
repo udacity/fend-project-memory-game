@@ -52,6 +52,19 @@ function shuffle(array) {
                      //clear the array
                      openCards = []
 
+
+                     // counter function
+                     const moveContainer = document.querySelector('.moves');
+                     let moves = 0;
+                     function addMove () {
+                      moves++
+                      moveContainer.innerHTML = moves;
+                     }
+
+
+
+
+
                      //game over function
                      function isOver () {
                        if(match.length === shapes.length) {
@@ -106,7 +119,7 @@ rating ();
 
 
 const starsContainer = document.querySelector('.stars');
-
+let moves = 0;
   function rating () {
     if (moves < 12) {
       starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>'

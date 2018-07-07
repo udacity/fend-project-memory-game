@@ -9,7 +9,7 @@ const moveContainer = document.querySelector('.moves');
 
 let moves = 0;
 
-
+let match = 16;
 //move counter
 function addMoves () {
   moves++;
@@ -27,6 +27,16 @@ function rating () {
     starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>';
   }
 }
+
+
+
+//game over function
+function isOver () {
+    if(match.length === shapes.length) {
+        alert('Game Over');
+    }
+}
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -80,6 +90,7 @@ function shuffle(array) {
 
                      addMoves();
                      rating();
+                     isOver();
                     }
 
                 })
@@ -113,11 +124,6 @@ timer.addEventListener('secondsUpdated', function (e) {
 })
 
 
-function isOver () {
-    if(match.length === shapes.length) {
-        alert('Game Over');
-    }
-}
 
 
 

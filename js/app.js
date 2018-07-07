@@ -21,15 +21,12 @@ var seconds = 00;
 var tens = 00;
 var appendTens = document.getElementById("tens")
 var appendSeconds = document.getElementById("seconds")
-var buttonStart = document.getElementById('button-start');
-var buttonStop = document.getElementById('button-stop');
-var buttonReset = document.getElementById('button-reset');
 var Interval ;
 var seconds = 00;
 var tens = 00;
 var appendTens = document.getElementById("tens")
 var appendSeconds = document.getElementById("seconds")
-var Interval ;
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -162,7 +159,7 @@ function addMove(){
 //determine rating
 function rating(){
   switch(moves){
-    case 10:
+    case 15:
       starsContainer.innerHTML = `<li><i class="fa fa-star"></i></li>
                                   <li><i class="fa fa-star"></i></li>`;
     break;
@@ -172,6 +169,7 @@ function rating(){
   }
 
 }
+
 //update card contents
 function updateCards(){
     //cardArr = shuffle(cardArr);
@@ -254,9 +252,9 @@ function resetStopwatch() {
   //win screen
   function showFinalScore() {
 
-      let finalMessage = "Congratulations! You won!<br/>Time: " + seconds + ":" + tens + "<br/>Rating: <ul class='stars-modal'>";
+      let finalMessage = "Congratulations! You won!<br/>Time: " + seconds + ":" + tens + "<br/>Rating: " + starsContainer.innerHTML;
 
-      finalMessage += "<li><i class='fa fa-star'></i></li></ul><br/> Want to <span class='modal-restart'>play again</span>?";
+      finalMessage += "<br/> Want to <span class='modal-restart'>play again</span>?";
 
       document.getElementById("modalText").innerHTML = finalMessage;
 

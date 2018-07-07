@@ -51,13 +51,13 @@ function shuffle(array) {
                      }
                      //clear the array
                      openCards = []
-                     const movesContainer = document.querySelector('.moves');
-                     let moves = 0;
 
-                     function addMoves () {
-                      moves++;
-                      movesContainer.innerHTML = moves;
-                     }
+                     //game over function
+                     function isOver () {
+                       if(match.length === shapes.length) {
+                          alert('Game Over');
+                      }
+                    }
 
 
                     }
@@ -100,7 +100,26 @@ function isOver () {
 }
 
 
+// star rating function
 
+rating ();
+
+
+const starsContainer = document.querySelector('.stars');
+
+  function rating () {
+    if (moves < 12) {
+      starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>'
+            '<li><i class="fa fa-star"></i></li>',
+            '<li><i class="fa fa-star"></i></li>';
+    } else if (moves < 20) {
+          stars.innerHTML = '<li><i class="fa fa-star"></i></li>',
+            '<li><i class="fa fa-star"></i></li>';
+    } else {
+      stars.innerHTML =  '<li><i class="fa fa-star"></i></li>';
+
+    }
+  }
 
 
 

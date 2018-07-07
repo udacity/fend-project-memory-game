@@ -192,42 +192,41 @@ function updateCards(){
           timerContainer.innerHTML = time;
           console.log(time);
         }, 1000);}
+*/
 
 function firstClick(){
   $(".deck").one("click", function(){
-    setTimer();
+    startStopwatch();
   });
 }
 
 function clearTimer(){
   clearInterval(time);
 }
-*/
+
 // New Timer functionality built from:
 
 
+function startStopwatch() {
+//buttonStart.onclick = function() {
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 10);
+}
 
+function stopStopwatch() {
+//buttonStop.onclick = function() {
+    clearInterval(Interval);
+}
 
-
-  buttonStart.onclick = function() {
-
-     clearInterval(Interval);
-     Interval = setInterval(startTimer, 10);
-  }
-
-    buttonStop.onclick = function() {
-       clearInterval(Interval);
-  }
-
-
-  buttonReset.onclick = function() {
-     clearInterval(Interval);
+function resetStopwatch() {
+//buttonReset.onclick = function() {
+    clearInterval(Interval);
     tens = "00";
-  	seconds = "00";
+    seconds = "00";
     appendTens.innerHTML = tens;
-  	appendSeconds.innerHTML = seconds;
-  }
-
+    appendSeconds.innerHTML = seconds;
+    started = false;
+}
 
 
   function startTimer () {

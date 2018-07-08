@@ -252,17 +252,17 @@ function resetStopwatch() {
   //win screen
   function showFinalScore() {
 
-      let finalMessage = "Congratulations! You won!<br/>Time: " + seconds + ":" + tens + "<br/>Rating: " + starsContainer.innerHTML;
+      let finalMessage = "Congratulations! You won!<br/>Time: " + seconds + ":" + tens + "</br> Rating: <br><ul class='stars'> " + starsContainer.innerHTML;
 
-      finalMessage += "<br/> Want to <span class='modal-restart'>play again</span>?";
+      finalMessage += "<br> Want to <span class='modal-restart'>play again</span>?";
 
       document.getElementById("modalText").innerHTML = finalMessage;
+        $('.modal-restart').click(function() {
+          modal.style.display = "none";
+          location.reload();
 
+    });
 
-      $('.modal-restart').click(function() {
-      modal.style.display = "none";
-      init();
-  });
   }
 // Get the modal
 var modal = document.getElementById('myModal');

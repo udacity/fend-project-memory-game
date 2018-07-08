@@ -33,6 +33,20 @@ h1 {
     font-weight: 300;
 }
 
+.stars {
+    list-style: none;
+    display: inline-block;
+    margin-top: 8px;
+    padding: 0;
+}
+
+.stars li {
+    list-style: none;
+    display: inline-block;
+    color: #000;
+}
+
+
 /*
  * Styles for the deck of cards
  */
@@ -135,6 +149,11 @@ h1 {
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.modal-restart {
+    color: #000;
+    cursor: pointer;
 }
 
 /* The Close Button */

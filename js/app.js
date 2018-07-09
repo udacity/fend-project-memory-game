@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
- let shapes = ["fa fa-diamond","fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"  ];
+ let shapes = [ "fa fa-diamond", "fa fa-diamond","fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-star", "fa fa-star", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-anchor", "fa fa-anchor", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle"];
 
 const starsContainer = document.querySelector('.stars');
 
@@ -21,10 +21,10 @@ function addMoves () {
 // star rating function
 
 function rating () {
-  if (moves === 13) {
+  if (moves === 10) {
     starsContainer.innerHTML = '    <li><i class="fa fa-star"></i></li>' +
             '<li><i class="fa fa-star"></i></li>';
-  } else if (moves === 18) {
+  } else if (moves === 15) {
     starsContainer.innerHTML = '<li><i class="fa fa-star"></i></li>';
   }
 }
@@ -86,15 +86,14 @@ function shuffle(array) {
                        secondCard.classList.add('match')
                    }, 1000);
                      }
-
+                          isOver();
                      //clear the array
                      openCards = []
 
                      addMoves();
                      rating();
-                     isOver();
-                    }
 
+                    }
                 })
              })
 

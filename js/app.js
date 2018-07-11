@@ -86,7 +86,6 @@ function shuffle(array) {
                        secondCard.classList.add('match')
                    }, 1000);
                      }
-                          isOver();
                      //clear the array
                      openCards = []
 
@@ -96,6 +95,9 @@ function shuffle(array) {
                     }
                 })
              })
+
+                              isOver();
+
 
      const restart = () => {
  let tiles = document.querySelectorAll('li.card')

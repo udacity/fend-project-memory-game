@@ -85,6 +85,8 @@ function shuffle(array) {
                        firstCard.classList.add('match')
                        secondCard.classList.add('match')
                    }, 1000);
+                                                      isOver();
+
                      }
                      //clear the array
                      openCards = []
@@ -96,7 +98,6 @@ function shuffle(array) {
                 })
              })
 
-                              isOver();
 
 
      const restart = () => {

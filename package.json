@@ -1,0 +1,31 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "classic memory game project using javascript. This is best project for learning dom manipulaton with js and also event handling in javascipt",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya81070/fend-project-memory-game.git"
+  },
+  "author": "Aditya Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aditya81070/fend-project-memory-game/issues"
+  },
+  "homepage": "https://github.com/aditya81070/fend-project-memory-game#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "browser-sync": "^2.24.6",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^7.0.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-jasmine-phantom": "^3.0.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify-es": "^1.0.4"
+  }
+}

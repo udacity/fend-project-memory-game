@@ -1,4 +1,3 @@
-.DS_Store
-.htmlhintrc
-.stylelintrc
+node_modules
 .eslintrc.json
+dist/

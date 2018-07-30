@@ -69,6 +69,8 @@ h1 {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    animation: flip 0.5s;
+    animation-iteration-count: 1;
 }
 
 .deck .card.show {
@@ -79,6 +81,8 @@ h1 {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    animation: flip 0.4s;
+    transition: background 0.6s;
 }
 
 /*
@@ -106,4 +110,66 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+
+/*shake card css*/
+
+
+@keyframes flip{
+    0% {
+        transform: rotateY(180deg);
+        background: #083963;
+    }
+    49%{
+        background: #083963;
+    }
+    50%{
+        transform: rotateY(90deg);
+        background: #044554;
+    }
+    100% {
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes reverse-flip{
+    0% {
+        transform: rotateY(0deg);
+        background: #02b3e4;
+    }
+    49%{
+        background: #02b3e4;
+    }
+    50%{
+        transform: rotateY(90deg);
+        background: #083963;
+    }
+    100% {
+        transform: rotateY(180deg);
+        background: #083963;
+    }
+}
+
+@keyframes shake {
+    0% { transform: translate(2px, 2px) rotate(0deg); background: #f50625; }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    40% { transform: translate(4px, -2px) rotate(1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    80% { transform: translate(2px, -2px) rotate(1deg); }
+    100% { transform: translate(0px, 0px) rotate(-1deg); background: #f50625; }
+}
+
+@keyframes showicon {
+    0% { opacity: 0;}
+    49% { opacity: 0;}
+    50% { opacity: 1;}
+    100% { opacity: 1;}
+}
+
+@keyframes hideicon {
+    0% { opacity: 1;}
+    49% { opacity: 1;}
+    50% { opacity: 0;}
+    100% { opacity: 0;}
 }

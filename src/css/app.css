@@ -66,7 +66,7 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    /*transform: rotateY(0);*/
     background: #02b3e4;
     cursor: default;
     
@@ -87,6 +87,7 @@ h1 {
  */
 
  .deck .card-not-match{
+    cursor: default;
     background: red;
  }
 

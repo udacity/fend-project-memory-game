@@ -3,6 +3,10 @@
  */
 
 
+const iconList=['fa fa-diamond','fa fa-paper-plane-o','fa fa-anchor','fa fa-bolt','fa fa-cube','fa fa-anchor','fa fa-leaf','fa fa-bicycle','fa fa-diamond','fa fa-bomb','fa fa-leaf','fa fa-bomb','fa fa-bolt', 'fa fa-bicycle','fa fa-paper-plane-o','fa fa-cube'];
+
+const deck= document.querySelector('.deck');
+const ul=document.createDocumentFragment('ul');
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -25,12 +29,20 @@ function shuffle(array) {
 
 	return array;
 }
-const array=[1,2,3,4,5];
-function foo(){
-	const shuffledArray=shuffle(array);
-	return shuffledArray;
+
+function createCard(){
+	const shuffledCards=shuffle(iconList);
+	shuffledCards.forEach(function(card){
+		const li=document.createElement('li');
+		const i=document.createElement('i');
+		i.setAttribute('class',card);
+		li.setAttribute('class','card');
+		li.appendChild(i);
+		ul.appendChild(li);
+	});
+	deck.appendChild(ul);
 }
-foo();
+createCard();
 
 /*
  * set up the event listener for a card. If a card is clicked:

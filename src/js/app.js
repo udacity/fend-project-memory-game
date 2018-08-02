@@ -44,6 +44,77 @@ function createCard(){
 }
 createCard();
 
+let cards=document.querySelectorAll('.card');
+const moves=document.querySelector('.moves');
+const restartButton=document.querySelector('.restart');
+console.log(restartButton);
+const min=document.querySelector('.min');
+const sec=document.querySelector('.sec');
+let opendCards=[];
+let matchedCards=[];
+let moveCounter=0;
+moves.textContent=moveCounter+' Moves';
+
+let timerId=0;
+let timerOn=false;
+
+deck.addEventListener('click', function(e){
+	let minuteCounter=0;
+	let secondCounter=0;
+
+	if(matchedCards.length==16){
+		timerOn=false;
+		clearInterval(timerId);
+	}
+	if(timerOn){
+		return;
+	}
+
+	if(e.target.classList.contains('card')){
+		timerOn=true;
+		min.textContent='00';
+		sec.textContent='00';
+		minuteCounter=0;
+		secondCounter=0;
+		timerId=setInterval(timer,1000);
+	}
+
+	function timer(){
+		if(secondCounter==59){
+			secondCounter=0;
+			minuteCounter++;
+			min.textContent=minuteCounter<10?'0'+minuteCounter:minuteCounter;
+		}
+		secondCounter++;
+		sec.textContent=secondCounter<10?'0'+secondCounter:secondCounter;
+	}
+
+	for(let card of cards){
+		card.addEventListener('click', show);
+	}
+
+	function show(e){
+		console.log('this is click');
+		if(opendCards.length>=2 || e.target.classList.contains('open','show')|| e.target.classList.contains('match')){
+			return;
+		}
+
+		e.target.classList.add('open','show','animated', 'flipInY');
+		opendCards.push(e.target);
+		if(opendCards.length==2){
+			moveCounter++;
+			moves.textContent=moveCounter===1?1+ ' Move':moveCounter+' Moves';
+			starScore('.stars','inline-block');	
+			match();
+		}
+	}
+
+	function match(){
+		
+	}
+
+});
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)

@@ -104,13 +104,31 @@ deck.addEventListener('click', function(e){
 		if(opendCards.length==2){
 			moveCounter++;
 			moves.textContent=moveCounter===1?1+ ' Move':moveCounter+' Moves';
-			starScore('.stars','inline-block');	
+			// starScore('.stars','inline-block');	
 			match();
 		}
 	}
 
 	function match(){
-		
+		if(opendCards[0].firstElementChild.getAttribute('class')===opendCards[1].firstElementChild.getAttribute('class'))	{
+			opendCards.map(function(card){
+				card.className='card match animated tada';
+				matchedCards.push(card);
+			});
+			// setTimeout(finalScore,500);
+			opendCards=[];
+		}
+		else{
+			setTimeout(function(){
+				for(let opendcard of opendCards){
+					opendcard.classList.replace('flipInY','headShake');
+					opendcard.classList.add('card-not-match');
+					opendcard.classList.remove('open');
+				}
+				opendCards=[];
+			},300);
+			
+		}
 	}
 
 });

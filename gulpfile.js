@@ -10,7 +10,7 @@ const babel=require('gulp-babel');
 gulp.task('default',['copy-html','copy-images','styles', 'lint','scripts'],function(){
 	gulp.watch('./src/css/**/*.css',['styles']);
 	gulp.watch('./dist/css/**/*.css').on('change',browserSync.reload);
-	gulp.watch('./src/js/**/*.js',['lint']);
+	gulp.watch('./src/js/**/*.js',['lint','scripts']);
 	gulp.watch('./dist/js/**/*.js').on('change',browserSync.reload);
 	gulp.watch('./src/index.html',['copy-html']);
 	gulp.watch('./dist/index.html').on('change',browserSync.reload);

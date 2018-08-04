@@ -27,5 +27,9 @@
     "gulp-jasmine-phantom": "^3.0.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify-es": "^1.0.4"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
   }
 }

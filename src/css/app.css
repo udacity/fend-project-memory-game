@@ -116,10 +116,13 @@ h1 {
 
 .score-panel .timer{
     display: inline;
-    position: absolute;
-    left: 56%;
+    margin-left: 15px;
+    left: 5%;
 }
 
-/*shake card css*/
+.star-hide{
+    display: none;
+}
+
 
 

@@ -102,7 +102,7 @@ function show(e) {
 		return;
 	}
 
-	e.target.classList.add('open', 'show', 'animated', 'flipInY');
+	e.target.classList.add('open', 'show', 'animated', 'flipInY','disable');
 	opendCards.push(e.target);
 	if (opendCards.length == 2) {
 		moveCounter++;
@@ -126,7 +126,7 @@ function match() {
 				setTimeout(function() {
 					opendcard.classList.replace('flipInY', 'headShake');
 					opendcard.classList.add('card-not-match');
-					opendcard.classList.remove('open');
+					opendcard.classList.remove('open','disable');
 				}, 500);
 
 			}
@@ -209,7 +209,7 @@ function starScore(selector) {
 	if(moveCounter<=12){
 		comment.textContent='Awesome!';
 	}
-	else if (moveCounter>12 && moveCounter<20){
+	else if (moveCounter>12 && moveCounter<=20){
 		stars[2].firstElementChild.style.display='none';
 		comment.textContent='Good!';
 	}

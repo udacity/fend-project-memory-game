@@ -112,6 +112,7 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+
 }
 
 .score-panel .timer{
@@ -120,9 +121,6 @@ h1 {
     left: 5%;
 }
 
-.star-hide{
-    display: none;
-}
 
 
 

@@ -26,17 +26,23 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 1.5em;
 }
 
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+.header{
+    font-family: inherit;
+    font-variant: small-caps;
+    font-size: 3.5em;
 }
+
+
 
 /*
  * Styles for the deck of cards
  */
-
+.disable{
+    pointer-events: none;
+}
 .deck {
     width: 660px;
     min-height: 680px;
@@ -66,7 +72,6 @@ h1 {
 }
 
 .deck .card.open {
-    /*transform: rotateY(0);*/
     background: #02b3e4;
     cursor: default;
     
@@ -92,9 +97,7 @@ h1 {
  }
 
 .score-panel {
-    text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    width: 400px;
 }
 
 .score-panel .stars {
@@ -110,7 +113,6 @@ h1 {
 }
 
 .score-panel .restart {
-    float: right;
     cursor: pointer;
 
 }
@@ -121,6 +123,33 @@ h1 {
     left: 5%;
 }
 
+.modal-header {
+    background: #32ccbb;
+    color:#fff;
+    font-weight: bold;
+}
 
+.modal-body {
+    background: #99c1bd;
+    color: #000;
+}
+.comment {
+    font-size: 30px;
+    font-weight: bold;
+}
 
+.modal-stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
 
+.modal-stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.modal-stars li i{
+    color: #ff0;
+    font-size: 20px;
+}

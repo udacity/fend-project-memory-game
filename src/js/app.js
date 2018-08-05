@@ -197,7 +197,8 @@ function restart(parentTag, fragment) {
 	sec.textContent = '00';
 	opendCards = [];
 	matchedCards = [];
-	starScore('.stars');
+	resetStar('.stars');
+	resetStar('.modal-stars');
 	timerOn = false;
 	clearInterval(timerId);
 }
@@ -209,13 +210,20 @@ function starScore(selector) {
 		comment.textContent='Awesome!';
 	}
 	else if (moveCounter>12 && moveCounter<20){
-		stars[2].firstElementChild.className='hide';
+		stars[2].firstElementChild.style.display='none';
 		comment.textContent='Good!';
 	}
 	else{
-		stars[1].firstElementChild.className='hide';
-		stars[2].firstElementChild.className='hide';
+		stars[1].firstElementChild.style.display='none';
+		stars[2].firstElementChild.style.display='none';
 		comment.textContent='You can do it better';
+	}
+}
+
+function resetStar(selector){
+	const stars=document.querySelector(selector).children;
+	for (var i = stars.length - 1; i >= 0; i--) {
+		stars[i].firstElementChild.style.display='inline-block';
 	}
 }
 

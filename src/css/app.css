@@ -123,7 +123,7 @@ body {
     left: 5%;
 }
 
-.modal-header {
+.modal-header, .modal-footer {
     background: #32ccbb;
     color:#fff;
     font-weight: bold;
@@ -136,6 +136,7 @@ body {
 .comment {
     font-size: 30px;
     font-weight: bold;
+    font-variant: small-caps;
 }
 
 .modal-stars {

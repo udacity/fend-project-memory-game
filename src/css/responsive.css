@@ -1,0 +1,87 @@
+@media screen and (max-width: 690px) {
+	.deck{
+		width: 600px;
+		min-height: 620px;
+	}
+	.deck .card {
+		height: 115px;
+		width: 115px;
+	}
+}
+
+@media screen and (max-width: 615px) {
+	.deck {
+		width: 550px;
+		min-height: 570px;
+	}
+
+	.deck .card {
+		height: 100px;
+		width: 100px;
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.deck {
+		width: 500px;
+		min-height: 520px;
+	}
+
+	.deck .card {
+		height: 90px;
+		width: 90px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.deck {
+		width: 400px;
+		min-height: 420px;
+	}
+
+	.deck .card {
+		height: 70px;
+		width: 70px;
+	}
+	.score-panel {
+	  font-size: 0.8em;
+	  width: 350px;
+	}
+	.score-panel .stars {
+		margin-left: 15px;
+		padding-left:5px;
+		padding-right: 5px;
+	}
+	.deck .card.show{
+		font-size: 27px;
+	}
+	.deck .card.match {
+		font-size: 27px;
+	}
+
+}
+
+@media screen and (max-width: 400px) {
+	.container {
+		font-size: 1.2em;
+	}
+	.deck {
+		width: 350px;
+		min-height: 370px;
+		padding: 20px;
+		margin: 0 0 2em;
+	}
+
+	.deck .card {
+		height: 65px;
+		width: 65px;
+	}
+	.score-panel {
+		width: 300px;
+	}
+	.deck .card.show{
+		font-size: 22px;
+	}
+	.deck .card.match {
+		font-size: 22px;
+	}
+}

@@ -152,6 +152,8 @@ function finalScore() {
 	const minFinal = document.querySelector('.min');
 	const secFinal = document.querySelector('.sec');
 	const timeFinal = document.querySelector('#total-time');
+	const totalMoves=document.querySelector('.moves');
+	const movesFinal=document.querySelector('#total-moves');
 
 	playAgain.addEventListener('click', function() {
 		restart(deck, ul);
@@ -165,6 +167,7 @@ function finalScore() {
 		});
 		console.log('this is working kfjlakjdlfa');
 		timeFinal.textContent = minFinal.textContent + ' min ' + secFinal.textContent + ' sec';
+		movesFinal.textContent=totalMoves.textContent;
 		starScore('.modal-stars');
 
 	}

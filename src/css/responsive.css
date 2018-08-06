@@ -85,3 +85,61 @@
 		font-size: 22px;
 	}
 }
+@media screen and (max-width: 350px) {
+	.container {
+		font-size: 1em;
+	}
+	.header {
+		font-size: 3em;
+	}
+
+	.deck {
+		width: 300px;
+		min-height: 320px;
+	}
+
+	.deck .card {
+		height: 55px;
+		width: 55px;
+	}
+
+	.score-panel {
+		width: 250px;
+	}
+	.deck .card.show{
+		font-size: 19px;
+	}
+	.deck .card.match {
+		font-size: 19px;
+	}
+}
+
+@media screen and (max-width: 300px){
+	.container {
+		font-size: 0.8em;
+	}
+	.header {
+		font-size: 2.8em;
+	}
+
+	.deck {
+		width: 250px;
+		min-height: 270px;
+	}
+
+	.deck .card {
+		height: 45px;
+		width: 45px;
+	}
+
+	.score-panel {
+		width: 200px;
+		font-size: 0.7em;
+	}
+	.deck .card.show{
+		font-size: 15px;
+	}
+	.deck .card.match {
+		font-size: 15px;
+	}
+}

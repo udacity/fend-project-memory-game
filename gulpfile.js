@@ -2,9 +2,6 @@ const gulp= require('gulp');
 const browserSync=require('browser-sync').create();
 const autoPrefixer=require('gulp-autoprefixer');
 const eslint=require('gulp-eslint');
-const uglify=require('gulp-uglify-es').default;
-const babel=require('gulp-babel');
-
 
 // const jasmine=require('gulp-jasmine-phantom');
 
@@ -51,13 +48,7 @@ gulp.task('lint',function(){
 
 gulp.task('scripts',function(){
 	gulp.src('./src/js/**/*.js')
-		.pipe(babel())
 		.pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('scripts-dist',function(){
-	gulp.src('./src/js/**/*.js')
-		.pipe(babel())
-		.pipe(uglify())
-		.pipe(gulp.dest('./dist/js'));
-});
+gulp.task('dist',['copy-html','copy-images','styles','scripts']);

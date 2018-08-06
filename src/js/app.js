@@ -192,7 +192,7 @@ function restart(parentTag, fragment) {
 		card.classList.remove('match', 'animated', 'tada');
 	});
 	opendCards.map(function(card) {
-		card.classList.remove('open', 'show');
+		card.classList.remove('open', 'show','animated','flipInY','disable');
 	});
 	moveCounter = 0;
 	moves.textContent = moveCounter + ' Moves';

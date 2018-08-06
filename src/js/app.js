@@ -1,3 +1,4 @@
+//list of icons
 const iconList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
 const deck = document.querySelector('.deck');
@@ -19,6 +20,7 @@ function shuffle(array) {
 	return array;
 }
 
+//create html for cards
 function createCard() {
 	const shuffledCards = shuffle(iconList);
 	shuffledCards.forEach(function(card) {
@@ -47,10 +49,12 @@ moves.textContent = moveCounter + ' Moves';
 let timerId = 0;
 let timerOn = false;
 
+//restart using restart button
 restartButton.addEventListener('click', function() {
 	restart(deck, ul);
 });
 
+//start the timer if a card is clicked and stops the counter if matchedCards array has length of 16.
 deck.addEventListener('click', function(e) {
 	let minuteCounter = 0;
 	let secondCounter = 0;
@@ -80,17 +84,19 @@ deck.addEventListener('click', function(e) {
 	}
 });
 
-//reveal cards;
+//add event to every card 
 for (let card of cards) {
 	card.addEventListener('click', show);
 }
 
+//show the card when it is clicked
 function show(e) {
-	console.log('this is click');
+	//prevent opening of another card if there are two cards are opened already
 	if (opendCards.length >= 2 || e.target.classList.contains('open', 'show') || e.target.classList.contains('match')) {
 		return;
 	}
-
+	//add classes for show
+	// 'disable' class added so one card can'be clicked more then one time in one move. 
 	e.target.classList.add('open', 'show', 'animated', 'flipInY', 'disable');
 	opendCards.push(e.target);
 	if (opendCards.length == 2) {
@@ -101,7 +107,9 @@ function show(e) {
 	}
 }
 
+//check if two cards are matched or not
 function match() {
+	//if two cards are matched then push cards to matchedCards and empty openCards[].
 	if (opendCards[0].firstElementChild.getAttribute('class') === opendCards[1].firstElementChild.getAttribute('class')) {
 		opendCards.map(function(card) {
 			card.className = 'card match animated tada';
@@ -110,6 +118,7 @@ function match() {
 		setTimeout(finalScore, 500);
 		opendCards = [];
 	} else {
+		//if cards are not matched , cards are closed and empty opencards[]
 		setTimeout(function() {
 			for (let opendcard of opendCards) {
 				setTimeout(function() {
@@ -136,6 +145,7 @@ function match() {
 	}
 }
 
+//popup the win modal and shows final score if all cards are matched
 function finalScore() {
 	const playAgain = document.querySelector('#modal-playagain');
 	const minFinal = document.querySelector('.min');
@@ -144,11 +154,13 @@ function finalScore() {
 	const totalMoves = document.querySelector('.moves');
 	const movesFinal = document.querySelector('#total-moves');
 
+	//restart game when click on 'play again' in modal
 	playAgain.addEventListener('click', function() {
 		restart(deck, ul);
 		$('#exampleModalLong').modal('hide');
 	});
 
+	//show win popup when all cards are matched
 	if (matchedCards.length === 16) {
 		$('#exampleModalLong').modal({
 			backdrop: 'static',
@@ -160,6 +172,9 @@ function finalScore() {
 		starScore('.modal-stars');
 	}
 }
+
+//restart the game. It takes two arguments one is parentTag that is '.deck' and fragement that is 'ul'.
+//it takes already crated cards[] and add it to deck after deleting previously opened cards.
 
 function restart(parentTag, fragment) {
 	const newCardArr = [];
@@ -173,12 +188,16 @@ function restart(parentTag, fragment) {
 	}
 	parentTag.appendChild(fragment);
 
+	//if no card was opened then this function do nothing
 	if (opendCards.length === 0 && matchedCards.length === 0 && moveCounter === 0) {
 		return;
 	}
+
+	//remove all classes from matched cards
 	matchedCards.map(function(card) {
 		card.classList.remove('match', 'animated', 'tada');
 	});
+	//remove all classes from opened cards
 	opendCards.map(function(card) {
 		card.classList.remove('open', 'show', 'animated', 'flipInY', 'disable');
 	});
@@ -188,27 +207,34 @@ function restart(parentTag, fragment) {
 	sec.textContent = '00';
 	opendCards = [];
 	matchedCards = [];
+	//reset star rating
 	resetStar('.stars');
 	resetStar('.modal-stars');
 	timerOn = false;
+	//clear timer
 	clearInterval(timerId);
 }
 
+//this function takes the selector and alter the number of stars according to number of moves.
 function starScore(selector) {
 	const stars = document.querySelector(selector).children;
 	const comment = document.querySelector('.comment');
+	//if user complete the moves in less than or 12 moves, he gets three stars
 	if (moveCounter <= 12) {
 		comment.textContent = 'Awesome!';
-	} else if (moveCounter > 12 && moveCounter <= 20) {
+	}
+	//if user completes the game in more than 12 moves and less than or 20 moves, he gets two stars
+	else if (moveCounter > 12 && moveCounter <= 20) {
 		stars[2].firstElementChild.style.display = 'none';
 		comment.textContent = 'Good!';
 	} else {
+		//otherwise he gets one star
 		stars[1].firstElementChild.style.display = 'none';
 		stars[2].firstElementChild.style.display = 'none';
 		comment.textContent = 'You can do it better';
 	}
 }
-
+//this reset the star rating when a new game starts.
 function resetStar(selector) {
 	const stars = document.querySelector(selector).children;
 	for (var i = stars.length - 1; i >= 0; i--) {

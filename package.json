@@ -17,16 +17,10 @@
   },
   "homepage": "https://github.com/aditya81070/fend-project-memory-game#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.24.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
-    "gulp-babel": "^7.0.1",
-    "gulp-eslint": "^5.0.0",
-    "gulp-jasmine-phantom": "^3.0.0",
-    "gulp-sass": "^4.0.1",
-    "gulp-uglify-es": "^1.0.4"
+    "gulp-eslint": "^5.0.0"
   },
   "dependencies": {}
 }

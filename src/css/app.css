@@ -124,13 +124,13 @@ body {
 }
 
 .modal-header, .modal-footer {
-    background: #32ccbb;
-    color:#fff;
+    background: #02b3e4;
+    color:#000;
     font-weight: bold;
 }
 
 .modal-body {
-    background: #99c1bd;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     color: #000;
 }
 .comment {
@@ -152,5 +152,9 @@ body {
 
 .modal-stars li i{
     color: #ff0;
+    font-size: 20px;
+}
+.btn {
+    color: #000;
     font-size: 20px;
 }

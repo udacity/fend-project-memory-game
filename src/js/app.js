@@ -1,6 +1,3 @@
-
-
-
 const iconList = ['fa fa-diamond', 'fa fa-paper-plane-o', 'fa fa-anchor', 'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle', 'fa fa-diamond', 'fa fa-bomb', 'fa fa-leaf', 'fa fa-bomb', 'fa fa-bolt', 'fa fa-bicycle', 'fa fa-paper-plane-o', 'fa fa-cube'];
 
 const deck = document.querySelector('.deck');
@@ -50,8 +47,8 @@ moves.textContent = moveCounter + ' Moves';
 let timerId = 0;
 let timerOn = false;
 
-restartButton.addEventListener('click',function(){
-	restart(deck,ul);
+restartButton.addEventListener('click', function() {
+	restart(deck, ul);
 });
 
 deck.addEventListener('click', function(e) {
@@ -63,7 +60,7 @@ deck.addEventListener('click', function(e) {
 		clearInterval(timerId);
 		return;
 	}
-	if (e.target.classList.contains('card')&& !timerOn) {
+	if (e.target.classList.contains('card') && !timerOn) {
 		timerOn = true;
 		min.textContent = '00';
 		sec.textContent = '00';
@@ -94,12 +91,12 @@ function show(e) {
 		return;
 	}
 
-	e.target.classList.add('open', 'show', 'animated', 'flipInY','disable');
+	e.target.classList.add('open', 'show', 'animated', 'flipInY', 'disable');
 	opendCards.push(e.target);
 	if (opendCards.length == 2) {
 		moveCounter++;
 		moves.textContent = moveCounter === 1 ? 1 + ' Move' : moveCounter + ' Moves';
-		starScore('.stars');	
+		starScore('.stars');
 		match();
 	}
 }
@@ -118,7 +115,7 @@ function match() {
 				setTimeout(function() {
 					opendcard.classList.replace('flipInY', 'headShake');
 					opendcard.classList.add('card-not-match');
-					opendcard.classList.remove('open','disable');
+					opendcard.classList.remove('open', 'disable');
 				}, 500);
 
 			}
@@ -144,8 +141,8 @@ function finalScore() {
 	const minFinal = document.querySelector('.min');
 	const secFinal = document.querySelector('.sec');
 	const timeFinal = document.querySelector('#total-time');
-	const totalMoves=document.querySelector('.moves');
-	const movesFinal=document.querySelector('#total-moves');
+	const totalMoves = document.querySelector('.moves');
+	const movesFinal = document.querySelector('#total-moves');
 
 	playAgain.addEventListener('click', function() {
 		restart(deck, ul);
@@ -159,9 +156,8 @@ function finalScore() {
 		});
 		console.log('this is working kfjlakjdlfa');
 		timeFinal.textContent = minFinal.textContent + ' min ' + secFinal.textContent + ' sec';
-		movesFinal.textContent=totalMoves.textContent;
+		movesFinal.textContent = totalMoves.textContent;
 		starScore('.modal-stars');
-
 	}
 }
 
@@ -184,7 +180,7 @@ function restart(parentTag, fragment) {
 		card.classList.remove('match', 'animated', 'tada');
 	});
 	opendCards.map(function(card) {
-		card.classList.remove('open', 'show','animated','flipInY','disable');
+		card.classList.remove('open', 'show', 'animated', 'flipInY', 'disable');
 	});
 	moveCounter = 0;
 	moves.textContent = moveCounter + ' Moves';
@@ -199,25 +195,23 @@ function restart(parentTag, fragment) {
 }
 
 function starScore(selector) {
-	const stars= document.querySelector(selector).children;
-	const comment=document.querySelector('.comment');
-	if(moveCounter<=12){
-		comment.textContent='Awesome!';
-	}
-	else if (moveCounter>12 && moveCounter<=20){
-		stars[2].firstElementChild.style.display='none';
-		comment.textContent='Good!';
-	}
-	else{
-		stars[1].firstElementChild.style.display='none';
-		stars[2].firstElementChild.style.display='none';
-		comment.textContent='You can do it better';
+	const stars = document.querySelector(selector).children;
+	const comment = document.querySelector('.comment');
+	if (moveCounter <= 12) {
+		comment.textContent = 'Awesome!';
+	} else if (moveCounter > 12 && moveCounter <= 20) {
+		stars[2].firstElementChild.style.display = 'none';
+		comment.textContent = 'Good!';
+	} else {
+		stars[1].firstElementChild.style.display = 'none';
+		stars[2].firstElementChild.style.display = 'none';
+		comment.textContent = 'You can do it better';
 	}
 }
 
-function resetStar(selector){
-	const stars=document.querySelector(selector).children;
+function resetStar(selector) {
+	const stars = document.querySelector(selector).children;
 	for (var i = stars.length - 1; i >= 0; i--) {
-		stars[i].firstElementChild.style.display='inline-block';
+		stars[i].firstElementChild.style.display = 'inline-block';
 	}
 }

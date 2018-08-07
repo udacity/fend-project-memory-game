@@ -112,7 +112,8 @@ function match() {
 	//if two cards are matched then push cards to matchedCards and empty openCards[].
 	if (opendCards[0].firstElementChild.getAttribute('class') === opendCards[1].firstElementChild.getAttribute('class')) {
 		opendCards.map(function(card) {
-			card.className = 'card match animated tada';
+			//disable class so matched card can't be clicked
+			card.className = 'card match animated tada disable';
 			matchedCards.push(card);
 		});
 		setTimeout(finalScore, 500);
@@ -195,7 +196,7 @@ function restart(parentTag, fragment) {
 
 	//remove all classes from matched cards
 	matchedCards.map(function(card) {
-		card.classList.remove('match', 'animated', 'tada');
+		card.classList.remove('match', 'animated', 'tada','disable');
 	});
 	//remove all classes from opened cards
 	opendCards.map(function(card) {

@@ -12,8 +12,9 @@
 
 ## Instructions
 
+### production code
 * clone the repo:
-	> $ git clone https://github.com/aditya81070/fend-project-memory-game.git
+	> $ git clone https://github.com/aditya81070/memory-game.git
 * move into repository:
 	> $ cd fend-project-memory-game
 * run npm install(it will give error if npm is not installed)
@@ -22,6 +23,9 @@
 	> $ gulp dist
 * now open `index.html` file in your favorite browser.
 
+### test server
+If you want to run testing server, use following code after `npm install`:
+	> $ gulp
 ## Rules
 
 * Game has 16 cards. You can only open two cards at a time.

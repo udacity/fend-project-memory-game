@@ -24,8 +24,9 @@
 * now open `index.html` file in your favorite browser.
 
 ### test server
-If you want to run testing server, use following code after `npm install`:
+If you want to run testing server, use following code after `npm install`
 	> $ gulp
+
 ## Rules
 
 * Game has 16 cards. You can only open two cards at a time.

@@ -2,19 +2,32 @@
 
 ## Table of Contents
 
+* [Prerequesities](#prerequesities)
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Rules](#rules)
+
+
+## Prerequesities
+* npm `~6.0.0 or higher`
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+* clone the repo:
+	> $ git clone https://github.com/aditya81070/fend-project-memory-game.git
+* move into repository:
+	> $ cd fend-project-memory-game
+* run npm install(it will give error if npm is not installed)
+	> $ npm install
+* now create distribution folder `dist`
+	> $ gulp dist
+* now open `index.html` file in your favorite browser.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Rules
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* Game has 16 cards. You can only open two cards at a time.
+* If cards matched, they will be remained open.
+* If cards do not match, cards will be closed and you can open them again.
+* If you complete the game within 12 moves, you will get three stars.
+* If you complete the game between 12 and 20 moves, you will get two stars.
+* If you complete the game more then 20 moves, you will get one star.
+* You can restart the game by clicking, restart button in your score panel or if you completet the game and want to play again, you can click on `play again`.

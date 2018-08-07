@@ -25,7 +25,7 @@
 
 ### test server
 If you want to run testing server, use following code after `npm install`
-	> $ gulp
+> $ gulp
 
 ## Rules
 

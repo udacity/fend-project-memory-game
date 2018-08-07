@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    /*background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: linear-gradient(to right, #159957, #155799);
     font-family: 'Coda', cursive;
 }
 
@@ -30,26 +31,26 @@ body {
 }
 
 .header{
-    font-family: inherit;
+    font-family: cursive;
     font-variant: small-caps;
     font-size: 3.5em;
 }
 
-
+/*to disable pointer events(click in my case)*/
+.disable{
+    pointer-events: none;
+}
 
 /*
  * Styles for the deck of cards
  */
-.disable{
-    pointer-events: none;
-}
 .deck {
     width: 660px;
     min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: 15px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -122,6 +123,8 @@ body {
     margin-left: 15px;
     left: 5%;
 }
+
+/*style for win popup*/
 
 .modal-header, .modal-footer {
     background: #02b3e4;

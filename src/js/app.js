@@ -200,7 +200,7 @@ function restart(parentTag, fragment) {
 	});
 	//remove all classes from opened cards
 	opendCards.map(function(card) {
-		card.classList.remove('open', 'show', 'animated', 'flipInY', 'disable');
+		card.classList.remove('open', 'show', 'animated', 'flipInY', 'disable','card-not-match');
 	});
 	moveCounter = 0;
 	moves.textContent = moveCounter + ' Moves';

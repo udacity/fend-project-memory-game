@@ -110,6 +110,10 @@ h1 {
     display: inline-block;
 }
 
+.separator {
+    font-weight: bold;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;

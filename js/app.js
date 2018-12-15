@@ -1,18 +1,68 @@
-/*
- * Create a list that holds all of your cards
+// Selectors 
+const deckSlctr = document.querySelector(".deck");
+
+// Variables 
+const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
+const pairs = duplicateElements(uniqueItems);
+
+// Start the game!
+render(deckSlctr, deckTemplate(pairs));
+
+// Functions 
+
+/**
+ * Render any HTML based on any element.
+ * @param {HTMLElement} slctr - HTML element where to be overwritten.
+ * @param {string} html - HTML content to be added to the doc.
  */
+function render(slctr, html) {
+    slctr.innerHTML = html;
+}
 
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+/**
+ * Generate an HTML template for a single card. 
+ * @param {string} itemClass - Font awesome icon name.
  */
+function cardTemplate(itemClass) {
+    return `<li class="card">
+                <i class="fa fa-${itemClass}"></i>
+            </li>`;
+}
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/**
+ * Shuffle the card elements in list and returns the HTML structure. 
+ * @param {array} list - list of ordered and duplicated font awesome icon' names.
+ * @return {string} - HTML content to be rendered. 
+ */
+function deckTemplate(list) {
+    list = shuffle(list);
+    return list.map(item => {
+        return cardTemplate(item);
+    }).join("");
+}
+
+/**
+ * Duplicate array content. 
+ * @see: https://stackoverflow.com/a/33305263
+ * @param {array} list - list of items.
+ * @return {array} - list of duplicated items. 
+ */
+function duplicateElements(list) {
+    return list.reduce(function(res, current, index, array) {
+        return res.concat([current, current]);
+    }, []);
+}
+
+
+/**
+ * Shuffle the array of items. 
+ * @see: http://stackoverflow.com/a/2450976
+ * @param {array} list - list of items.
+ * @return {array} - list of shuffled items. 
+ */
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -24,6 +74,7 @@ function shuffle(array) {
 
     return array;
 }
+
 
 
 /*

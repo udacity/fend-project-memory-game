@@ -8,7 +8,26 @@ const pairs = duplicateElements(uniqueItems);
 // Start the game!
 render(deckSlctr, deckTemplate(pairs));
 
+// Events 
+
+deckSlctr.addEventListener("click", evt => {
+    const element = evt.target;
+    if (element.nodeName === "LI") {
+        flipCard(element);
+    }
+});
+
 // Functions 
+
+/**
+ * Flip the cards' effect adding "open" and "show" classes.
+ * @param {HTMLElement} card - HTML element to be flipped.
+ */
+
+function flipCard(card) {
+    card.classList.add("show");
+    card.classList.add("open");
+}
 
 /**
  * Render any HTML based on any element.

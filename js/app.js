@@ -18,8 +18,7 @@
     // Events 
     deckSlctr.addEventListener("click", evt => {
         const element = evt.target;
-        if (element.nodeName === "LI") {
-            compareHandler(element);
+        if (element.nodeName === "LI" && compareHandler(element)) {
             updateMoves();
             updateRating();
             winningCondition();
@@ -137,30 +136,39 @@
 
     /**
      * Handle the comparison and animations of cards, and resolves the comparison.
-     * If no previous card is selected, the function flips currentCard element. 
-     * If the same card is clicked, it gets ignore. 
-     * If we have a pair, matchRender is executed. Else, dismatchRender does. 
+     * If there is a dismatch operation ongoing, it gets ignore and returns false.
+     * If no previous card is selected, the function flips currentCard element and returns true. 
+     * If the same card is clicked, it gets ignore and returns false.
+     * If we have a pair, matchRender is executed. Else, dismatchRender does. In both cases, returns true. 
      * @see flipCard, sameCard, matchRender, dismatchRender.
-     * @todo https://github.com/KoolTheba/memory-game/issues/10
      * @param {HTMLElement} currentCard - Current clicked card element.
+     * @return {boolean} true only when there is a real movement. 
      */
 
     function compareHandler(currentCard) {
         const prevCard = document.querySelector(".show");
+        const dismatchedCard = document.querySelectorAll(".dismatch");
+        
+        // If there is a dismatch operation ongoing, then discard...
+        if (dismatchedCard.length > 0) {
+            return false; 
+        }
+
         // If I'm the first card clicked, then turn...
         if (!prevCard) {
             flipCard(currentCard);
-            return;
+            return true;
         }
 
         // If you have clicked twice the same card, discard...
         if (sameCard(currentCard, prevCard)) {
-            return;
+            return false;
         }
 
         // Let's compare the element's innerHTML...
         const match = currentCard.innerHTML === prevCard.innerHTML;
         match ? matchRender(currentCard, prevCard) : dismatchRender(currentCard, prevCard);
+        return true;
     }
 
 
@@ -192,7 +200,6 @@
 
     /**
      * Renders the dismatching condition for the cards' pair.
-     * @todo https://github.com/KoolTheba/memory-game/issues/10
      * @param {HTMLElement} current - Current clicked card element.
      * @param {HTMLElement} previous - Previous clicked card element.
      */

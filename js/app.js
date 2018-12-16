@@ -2,9 +2,12 @@
 const deckSlctr = document.querySelector(".deck");
 const modalSlctr = document.querySelector(".modal");
 const paBtnSlctr = document.querySelector("button");
+const movesSlctr = document.querySelector(".moves");
+const resultsSlctr = document.querySelector(".results");
 
 // Variables 
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
+let moves = 0; 
 const pairs = duplicateElements(uniqueItems);
 
 // Events 
@@ -12,6 +15,7 @@ deckSlctr.addEventListener("click", evt => {
     const element = evt.target;
     if (element.nodeName === "LI") {
         compareHandler(element);
+        updateMoves();
         winningCondition();
     } 
 });
@@ -22,6 +26,15 @@ paBtnSlctr.addEventListener("click", resetGame);
 startGame();
 
 // Functions 
+
+/**
+ * Updates the moves counter in the grid.
+ * @param {boolean} reset - It resets the moves to 0, if true. 
+ */
+function updateMoves(reset){
+    moves = reset ? 0 : moves +1;
+    movesSlctr.innerText = moves; 
+}
 
 /**
  * The final match for the winning condition.
@@ -36,9 +49,11 @@ function winningCondition(){
 
 /**
  * Show the congratulations modal.
+ * Updates the results info in the modal.
  */
 
 function showModal (){
+    resultsSlctr.innerText = `With ${moves} moves and 3 stars!`;
     modalSlctr.style.display = "block";
 }
 
@@ -51,10 +66,11 @@ function hideModal (){
 }
 
 /**
- * Starts the game again and hides winning modal.  
- * @see startGame, hideModal
+ * Starts the game again and hides winning modal.
+ * @see startGame, hideModal, updateMoves.
  */
 function resetGame(){
+    updateMoves(true);
     startGame();
     hideModal();
 }

@@ -7,6 +7,7 @@
     const resultsSlctr = document.querySelector(".results");
     const ratingSlctr = document.querySelector(".rating");
     const restartSlctr = document.querySelector(".restart");
+    const timerSlctr = document.querySelector(".timer > span");
 
     // Variables 
     const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
@@ -28,6 +29,11 @@
     paBtnSlctr.addEventListener("click", resetGame);
     restartSlctr.addEventListener("click", resetGame);
 
+    // Timers
+    setInterval(()=>{
+        const diff = (getTimestamp() - timeStart)/1000;
+        timerSlctr.innerText=`${diff.toFixed(1)} secs`
+    },100)
 
     // Start the game!
     startGame();

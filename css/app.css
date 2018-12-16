@@ -38,7 +38,13 @@ h1 {
     margin-left: 0.5em;
 }
 
+.timer {
+    font-size: 30px;
+}
 
+.timer > span {
+    margin-left: 0.5em;
+}
 /*
  * Styles for the deck of cards
  */

@@ -2,9 +2,15 @@
 const deckSlctr = document.querySelector(".deck");
 const modalSlctr = document.querySelector(".modal");
 const paBtnSlctr = document.querySelector("button");
+const movesSlctr = document.querySelector(".moves");
+const resultsSlctr = document.querySelector(".results");
+const ratingSlctr = document.querySelector(".rating");
+const restartSlctr = document.querySelector(".restart");
 
 // Variables 
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
+let moves = 0;
+let timeStart = getTimestamp();
 const pairs = duplicateElements(uniqueItems);
 
 // Events 
@@ -12,11 +18,15 @@ deckSlctr.addEventListener("click", evt => {
     const element = evt.target;
     if (element.nodeName === "LI") {
         compareHandler(element);
+        updateMoves();
+        updateRating();
         winningCondition();
-    } 
+    }
 });
 
 paBtnSlctr.addEventListener("click", resetGame);
+restartSlctr.addEventListener("click", resetGame);
+
 
 // Start the game!
 startGame();
@@ -24,37 +34,87 @@ startGame();
 // Functions 
 
 /**
+ * Stimate the value of the card moves. 
+ * With 20 or less moves, value is always 100. 
+ * Between 21 to 40 moves, value decreases 5% per each movement. 
+ * In other cases, value is always 0. 
+ * @return {number} stimation (0-100). 
+ */
+function stimateRating() {
+    let value = 0;
+    if (moves <= 20) {
+        value = 100;
+    } else if (moves <= 40) {
+        value = 100 - ((moves - 20) * 5);
+    } else {
+        value = 0;
+    }
+    return value;
+}
+
+/**
+ * Change the width in the ratingSlctr. 
+ */
+function updateRating() {
+    ratingSlctr.style.width = `${stimateRating()}%`;
+}
+
+/**
+ * Generates the current timestamp.
+ * @return {number} Timestamp. 
+ */
+function getTimestamp() {
+    return new Date().getTime();
+}
+
+/**
+ * Updates the moves counter in the grid.
+ * @param {boolean} reset - It resets the moves to 0, if true. 
+ */
+function updateMoves(reset) {
+    moves = reset ? 0 : moves + 1;
+    movesSlctr.innerText = moves;
+}
+
+/**
  * The final match for the winning condition.
  */
 
-function winningCondition(){
-    const matchedCards = document.querySelectorAll(".match").length; 
-    if (matchedCards >= 16){
+function winningCondition() {
+    const matchedCards = document.querySelectorAll(".match").length;
+    if (matchedCards >= 16) {
         showModal();
-    } 
+    }
 }
 
 /**
  * Show the congratulations modal.
+ * Updates the results info in the modal.
+ * @see getTimestamp, stimateRating. 
  */
 
-function showModal (){
+function showModal() {
+    const timeLapse = (getTimestamp() - timeStart) / 1000;
+    const starsStimation = (3 * (stimateRating() / 100)).toFixed(1);
+    resultsSlctr.innerText = `With ${moves} moves and ${starsStimation} stars in ${timeLapse.toFixed(1)}s!`;
     modalSlctr.style.display = "block";
 }
 
 /**
  * Hide the congratulations modal
  */
- 
-function hideModal (){
+
+function hideModal() {
     modalSlctr.style.display = "none";
 }
 
 /**
- * Starts the game again and hides winning modal.  
- * @see startGame, hideModal
+ * Starts the game again and hides winning modal.
+ * @see startGame, hideModal, updateMoves.
  */
-function resetGame(){
+function resetGame() {
+    updateMoves(true);
+    updateRating();
     startGame();
     hideModal();
 }
@@ -63,8 +123,9 @@ function resetGame(){
  * Generate and shuffle cards' deck and adds it to the HTML.  
  * @see render.
  */
-function startGame(){
+function startGame() {
     render(deckSlctr, deckTemplate(pairs));
+    timeStart = getTimestamp();
 }
 
 /**
@@ -214,16 +275,3 @@ function shuffle(array) {
 
     return array;
 }
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

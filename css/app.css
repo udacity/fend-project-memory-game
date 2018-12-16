@@ -34,6 +34,10 @@ h1 {
 	font-weight: 300;
 }
 
+.restart > span { 
+    margin-left: 0.5em;
+}
+
 
 /*
  * Styles for the deck of cards
@@ -100,18 +104,6 @@ h1 {
 	margin-bottom: 10px;
 }
 
-.score-panel .stars {
-	margin: 0;
-	padding: 0;
-	display: inline-block;
-	margin: 0 5px 0 0;
-}
-
-.score-panel .stars li {
-	list-style: none;
-	display: inline-block;
-}
-
 .score-panel .restart {
 	float: right;
 	cursor: pointer;
@@ -153,4 +145,37 @@ h1 {
 
 .wrapper button:hover {
 	background-color: #25c425;
+}
+
+
+/* Stars
+*  @see https://stackoverflow.com/a/49343426
+*/
+
+.rating-box {
+	position: relative;
+	vertical-align: middle;
+	font-size: 1.5em;
+	font-family: FontAwesome;
+	display: inline-block;
+	color: #F68127;
+	margin-right: 0.5em;
+}
+
+.rating-box:before {
+	content: "\f006 \f006 \f006";
+}
+
+.rating-box .rating {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #F68127;
+}
+
+.rating-box .rating:before {
+	content: "\f005 \f005 \f005 \f005 \f005";
 }

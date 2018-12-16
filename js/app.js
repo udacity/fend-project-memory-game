@@ -1,5 +1,7 @@
 // Selectors 
 const deckSlctr = document.querySelector(".deck");
+const modalSlctr = document.querySelector(".modal");
+const paBtnSlctr = document.querySelector("button");
 
 // Variables 
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
@@ -10,13 +12,60 @@ deckSlctr.addEventListener("click", evt => {
     const element = evt.target;
     if (element.nodeName === "LI") {
         compareHandler(element);
-    }
+        winningCondition();
+    } 
 });
 
+paBtnSlctr.addEventListener("click", resetGame);
+
 // Start the game!
-render(deckSlctr, deckTemplate(pairs));
+startGame();
 
 // Functions 
+
+/**
+ * The final match for the winning condition.
+ */
+
+function winningCondition(){
+    const matchedCards = document.querySelectorAll(".match").length; 
+    if (matchedCards >= 16){
+        showModal();
+    } 
+}
+
+/**
+ * Show the congratulations modal.
+ */
+
+function showModal (){
+    modalSlctr.style.display = "block";
+}
+
+/**
+ * Hide the congratulations modal
+ */
+ 
+function hideModal (){
+    modalSlctr.style.display = "none";
+}
+
+/**
+ * Starts the game again and hides winning modal.  
+ * @see startGame, hideModal
+ */
+function resetGame(){
+    startGame();
+    hideModal();
+}
+
+/**
+ * Generate and shuffle cards' deck and adds it to the HTML.  
+ * @see render.
+ */
+function startGame(){
+    render(deckSlctr, deckTemplate(pairs));
+}
 
 /**
  * Handle the comparison and animations of cards, and resolves the comparison.

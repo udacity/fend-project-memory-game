@@ -34,7 +34,17 @@ h1 {
 	font-weight: 300;
 }
 
+.restart > span { 
+    margin-left: 0.5em;
+}
 
+.timer {
+    font-size: 30px;
+}
+
+.timer > span {
+    margin-left: 0.5em;
+}
 /*
  * Styles for the deck of cards
  */
@@ -89,6 +99,21 @@ h1 {
 	font-size: 33px;
 }
 
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+	text-align: left;
+	width: 345px;
+	margin-bottom: 10px;
+}
+
+.score-panel .restart {
+	float: right;
+	cursor: pointer;
+}
+
 /* Modal */
 
 .modal {
@@ -124,4 +149,37 @@ h1 {
 
 .wrapper button:hover {
 	background-color: #25c425;
+}
+
+
+/* Stars
+*  @see https://stackoverflow.com/a/49343426
+*/
+
+.rating-box {
+	position: relative;
+	vertical-align: middle;
+	font-size: 1.5em;
+	font-family: FontAwesome;
+	display: inline-block;
+	color: #F68127;
+	margin-right: 0.5em;
+}
+
+.rating-box:before {
+	content: "\f006 \f006 \f006";
+}
+
+.rating-box .rating {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #F68127;
+}
+
+.rating-box .rating:before {
+	content: "\f005 \f005 \f005 \f005 \f005";
 }

@@ -4,6 +4,7 @@ const modalSlctr = document.querySelector(".modal");
 const paBtnSlctr = document.querySelector("button");
 const movesSlctr = document.querySelector(".moves");
 const resultsSlctr = document.querySelector(".results");
+const ratingSlctr = document.querySelector(".rating");
 
 // Variables 
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
@@ -17,6 +18,7 @@ deckSlctr.addEventListener("click", evt => {
     if (element.nodeName === "LI") {
         compareHandler(element);
         updateMoves();
+        updateRating();
         winningCondition();
     } 
 });
@@ -27,6 +29,32 @@ paBtnSlctr.addEventListener("click", resetGame);
 startGame();
 
 // Functions 
+
+/**
+ * Stimate the value of the card moves. 
+ * With 20 or less moves, value is always 100. 
+ * Between 21 to 40 moves, value decreases 5% per each movement. 
+ * In other cases, value is always 0. 
+ * @return {number} stimation (0-100). 
+ */
+function stimateRating(){
+    let value = 0; 
+    if (moves <= 20) {
+        value = 100;
+    } else if (moves <= 40) {
+        value = 100 - ((moves - 20)*5);
+    } else {
+        value = 0; 
+    } 
+    return value; 
+}
+
+/**
+ * Change the width in the ratingSlctr. 
+ */
+function updateRating(){
+    ratingSlctr.style.width = `${stimateRating()}%`;
+} 
 
 /**
  * Generates the current timestamp.
@@ -59,12 +87,13 @@ function winningCondition(){
 /**
  * Show the congratulations modal.
  * Updates the results info in the modal.
- * @see getTimestamp; 
+ * @see getTimestamp, stimateRating. 
  */
 
 function showModal (){
     const timeLapse = (getTimestamp() - timeStart)/1000;
-    resultsSlctr.innerText = `With ${moves} moves and 3 stars in ${timeLapse.toFixed(1)}s!`;
+    const starsStimation = (3*(stimateRating()/100)).toFixed(1);
+    resultsSlctr.innerText = `With ${moves} moves and ${starsStimation} stars in ${timeLapse.toFixed(1)}s!`;
     modalSlctr.style.display = "block";
 }
 
@@ -82,6 +111,7 @@ function hideModal (){
  */
 function resetGame(){
     updateMoves(true);
+    updateRating();
     startGame();
     hideModal();
 }

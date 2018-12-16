@@ -5,19 +5,91 @@ const deckSlctr = document.querySelector(".deck");
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
 const pairs = duplicateElements(uniqueItems);
 
-// Start the game!
-render(deckSlctr, deckTemplate(pairs));
-
 // Events 
-
 deckSlctr.addEventListener("click", evt => {
     const element = evt.target;
     if (element.nodeName === "LI") {
-        flipCard(element);
+        compareHandler(element);
     }
 });
 
+// Start the game!
+render(deckSlctr, deckTemplate(pairs));
+
 // Functions 
+
+/**
+ * Handle the comparison and animations of cards, and resolves the comparison.
+ * If no previous card is selected, the function flips currentCard element. 
+ * If the same card is clicked, it gets ignore. 
+ * If we have a pair, matchRender is executed. Else, dismatchRender does. 
+ * @see flipCard, sameCard, matchRender, dismatchRender.
+ * @todo https://github.com/KoolTheba/memory-game/issues/10
+ * @param {HTMLElement} currentCard - Current clicked card element.
+ */
+
+function compareHandler(currentCard) {
+    const prevCard = document.querySelector(".show");
+    // If I'm the first card clicked, then turn...
+    if (!prevCard) {
+        flipCard(currentCard);
+        return;
+    }
+
+    // If you have clicked twice the same card, discard...
+    if (sameCard(currentCard, prevCard)) {
+        return;
+    }
+
+    // Let's compare the element's innerHTML...
+    const match = currentCard.innerHTML === prevCard.innerHTML;
+    match ? matchRender(currentCard, prevCard) : dismatchRender(currentCard, prevCard);
+}
+
+
+/**
+ * Check if both elements have the same children position regarding their parent. 
+ * @see https://stackoverflow.com/a/39395069
+ * @param {HTMLElement} current - Current clicked card element.
+ * @param {HTMLElement} previous - Previous clicked card element.
+ * @return {boolean} - True: same card. False: different card.
+ */
+function sameCard(current, previous) {
+    function cardPosition(card) {
+        return Array.from(card.parentNode.children).indexOf(card);
+    }
+    return cardPosition(current) === cardPosition(previous);
+}
+
+/**
+ * Renders the matching condition for the cards' pair.
+ * @param {HTMLElement} current - Current clicked card element.
+ * @param {HTMLElement} previous - Previous clicked card element.
+ */
+function matchRender(current, previous) {
+    previous.classList.remove("show");
+    previous.classList.remove("open");
+    previous.classList.add("match");
+    current.classList.add("match");
+}
+
+/**
+ * Renders the dismatching condition for the cards' pair.
+ * @todo https://github.com/KoolTheba/memory-game/issues/10
+ * @param {HTMLElement} current - Current clicked card element.
+ * @param {HTMLElement} previous - Previous clicked card element.
+ */
+
+function dismatchRender(current, previous) {
+    previous.classList.remove("show");
+    previous.classList.remove("open");
+    previous.classList.add("dismatch");
+    current.classList.add("dismatch");
+    setTimeout(() => {
+        previous.classList.remove("dismatch");
+        current.classList.remove("dismatch");
+    }, 800);
+}
 
 /**
  * Flip the cards' effect adding "open" and "show" classes.

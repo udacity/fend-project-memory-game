@@ -8,6 +8,7 @@ const resultsSlctr = document.querySelector(".results");
 // Variables 
 const uniqueItems = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
 let moves = 0; 
+let timeStart = getTimestamp();
 const pairs = duplicateElements(uniqueItems);
 
 // Events 
@@ -26,6 +27,14 @@ paBtnSlctr.addEventListener("click", resetGame);
 startGame();
 
 // Functions 
+
+/**
+ * Generates the current timestamp.
+ * @return {number} Timestamp. 
+ */
+function getTimestamp() {
+    return new Date().getTime();
+}
 
 /**
  * Updates the moves counter in the grid.
@@ -50,10 +59,12 @@ function winningCondition(){
 /**
  * Show the congratulations modal.
  * Updates the results info in the modal.
+ * @see getTimestamp; 
  */
 
 function showModal (){
-    resultsSlctr.innerText = `With ${moves} moves and 3 stars!`;
+    const timeLapse = (getTimestamp() - timeStart)/1000;
+    resultsSlctr.innerText = `With ${moves} moves and 3 stars in ${timeLapse.toFixed(1)}s!`;
     modalSlctr.style.display = "block";
 }
 
@@ -81,6 +92,7 @@ function resetGame(){
  */
 function startGame(){
     render(deckSlctr, deckTemplate(pairs));
+    timeStart = getTimestamp();
 }
 
 /**

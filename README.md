@@ -27,6 +27,11 @@ The real-life game, players flip over cards to locate the pairs that match The g
 - Git-flow has been used.
 - Semantic version has been used (semver).
 
+### Dependencies
+- Boostrap (v.4)
+- Coda from Google Fonts 
+
+
 ### [Play Demo](https://kooltheba.github.io/memory-game/)
 
 

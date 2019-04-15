@@ -17,7 +17,8 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 
 ## Issues
 
-Shuffle function does not work
+- Deck shuffling function does not work
+- More than two cards can be selected, it messes with the comparison operation
 
 ## Progress
 

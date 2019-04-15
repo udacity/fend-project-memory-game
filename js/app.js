@@ -36,3 +36,64 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+  // variables to help with comparing
+  let doEvaluate = false;
+  let compare;
+  
+  // get all the card elements
+  let card = document.getElementsByClassName("card");
+ 
+  // main function that deals with card flip
+  function flip (event) {
+     // returns the element that was clicked
+      let element = event.currentTarget;
+ 
+     // reveal the card by udating the css list
+      element.classList.add("open");
+      element.classList.add("show");
+ 
+      if (doEvaluate && compare != null && !(element === compare))
+      {
+       
+       
+         // variables to check
+         let a = element.childNodes[1].classList.item(1);
+         let b = compare.childNodes[1].classList.item(1);
+         //check if child has the same class
+         if (a == b) 
+         {
+           setTimeout(rmOpen, 750);
+           compare.classList.add("match");
+           element.classList.add("match");
+         }
+         //if not we flip both cards back
+         else
+         {
+           setTimeout(rmOpen, 750);
+           element.classList.remove("flip-vertical-right");
+           element.classList.add("flip-vertical-left");
+         }
+       }
+      else
+      {
+        //set to evalutate on next click
+        doEvaluate = true;
+        compare = element;
+      }
+ 
+     // Remove open, need to pass a function to timout and these steps are repeated
+     function rmOpen () {
+       compare.classList.remove("open");
+       compare.classList.remove("show");
+       element.classList.remove("open");
+       element.classList.remove("show");
+       element.classList.add("flip-vertical-right");
+       doEvaluate = false;
+     }
+  }
+
+  Array.from(card).forEach(function(element)
+  {
+    element.addEventListener('click', flip);
+  });

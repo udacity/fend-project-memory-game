@@ -38,23 +38,73 @@ function shuffle(array) {
  */
 
 let cardList = document.querySelectorAll('li.card');
-let openCardlist;
+let openCardList;
 let moves = 0; //move counter
 
 /**Event Listeners */
 Array.from(cardList).forEach(function(element){
-  element.addEventListener('click', onClick)
+    element.addEventListener('click', onClick)
 });
 
 /**Functions */
 function onClick(card){
-  displayCard(card);
+    displayCard(card);
+    pushCard(card);
 
+    //if openCardList.length > 1
+    //if card matches the other card in list
+    // call cardMatch(); on both cards
+    //else
+    cardNoMatch();
+
+    gameOver();
 }
 
+// display the card's symbol
 function displayCard(card){
-  card.classList.add('open show');
+    card.classList.add(['open', 'show']);
 }
+
+// add the card to a *list* of "open" cards 
+function pushCard(card){
+    openCardList.add(card);
+}
+
+
+// if the cards do match, lock the cards in the open position    
+function cardMatch(cards){
+    cards.forEach(function(card){
+        card.classList.add('match');
+    })
+}
+    
+    // must be called after the open function
+
+//if the cards do not match, remove the cards from the list and hide the card's symbol
+function cardNoMatch(card){
+    card.classList.remove(['open', 'show'])
+
+}
+
+//Checks to see if the game is over
+function gameOver(){
+    //Set this bool to false if any card does not match
+    let allMatch = true;
+    cardList.forEach(card => {
+        if (!(card.contains('match'))){
+            allMatch = false;
+            break;
+        }
+    });
+
+    if (allMatch){
+        //display win
+        console.log('You win!');
+    }
+}
+
+
+
 
 /**function onClick(card)
 1. call displayCard(card)
@@ -78,14 +128,7 @@ function displayCard(card)
 function addCard
     add thisCard to openCardList
 
-// if the cards do match, lock the cards in the open position    
-function cardMatch
-    classList add match
-    // must be called after the open function
 
-//if the cards do not match, remove the cards from the list and hide the card's symbol
-function cardNoMatch
-    classList = card
 
 // increment the move counter and display it on the page
 function moveCount

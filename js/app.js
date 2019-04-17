@@ -38,36 +38,53 @@ function shuffle(array) {
  */
 
 let cardList = document.querySelectorAll('li.card');
-let openCardList;
+let openCardList = [];
 let moves = 0; //move counter
 
 /**Event Listeners */
+
 Array.from(cardList).forEach(function(element){
     element.addEventListener('click', onClick)
 });
 
 /**Functions */
-function onClick(card){
-    displayCard(card);
-    pushCard(card);
+
+//main functionality function
+function onClick(trigger){
+    let card = trigger.currentTarget;
+
+    //this check is supposed to prevent selecting more than two cards
+    if (pushCard(card)){
+        displayCard(card);
+    }
 
     //if openCardList.length > 1
-    //if card matches the other card in list
-    // call cardMatch(); on both cards
-    //else
-    cardNoMatch();
+    if (openCardList.length == 2)
+    {
+        if (openCardList[0].firstElementChild.classList == openCardList[1].firstElementChild.classList){
+            cardMatch(openCardList);
+        }
+        else
+        cardNoMatch(openCardList);        
+    }
 
+    moveCount();
     gameOver();
 }
 
 // display the card's symbol
 function displayCard(card){
-    card.classList.add(['open', 'show']);
+    card.classList.add('open', 'show');
 }
 
 // add the card to a *list* of "open" cards 
 function pushCard(card){
-    openCardList.add(card);
+    // we only want to add the card if there is only one other card selected
+    if (!(openCardList.length >= 2)){
+        openCardList.push(card);
+        return true;    
+    }
+    else return false;
 }
 
 
@@ -76,14 +93,25 @@ function cardMatch(cards){
     cards.forEach(function(card){
         card.classList.add('match');
     })
+    cards = [];
 }
     
     // must be called after the open function
 
 //if the cards do not match, remove the cards from the list and hide the card's symbol
-function cardNoMatch(card){
-    card.classList.remove(['open', 'show'])
+function cardNoMatch(cards){
+    cards.forEach(function(card){
+        card.classList.remove('open', 'show')
+    })
+    cards = [];
+    
+}
 
+//Increment move counter
+function moveCount(){
+    moves += 1;
+    let el = document.querySelector('.moves');
+    el.innerText = moves;
 }
 
 //Checks to see if the game is over
@@ -91,9 +119,8 @@ function gameOver(){
     //Set this bool to false if any card does not match
     let allMatch = true;
     cardList.forEach(card => {
-        if (!(card.contains('match'))){
+        if (!(card.classList.contains('match'))){
             allMatch = false;
-            break;
         }
     });
 

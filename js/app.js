@@ -51,21 +51,22 @@ Array.from(cardList).forEach(function(element){
 
 //main functionality function
 function onClick(trigger){
+    debugger;
     let card = trigger.currentTarget;
 
     //this check is supposed to prevent selecting more than two cards
     if (pushCard(card)){
-        displayCard(card);
+        toggleDisplay(card);
     }
 
     //if openCardList.length > 1
     if (openCardList.length == 2)
     {
-        if (openCardList[0].firstElementChild.classList == openCardList[1].firstElementChild.classList){
+        if (openCardList[0].firstElementChild.classList[1] == openCardList[1].firstElementChild.classList[1]){
             cardMatch(openCardList);
         }
         else
-        cardNoMatch(openCardList);        
+        setTimeout(750, cardNoMatch(openCardList));        
     }
 
     moveCount();
@@ -73,14 +74,15 @@ function onClick(trigger){
 }
 
 // display the card's symbol
-function displayCard(card){
-    card.classList.add('open', 'show');
+function toggleDisplay(card){
+    card.classList.toggle('open');
+    card.classList.toggle('show');
 }
 
 // add the card to a *list* of "open" cards 
 function pushCard(card){
     // we only want to add the card if there is only one other card selected
-    if (!(openCardList.length >= 2)){
+    if (openCardList.length < 2){
         openCardList.push(card);
         return true;    
     }
@@ -93,7 +95,9 @@ function cardMatch(cards){
     cards.forEach(function(card){
         card.classList.add('match');
     })
-    cards = [];
+    for ( let i = cards.length; i > 0; i--){
+        cards.pop();
+    }
 }
     
     // must be called after the open function
@@ -101,9 +105,13 @@ function cardMatch(cards){
 //if the cards do not match, remove the cards from the list and hide the card's symbol
 function cardNoMatch(cards){
     cards.forEach(function(card){
-        card.classList.remove('open', 'show')
+        toggleDisplay(card);
     })
-    cards = [];
+    for ( let i = cards.length; i > 0; i--){
+        cards.pop();
+    }
+
+    //This function has a bug, it is not actually emptying the main array
     
 }
 
@@ -134,7 +142,7 @@ function gameOver(){
 
 
 /**function onClick(card)
-1. call displayCard(card)
+1. call toggleDisplay(card)
 2. call addCard
 3. Compare if the list already has another card, check to see if the two cards match
     1. if match
@@ -146,7 +154,7 @@ function gameOver(){
         call gameOver
 
 // display the card's symbol
-function displayCard(card)
+function toggleDisplay(card)
     change css to show the card
     card.
     classList = card open show

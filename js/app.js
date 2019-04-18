@@ -65,8 +65,11 @@ function onClick(trigger){
         if (openCardList[0].firstElementChild.classList[1] == openCardList[1].firstElementChild.classList[1]){
             cardMatch(openCardList);
         }
-        else
-        setTimeout(750, cardNoMatch(openCardList));        
+        else {
+            setTimeout(function(){
+                cardNoMatch(openCardList);
+            }, 750);
+        }
     }
 
     moveCount();
@@ -110,9 +113,6 @@ function cardNoMatch(cards){
     for ( let i = cards.length; i > 0; i--){
         cards.pop();
     }
-
-    //This function has a bug, it is not actually emptying the main array
-    
 }
 
 //Increment move counter

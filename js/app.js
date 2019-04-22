@@ -1,28 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-/*var cardsArray = ['fa-diamond', 'fa-paper-plane-o',
-                  'fa fa-anchor','fa fa-bolt',
-                  'fa fa-cube', 'fa-anchor',
-                  'fa-leaf','fa-bicycle',
-                  'fa-diamond','fa-bomb',
-                  'fa-leaf', 'fa-bomb',
-                  'fa-bolt', 'fa-bicycle',
-                  'fa-paper-plane-o','fa-cube'];
-function cardsGenerator (cards){
-     var gener = `<li class="card"><i class="fa ${cards}"></i></li>`;
-     return gener;
 
-function htmlCode(htmlCodeCards){
-const cardHtml = `<li class="card"><i class="fa ${cards}"></i></li>`;
-return cardHtml;
-}
-
-
-
-
-
-}*/
 
 /*
  * Display the cards on the page
@@ -32,17 +11,16 @@ return cardHtml;
  */
 
 
- var faElements = document.getElementsByClassName('fa');
- var fa=[];
+ var faElements = document.getElementsByClassName('faCard');
+ var faClasses=[];
  for(i=0; i<faElements.length; i++){
-   fa[i]= faElements[i].className;
+   faClasses[i]= faElements[i].className;
  }
- console.log(fa);
+ console.log(faClasses);
 
-fa =shuffle(fa);
-console.log(fa);
+faClasses =shuffle(faClasses);
 for (i=0; i<faElements.length; i++){
-  faElements[i].className=fa[i];
+  faElements[i].className=faClasses[i];
 }
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -55,23 +33,8 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
-
-
-function game(){
-  var htmlCards = shuffle(arrCards);
-
-}
-/*function game(){
-  var deck = document.querySelector('.deck');
-  var htmlCards = shuffle(cardsArray).forEach(function(cards) {
-    return cardsGenerator (cards);
-    deck.innerHTML=htmlCards.join('');
-  });
-}*/
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -88,12 +51,41 @@ var openCards = [];
 allCards.forEach(function(cards){
    cards.addEventListener('click',function(){
       clickCounter++;
-      cards.classList.add('open','show');
+      if (!cards.classList.contains('open','show','match')){
+        openCards.push(cards);
+        cards.classList.add('open','show');
+        if(openCards.length==2){
+          var first=openCards[0].classList;
+          var second= openCards[1].classList;
+          first=first.toString;
+          second=second.toString;
+          console.log(first);
+          if(first===second){
+            openCards[0].classList.add('match');
+            openCards[1].classList.add('match');
+            openCards=[];
+          }else{
+            setTimeout(function() {
+              openCards.forEach(function(cards){
+                cards.classList.remove('open','show');
+              });
+              openCards=[];
+             }, 1000);
+
+          }
+          }
+
+        }
+
+
+
+      });
+      /*cards.classList.add('open','show');
+      openCards.push(cards);
+      console.log(openCards);
       console.log(clickCounter);
       if (clickCounter>2){
         cards.classList.remove('open','show');
-      }
+      }*/
 
   });
-
-});

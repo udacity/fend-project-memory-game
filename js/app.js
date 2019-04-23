@@ -45,26 +45,29 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-var clickCounter=0;
+
 const allCards=document.querySelectorAll ('.card');
 var openCards = [];
+var clickCounter=0;
+
+
+
+
 allCards.forEach(function(cards){
    cards.addEventListener('click',function(){
-      clickCounter++;
+
+      console.log(clickCounter);
       if (!cards.classList.contains('open','show','match')){
         openCards.push(cards);
         cards.classList.add('open','show');
         if(openCards.length==2){
-          var first=openCards[0].classList;
-          var second= openCards[1].classList;
-          first=first.toString;
-          second=second.toString;
-          console.log(first);
-          if(first===second){
+          clickCounter++;
+          /*matching two cards*/
+          if(openCards[0].innerHTML==openCards[1].innerHTML){
             openCards[0].classList.add('match');
             openCards[1].classList.add('match');
             openCards=[];
-          }else{
+          }else{ /*if they are different. we close them*/
             setTimeout(function() {
               openCards.forEach(function(cards){
                 cards.classList.remove('open','show');
@@ -72,20 +75,17 @@ allCards.forEach(function(cards){
               openCards=[];
              }, 1000);
 
-          }
+              }
           }
 
         }
 
-
+        var moveCounter=document.querySelector('.moves');
+        console.log(moveCounter);
+        moveCounter.innerText=clickCounter;
+        console.log(moveCounter);
 
       });
-      /*cards.classList.add('open','show');
-      openCards.push(cards);
-      console.log(openCards);
-      console.log(clickCounter);
-      if (clickCounter>2){
-        cards.classList.remove('open','show');
-      }*/
+
 
   });

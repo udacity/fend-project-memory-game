@@ -81,11 +81,13 @@ allCards.forEach(function(cards){
         }
 
         var moveCounter=document.querySelector('.moves');
-        console.log(moveCounter);
+          if (clickCounter>=8 && clickCounter<16){
+        document.getElementById('firstStar').style.color = "#c0c0c0";
+          }else if(clickCounter>=16 && clickCounter<24){
+        document.getElementById('secondStar').style.color = "#c0c0c0";
+          }else if(clickCounter>=24){
+        document.getElementById('thirdStar').style.color = "#c0c0c0";
+          }
         moveCounter.innerText=clickCounter;
-        console.log(moveCounter);
-
       });
-
-
   });

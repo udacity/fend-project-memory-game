@@ -102,7 +102,9 @@ h1 {
     list-style: none;
     display: inline-block;
 }
-
+.stars{
+  color: ffffff;
+}
 .score-panel .restart {
     float: right;
     cursor: pointer;

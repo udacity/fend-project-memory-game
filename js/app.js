@@ -53,13 +53,14 @@ var clickCounter=0;
 
 
 
-allCards.forEach(function(cards){
-   cards.addEventListener('click',function(){
+allCards.forEach(function(card){
+   card.addEventListener('click',function(){
 
       console.log(clickCounter);
-      if (!cards.classList.contains('open','show','match')){
-        openCards.push(cards);
-        cards.classList.add('open','show');
+
+      if (!card.classList.contains('open','show','match')){
+        openCards.push(card);
+        card.classList.add('open','show');
         if(openCards.length==2){
           clickCounter++;
           /*matching two cards*/
@@ -69,8 +70,8 @@ allCards.forEach(function(cards){
             openCards=[];
           }else{ /*if they are different. we close them*/
             setTimeout(function() {
-              openCards.forEach(function(cards){
-                cards.classList.remove('open','show');
+              openCards.forEach(function(card){
+                card.classList.remove('open','show');
               });
               openCards=[];
              }, 1000);
@@ -79,6 +80,14 @@ allCards.forEach(function(cards){
           }
 
         }
+        var matchedCards=document.querySelectorAll('.open','.show','.match');
+        console.log(matchedCards);
+        if (matchedCards.length==16){
+        document.querySelector('.deck').style.visibility='hidden';
+        document.querySelector('.CongratulationsPopup').style.visibility='visible';
+        }
+
+
 
         var moveCounter=document.querySelector('.moves');
           if (clickCounter>=8 && clickCounter<16){
@@ -89,5 +98,8 @@ allCards.forEach(function(cards){
         document.getElementById('thirdStar').style.color = "#c0c0c0";
           }
         moveCounter.innerText=clickCounter;
+
       });
-  });
+
+
+      });

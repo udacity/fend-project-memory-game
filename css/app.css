@@ -49,6 +49,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
+    visibility: visible;
 }
 
 .deck .card {
@@ -102,10 +103,29 @@ h1 {
     list-style: none;
     display: inline-block;
 }
-.stars{
-  color: ffffff;
-}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.CongratulationsPopup {
+  background: linear-gradient(#e66465, #9198e5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  background-size: cover;
+  visibility: hidden;
+  z-index: 2;
+  position: fixed;
+  justify-content:space-around;
+}
+#playButton{
+  width: 150px;
+  height: 120px;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 10px;
+  text-align: center;
 }

@@ -49,57 +49,93 @@ function shuffle(array) {
 const allCards=document.querySelectorAll ('.card');
 var openCards = [];
 var clickCounter=0;
+var star=3;
+var second=0;
+var minutes=0;
+var startDate = null;
+var stopTime = null;
+var isStopWatchRunning = false;
+
+function secondsCounter(){
+  if(!isStopWatchRunning) {
+    return;
+  }
+  var currentDate = new Date();
+  console.log("CurrentDate =" + currentDate + "  startTime=" + startDate);
+  console.log("CurrentDate.getTime() =" + currentDate.getTime() + "  startTime=" + startDate.getTime());
+  seconds = Math.round((currentDate.getTime() - startDate.getTime()) / 1000);
 
 
+  var timerHtml=document.getElementById('timer');
+  timerHtml.innerHTML=`${minutes}:${seconds}`;
+}
+setInterval(secondsCounter, 500);
 
 
 allCards.forEach(function(card){
    card.addEventListener('click',function(){
+     if(!isStopWatchRunning) {
+       startDate = new Date();
+       isStopWatchRunning = true;
+     }
 
-      console.log(clickCounter);
 
-      if (!card.classList.contains('open','show','match')){
-        openCards.push(card);
-        card.classList.add('open','show');
-        if(openCards.length==2){
-          clickCounter++;
-          /*matching two cards*/
-          if(openCards[0].innerHTML==openCards[1].innerHTML){
-            openCards[0].classList.add('match');
-            openCards[1].classList.add('match');
-            openCards=[];
-          }else{ /*if they are different. we close them*/
-            setTimeout(function() {
-              openCards.forEach(function(card){
-                card.classList.remove('open','show');
-              });
-              openCards=[];
-             }, 1000);
 
-              }
-          }
-
+     console.log(clickCounter);
+     if (!card.classList.contains('open','show','match')){
+      openCards.push(card);
+      card.classList.add('open','show');
+      if(openCards.length==2){
+        clickCounter++;
+        /*matching two cards*/
+        if(openCards[0].innerHTML==openCards[1].innerHTML){
+          openCards[0].classList.add('match');
+          openCards[1].classList.add('match');
+          openCards=[];
+        }else{ /*if they are different. we close them*/
+          setTimeout(function() {
+            openCards.forEach(function(card){
+              card.classList.remove('open','show');
+            });
+          openCards=[];
+        }, 1000);
         }
-        var matchedCards=document.querySelectorAll('.open','.show','.match');
-        console.log(matchedCards);
-        if (matchedCards.length==16){
+      }
+    }
+
+
+    var matchedCards=document.querySelectorAll('.open','.show','.match');
+    console.log(matchedCards);
+    if (matchedCards.length==4){
+       setTimeout(function() {
+        /* Emergence of congratulations popup*/
         document.querySelector('.deck').style.visibility='hidden';
-        document.querySelector('.CongratulationsPopup').style.visibility='visible';
+        document.querySelector('.congratulationsPopup').style.visibility='visible';
+       }, 1000);
+    }
+
+
+
+
+
+
+        /*Color change of stars (depends on moves )*/
+        var moveCounter=document.querySelector('.moves');
+        if (clickCounter>=8 && clickCounter<16){
+          document.getElementById('firstStar').style.color = "#c0c0c0";
+          star==2;
+        }else if(clickCounter>=16 && clickCounter<24){
+          document.getElementById('secondStar').style.color = "#c0c0c0";
+          star==1;
+        }else if(clickCounter>=24){
+          document.getElementById('thirdStar').style.color = "#c0c0c0";
+          star==0;
         }
 
-
-
-        var moveCounter=document.querySelector('.moves');
-          if (clickCounter>=8 && clickCounter<16){
-        document.getElementById('firstStar').style.color = "#c0c0c0";
-          }else if(clickCounter>=16 && clickCounter<24){
-        document.getElementById('secondStar').style.color = "#c0c0c0";
-          }else if(clickCounter>=24){
-        document.getElementById('thirdStar').style.color = "#c0c0c0";
-          }
+        /*Adding congratulations text in HTML*/
         moveCounter.innerText=clickCounter;
-
-      });
-
-
-      });
+        let winText=document.querySelector('.congratText');
+        winText.innerHTML=`With ${clickCounter} Moves and ${star} Star.\n
+                               It took you  to win.`;
+    });
+});

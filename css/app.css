@@ -17,7 +17,8 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -34,26 +35,24 @@ h1 {
 }
 
 /*
- * Styles for the deck of cards
- */
+   * Styles for the deck of cards
+   */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    list-style: none;
+    grid-column-gap: 0.8em;
+    grid-row-gap: 0.8em;
+    padding: 0.8em;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
+    display: grid;
+    grid-template-columns: repeat(4, 20vmin);
+    grid-template-rows: repeat(4, 20vmin);
+    margin: 0.5em 0;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -72,23 +71,29 @@ h1 {
 }
 
 .deck .card.show {
-    font-size: 33px;
+    font-size: 1.6rem;
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+    cursor: default;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
-    font-size: 33px;
+    font-size: 1, 6rem;
 }
 
 /*
- * Styles for the Score Panel
- */
+   * Styles for the Score Panel
+   */
 
 .score-panel {
     text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    width: 80%;
+    max-width: 700px;
 }
 
 .score-panel .stars {
@@ -106,4 +111,24 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+@media only screen and (min-width: 426px) {
+
+    .deck .card.show,
+    .deck .card.match {
+        font-size: 2rem;
+    }
+
+    .deck {
+        grid-column-gap: 1.2em;
+        grid-row-gap: 1.2em;
+    }
+}
+
+@media only screen and (min-width: 620px) {
+
+    .deck {
+        padding: 1.8rem;
+    }
 }

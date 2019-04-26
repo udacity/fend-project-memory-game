@@ -50,7 +50,8 @@ const allCards=document.querySelectorAll ('.card');
 var openCards = [];
 var clickCounter=0;
 var star=3;
-var second=0;
+var seconds=0;
+var displaySeconds=0;
 var minutes=0;
 var startDate = null;
 var stopTime = null;
@@ -61,58 +62,74 @@ function secondsCounter(){
     return;
   }
   var currentDate = new Date();
-  console.log("CurrentDate =" + currentDate + "  startTime=" + startDate);
-  console.log("CurrentDate.getTime() =" + currentDate.getTime() + "  startTime=" + startDate.getTime());
+  /*console.log("CurrentDate =" + currentDate + "  startTime=" + startDate);
+  console.log("CurrentDate.getTime() =" + currentDate.getTime() + "  startTime=" + startDate.getTime());*/
   seconds = Math.round((currentDate.getTime() - startDate.getTime()) / 1000);
-
-
-  var timerHtml=document.getElementById('timer');
-  timerHtml.innerHTML=`${minutes}:${seconds}`;
+      if (seconds<=9){
+          seconds= seconds.toString().padStart(2, "0");
+          var timerHtml=document.getElementById('timer');
+          timerHtml.innerHTML=`${minutes}:${seconds}`;
+      }
+      if(seconds>=60){
+         minutes=Math.floor(seconds/60);
+         displaySeconds=Math.ceil(seconds-(minutes*60));
+            if(displaySeconds<=9){
+               displaySeconds= displaySeconds.toString().padStart(2, "0");
+               var timerHtml=document.getElementById('timer');
+               timerHtml.innerHTML=`${minutes}:${displaySeconds}`;
+            }
+         var timerHtml=document.getElementById('timer');
+         timerHtml.innerHTML=`${minutes}:${displaySeconds}`;
+      }else{
+         var timerHtml=document.getElementById('timer');
+         timerHtml.innerHTML=`${minutes}:${seconds}`;
+      }
 }
 setInterval(secondsCounter, 500);
 
 
-allCards.forEach(function(card){
+  allCards.forEach(function(card){
    card.addEventListener('click',function(){
+     if(openCards.length>1){
+       return;
+     }
      if(!isStopWatchRunning) {
        startDate = new Date();
        isStopWatchRunning = true;
      }
-
-
-
-     console.log(clickCounter);
-     if (!card.classList.contains('open','show','match')){
-      openCards.push(card);
-      card.classList.add('open','show');
-      if(openCards.length==2){
-        clickCounter++;
+     if(!card.classList.contains('open','show','match')){
+       openCards.push(card);
+       card.classList.add('open','show');
+        if(openCards.length==2){
+           clickCounter++;
         /*matching two cards*/
-        if(openCards[0].innerHTML==openCards[1].innerHTML){
-          openCards[0].classList.add('match');
-          openCards[1].classList.add('match');
-          openCards=[];
-        }else{ /*if they are different. we close them*/
-          setTimeout(function() {
-            openCards.forEach(function(card){
-              card.classList.remove('open','show');
-            });
-          openCards=[];
-        }, 1000);
-        }
-      }
+           if(openCards[0].innerHTML==openCards[1].innerHTML){
+              openCards[0].classList.add('match');
+              openCards[1].classList.add('match');
+              openCards=[];
+        /*if they are different. we close them*/
+          }else{
+              setTimeout(function() {
+              openCards.forEach(function(card){
+               card.classList.remove('open','show');
+              });
+              openCards=[];
+              }, 1000);
+          }
+       }
+
     }
-
-
+     /*check if all cards are matched*/
     var matchedCards=document.querySelectorAll('.open','.show','.match');
-    console.log(matchedCards);
-    if (matchedCards.length==4){
-       setTimeout(function() {
-        /* Emergence of congratulations popup*/
-        document.querySelector('.deck').style.visibility='hidden';
-        document.querySelector('.congratulationsPopup').style.visibility='visible';
-       }, 1000);
-    }
+      if(matchedCards.length==4){
+         isStopWatchRunning=false;
+         var timeToWin=document.getElementById('timer').innerHTML;
+      /* Appeare of congratulations popup*/
+         setTimeout(function() {
+         document.querySelector('.deck').style.visibility='hidden';
+         document.querySelector('.congratulationsPopup').style.visibility='visible';
+         }, 1000);
+      }
 
 
 
@@ -124,18 +141,22 @@ allCards.forEach(function(card){
         if (clickCounter>=8 && clickCounter<16){
           document.getElementById('firstStar').style.color = "#c0c0c0";
           star==2;
-        }else if(clickCounter>=16 && clickCounter<24){
+        }else if(clickCounter>=16){
           document.getElementById('secondStar').style.color = "#c0c0c0";
           star==1;
-        }else if(clickCounter>=24){
-          document.getElementById('thirdStar').style.color = "#c0c0c0";
-          star==0;
         }
 
         /*Adding congratulations text in HTML*/
         moveCounter.innerText=clickCounter;
         let winText=document.querySelector('.congratText');
         winText.innerHTML=`With ${clickCounter} Moves and ${star} Star.\n
-                               It took you  to win.`;
+                               It tooks ${timeToWin} to win.`;
     });
 });
+
+document.getElementById('playButton').onclick = function() {
+   document.location.reload()=true;
+};
+document.querySelector('.restart').onclick = function() {
+   document.location.reload()=true;
+};

@@ -137,20 +137,38 @@ setInterval(secondsCounter, 500);
 
 
         /*Color change of stars (depends on moves )*/
+
         var moveCounter=document.querySelector('.moves');
+        moveCounter.innerText=`${clickCounter} Moves`;
+        let winText=document.querySelector('.congratText');
         if (clickCounter>=8 && clickCounter<16){
           document.getElementById('firstStar').style.color = "#c0c0c0";
-          star==2;
+          star=2;
+          winText.innerHTML=`With ${clickCounter} Moves and 2 Stars.\n
+                                 It tooks ${timeToWin} to win.`;
         }else if(clickCounter>=16){
           document.getElementById('secondStar').style.color = "#c0c0c0";
-          star==1;
+          star=1;
+          winText.innerHTML=`With ${clickCounter} Moves and 1 Star.\n
+                                 It tooks ${timeToWin} to win.`;
+        }else{
+          winText.innerHTML=`With ${clickCounter} Moves and 3 Stars.\n
+                                 It tooks ${timeToWin} to win.`;
         }
 
         /*Adding congratulations text in HTML*/
-        moveCounter.innerText=clickCounter;
-        let winText=document.querySelector('.congratText');
-        winText.innerHTML=`With ${clickCounter} Moves and ${star} Star.\n
+      /*  moveCounter.innerText=`${clickCounter} Moves`;
+
+        if (star=3){
+        winText.innerHTML=`With ${clickCounter} Moves and 3 Stars.\n
                                It tooks ${timeToWin} to win.`;
+        }else if(star=2){
+          winText.innerHTML=`With ${clickCounter} Moves and 2 Stars.\n
+                                 It tooks ${timeToWin} to win.`;
+        }else{
+          winText.innerHTML=`With ${clickCounter} Moves and 1 Star.\n
+                                 It tooks ${timeToWin} to win.`;
+        }*/
     });
 });
 

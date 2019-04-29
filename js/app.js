@@ -121,7 +121,7 @@ setInterval(secondsCounter, 500);
     }
      /*check if all cards are matched*/
     var matchedCards=document.querySelectorAll('.open','.show','.match');
-      if(matchedCards.length==4){
+      if(matchedCards.length==16){
          isStopWatchRunning=false;
          var timeToWin=document.getElementById('timer').innerHTML;
       /* Appeare of congratulations popup*/

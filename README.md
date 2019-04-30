@@ -1,20 +1,23 @@
 # Memory Game Project
 
-## Table of Contents
+The Game was made for the second Project of Udacity Front-End Web Developer Nanodegree Program.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Game Behavior
 
-## Instructions
+The game randomly shuffles the cards. A user wins once all cards have successfully been matched.
+When a user wins the game, a modal appears to congratulate the player and ask if they want to play again. It will also tell the user how much time it took to win the game, and what the star rating was.
+A restart button allows the player to reset the game board, the timer, and the star rating.
+The game displays a star rating (from 1 to 3) that reflects the player's performance. At the beginning of a game, it will display at least 3 stars. After 8 moves, it should change to a lower star rating. After 16 moves, it will change to a even lower star rating ( to 1).
+When the player starts a game, a displayed timer will also start. Once the player wins the game, the timer stops.
+Game displays the current number of moves a user has made.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## Usage
 
-To get started, open `js/app.js` and start building out the app's functionality
+You can open it in any Web-browser to play.
+Does not need installation.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Technologies
+The project is created with:
+* JavaScript
+* HTML/CSS
+* Library of CSS animations: [animate.css](https://github.com/daneden/animate.css)

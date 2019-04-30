@@ -1,7 +1,6 @@
 html {
     box-sizing: border-box;
 }
-
 *,
 *::before,
 *::after {
@@ -85,7 +84,7 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel {
+.scorePanel {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
@@ -94,19 +93,19 @@ h1 {
     justify-content:space-around;
 }
 
-.score-panel .stars {
+.scorePanel .stars {
     margin: 0;
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
 }
 
-.score-panel .stars li {
+.scorePanel .stars li {
     list-style: none;
     display: inline-block;
 }
 
-.score-panel .restart {
+.scorePanel .restart {
     float: right;
     cursor: pointer;
 }
@@ -143,11 +142,26 @@ p{
     border-radius: 10px;
     text-align: center;
     border: 0;
+
 }
 #timerBox{
     width: 30px;
     height: 10px;
 }
+.rubberBand{
+   transform: scale3d(1.15, 0.85, 1);
+   transform: scale3d(1.15, 0.85, 1);
+ }
+.heartBeat{
+   transform: scale(1);
+   transform: scale(1);
+   animation-duration: 2s;
+}
+.tada{
+   transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+   transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+}
+
 @media screen and (min-width:600px) and (max-width: 760px) {
 .container {
     height: 1100px;
@@ -196,10 +210,10 @@ p{
     width:50px;
     height:50px;
 }
-.score-panel{
+.scorePanel{
     text-align: center;
-    width: 345px;
-    margin-bottom: 10px;
+    /*width: 345px;
+    margin-bottom: 10px;*/
     display: flex;
     flex-wrap: wrap;
     flex-direction:row;

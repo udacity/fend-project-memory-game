@@ -11,12 +11,11 @@
  */
 
 
- var faElements = document.getElementsByClassName('faCard');
- var faClasses=[];
- for(i=0; i<faElements.length; i++){
+var faElements = document.getElementsByClassName('faCard');
+var faClasses=[];
+for(i=0; i<faElements.length; i++){
    faClasses[i]= faElements[i].className;
- }
- console.log(faClasses);
+}
 
 faClasses =shuffle(faClasses);
 for (i=0; i<faElements.length; i++){
@@ -62,8 +61,6 @@ function secondsCounter(){
     return;
   }
   var currentDate = new Date();
-  /*console.log("CurrentDate =" + currentDate + "  startTime=" + startDate);
-  console.log("CurrentDate.getTime() =" + currentDate.getTime() + "  startTime=" + startDate.getTime());*/
   seconds = Math.round((currentDate.getTime() - startDate.getTime()) / 1000);
       if (seconds<=9){
           seconds= seconds.toString().padStart(2, "0");
@@ -87,7 +84,6 @@ function secondsCounter(){
 }
 setInterval(secondsCounter, 500);
 
-
   allCards.forEach(function(card){
    card.addEventListener('click',function(){
      if(openCards.length>1){
@@ -99,25 +95,24 @@ setInterval(secondsCounter, 500);
      }
      if(!card.classList.contains('open','show','match')){
        openCards.push(card);
-       card.classList.add('open','show');
+       card.classList.add('open','show','animated', 'rubberBand', 'fast');
         if(openCards.length==2){
            clickCounter++;
         /*matching two cards*/
            if(openCards[0].innerHTML==openCards[1].innerHTML){
-              openCards[0].classList.add('match');
-              openCards[1].classList.add('match');
+              openCards[0].classList.add('match','animated','tada');
+              openCards[1].classList.add('match','animated','tada');
               openCards=[];
         /*if they are different. we close them*/
-          }else{
+            }else{
               setTimeout(function() {
               openCards.forEach(function(card){
-               card.classList.remove('open','show');
-              });
+               card.classList.remove('open','show','animated', 'rubberBand', 'fast');
+               });
               openCards=[];
               }, 1000);
-          }
+            }
        }
-
     }
      /*check if all cards are matched*/
     var matchedCards=document.querySelectorAll('.open','.show','.match');
@@ -128,47 +123,29 @@ setInterval(secondsCounter, 500);
          setTimeout(function() {
          document.querySelector('.deck').style.visibility='hidden';
          document.querySelector('.congratulationsPopup').style.visibility='visible';
+         const animatedPlayButton =  document.getElementById('playButton');
+         animatedPlayButton.classList.add('animated', 'heartBeat');
          }, 1000);
       }
-
-
-
-
-
-
         /*Color change of stars (depends on moves )*/
-
+        /*Adding congratulations text in HTML*/
         var moveCounter=document.querySelector('.moves');
         moveCounter.innerText=`${clickCounter} Moves`;
         let winText=document.querySelector('.congratText');
-        if (clickCounter>=8 && clickCounter<16){
-          document.getElementById('firstStar').style.color = "#c0c0c0";
-          star=2;
-          winText.innerHTML=`With ${clickCounter} Moves and 2 Stars.\n
+          if (clickCounter>=8 && clickCounter<16){
+            document.getElementById('firstStar').style.color = "#c0c0c0";
+            star=2;
+            winText.innerHTML=`With ${clickCounter} Moves and 2 Stars.\n
                                  It tooks ${timeToWin} to win.`;
-        }else if(clickCounter>=16){
-          document.getElementById('secondStar').style.color = "#c0c0c0";
-          star=1;
-          winText.innerHTML=`With ${clickCounter} Moves and 1 Star.\n
+          }else if(clickCounter>=16){
+            document.getElementById('secondStar').style.color = "#c0c0c0";
+            star=1;
+            winText.innerHTML=`With ${clickCounter} Moves and 1 Star.\n
                                  It tooks ${timeToWin} to win.`;
-        }else{
-          winText.innerHTML=`With ${clickCounter} Moves and 3 Stars.\n
+          }else{
+            winText.innerHTML=`With ${clickCounter} Moves and 3 Stars.\n
                                  It tooks ${timeToWin} to win.`;
-        }
-
-        /*Adding congratulations text in HTML*/
-      /*  moveCounter.innerText=`${clickCounter} Moves`;
-
-        if (star=3){
-        winText.innerHTML=`With ${clickCounter} Moves and 3 Stars.\n
-                               It tooks ${timeToWin} to win.`;
-        }else if(star=2){
-          winText.innerHTML=`With ${clickCounter} Moves and 2 Stars.\n
-                                 It tooks ${timeToWin} to win.`;
-        }else{
-          winText.innerHTML=`With ${clickCounter} Moves and 1 Star.\n
-                                 It tooks ${timeToWin} to win.`;
-        }*/
+          }
     });
 });
 

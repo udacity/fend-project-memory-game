@@ -17,8 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png');
-    /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -35,8 +34,8 @@ h1 {
 }
 
 /*
-   * Styles for the deck of cards
-   */
+* Styles for the deck of cards
+*/
 
 .deck {
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
@@ -87,8 +86,8 @@ h1 {
 }
 
 /*
-   * Styles for the Score Panel
-   */
+* Styles for the Score Panel
+*/
 
 .score-panel {
     text-align: left;

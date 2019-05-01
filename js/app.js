@@ -6,6 +6,15 @@ $(document).ready(function(){
  * Create a list that holds all of your cards
  */
 
+ /*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+
+/*Global variables declarations*/
+
 let cards = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb'];
 
 let totalCards = cards.length / 2;
@@ -34,12 +43,9 @@ let minute = {
 	label: " mins "
 };
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+ let restartButton = $('.restart');
+
+ /*click events*/
 
 deckCards.click(function(){
 	clickCard++;
@@ -48,6 +54,10 @@ deckCards.click(function(){
 });
 
 deckCards.click(cardShowed);
+
+restartButton.click(startGame);
+
+/*Start game function called when all elements of the page are loaded*/
 
 window.onLoad = startGame();
 
@@ -75,7 +85,27 @@ function startGame() {
 		aClass = deck.find('i').eq(i).attr('class');
 		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + cards[i]);
 	}
+	restartSession();
 }
+
+/*Function restart session that reset all variables that influence the game behaviors*/
+
+function restartSession() {
+
+	for(let i=0; i<cards.length; i++)  {
+		deckCards.eq(i).removeClass('match disable show open');
+	}
+
+	cardsTry = [];
+	moves = 0;
+	counter.html(moves);
+	matches = 0;
+	clickCard = 0;
+
+	restartTimer();
+}
+
+/*function that open the cards and stores his classes to an array*/
 
 function showCard(card) {
 

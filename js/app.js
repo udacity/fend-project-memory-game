@@ -10,6 +10,8 @@ let cards = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', '
 
 let totalCards = cards.length / 2;
 var deck = $('.deck');
+let deckCards = $('.card');
+let cardsTry = [];
 
 /*
  * Display the cards on the page
@@ -17,6 +19,10 @@ var deck = $('.deck');
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+deckCards.click(function(){
+	showCard($(this));
+});
 
 window.onLoad = startGame();
 
@@ -44,6 +50,21 @@ function startGame() {
 		aClass = deck.find('i').eq(i).attr('class');
 		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + cards[i]);
 	}
+}
+
+function showCard(card) {
+
+		var $card = $(card);
+		$card.addClass('open show disable');
+
+		if(cardsTry.length < 2) {
+
+		var showedClass = $card.find('i').attr('class');
+		cardsTry.push(showedClass);
+		
+		} else {
+			cardsTry = [];
+		}
 }
 
 });

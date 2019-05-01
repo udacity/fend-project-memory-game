@@ -25,7 +25,8 @@ let cardsTry = [];
 let moves = 0;
 let clickCard = 0;
 let counter = $('.count');
-
+let rating = $('.stars');
+let starsNumber = 3;
 
 
 let timer = $('div.timer');
@@ -96,6 +97,10 @@ function restartSession() {
 		deckCards.eq(i).removeClass('match disable show open');
 	}
 
+	for (i=0; i<starsNumber; i++){
+		rating.find('i').eq(i).removeClass('lost')
+	}
+
 	cardsTry = [];
 	moves = 0;
 	counter.html(moves);
@@ -137,11 +142,16 @@ function cardShowed() {
 			unmatchCards();
 		}
 	};
+	beginRating();
 }
+
+/*function that attributes the match class to the opened and equal cards*/
 
 function matchCards() {
 	deck.find('.open').addClass('match disable').removeClass('open show');
 }
+
+/*function that attributes the unmatch class to the opened and different cards*/
 
 function unmatchCards() {
 	deck.find('.open').addClass('unmatch').removeClass('open show');
@@ -153,9 +163,14 @@ function unmatchCards() {
 	}, 1000);
 }
 
+/*Function that block the click on the opened or matched cards*/
+
 function disableCards(){
 	deck.find('.card').addClass('disable');
 }
+
+/*Function that active the click on the cards that aren't opened and
+on the cards that aren't matched*/
 
 function activeCards() {
 	var aCards = deck.find('.card');
@@ -165,6 +180,17 @@ function activeCards() {
 			if(!aCards.eq(i).hasClass('match')) {
 				aCards.eq(i).removeClass('disable');
 		};
+	}
+}
+
+/*Function that attributes a class that hide stars to do the rating*/
+
+function beginRating() {
+
+	if(moves > 16 && moves < 23){
+		rating.find('i').eq(2).addClass('lost');
+	} else if (moves > 23){
+		rating.find('i').eq(1).addClass('lost');
 	}
 }
 

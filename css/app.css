@@ -62,6 +62,11 @@ h1 {
     display: inline-block;
 }
 
+.lost {
+    list-style: none;
+    display: none;
+}
+
 .score-panel .restart {
     float: right;
     cursor: pointer;

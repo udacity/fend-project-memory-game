@@ -14,8 +14,25 @@ let deckCards = $('.card');
 let cardsTry = [];
 
 let moves = 0;
-
+let clickCard = 0;
 let counter = $('.count');
+
+
+
+let timer = $('div.timer');
+let minutes = $('.minutes');
+let seconds = $('.seconds');
+let clocker;
+
+let second = {
+	value: 0,
+	label: " secs"
+};
+
+let minute = {
+	value: 0,
+	label: " mins "
+};
 
 /*
  * Display the cards on the page
@@ -25,6 +42,8 @@ let counter = $('.count');
  */
 
 deckCards.click(function(){
+	clickCard++;
+	beginTimer();
 	showCard($(this));
 });
 
@@ -117,6 +136,45 @@ function activeCards() {
 				aCards.eq(i).removeClass('disable');
 		};
 	}
+}
+
+/*Function that reset minutes and seconds values*/
+
+function restartTimer() {
+	second.value = 0;
+	minute.value = 0;
+	clearInterval(clocker);
+	updateTimer();
+}
+
+/*Function that updates the minute and second values ​​on the page*/
+
+function updateTimer() {
+	if (second.value < 10 && minute.value < 10) {
+		seconds.html("0" + second.value + second.label);
+		minutes.html("0" + minute.value + minute.label);
+	} else if (minute.value < 10) {
+			seconds.html(second.value + second.label);
+			minutes.html("0" + minute.value + minute.label);
+		} else {
+			minutes.html(minute.value + minute.label);
+			seconds.html(second.value + second.label);
+			}
+}
+
+/*Function that initializes the time count*/
+
+function beginTimer() {
+	if(clickCard === 1) {
+		clocker = setInterval(function() {
+			second.value++;
+			if(second.value == 60) {
+				minute.value++;
+				second.value = 0;
+			}
+			updateTimer();
+		}, 1000);
+	};
 }
 
 });

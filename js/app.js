@@ -6,6 +6,10 @@ $(document).ready(function(){
  * Create a list that holds all of your cards
  */
 
+let cards = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb'];
+
+let totalCards = cards.length / 2;
+var deck = $('.deck');
 
 /*
  * Display the cards on the page
@@ -13,6 +17,8 @@ $(document).ready(function(){
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+
+window.onLoad = startGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -27,6 +33,17 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function startGame() {
+	
+	let deckCards = shuffle(cards);
+
+	for(let i = 0; i < cards.length; i++) {
+
+		aClass = deck.find('i').eq(i).attr('class');
+		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + cards[i]);
+	}
 }
 
 });

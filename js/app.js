@@ -13,6 +13,17 @@ $(document).ready(function(){
  *   - add each card's HTML to the page
  */
 
+ /*
+ * set up the event listener for a card. If a card is clicked:
+ *  - display the card's symbol (put this functionality in another function that you call from this one)
+ *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+ *  - if the list already has another card, check to see if the two cards match
+ *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ */
+
 /*Global variables declarations*/
 
 let cards = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb'];
@@ -48,7 +59,7 @@ let minute = {
 
  let restartButton = $('.restart');
 
- /*click events*/
+ /*Event listener that starts time counter, catch the card clicked*/
 
 deckCards.click(function(){
 	clickCard++;
@@ -56,7 +67,12 @@ deckCards.click(function(){
 	showCard($(this));
 });
 
+
+/*Event listener that verify if the cards can be compared*/
+
 deckCards.click(cardShowed);
+
+/*Event listener that listen mouse behavior on the reset button*/
 
 restartButton.click(startGame);
 
@@ -65,6 +81,7 @@ restartButton.click(startGame);
 window.onLoad = startGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -79,6 +96,8 @@ function shuffle(array) {
     return array;
 }
 
+/*start function that shuffle the cards*/
+
 function startGame() {
 	
 	let deckCards = shuffle(cards);
@@ -91,7 +110,7 @@ function startGame() {
 	restartSession();
 }
 
-/*Function restart session that reset all variables that influence the game behaviors*/
+/*Function  that reset all variables that influence the game behaviors*/
 
 function restartSession() {
 
@@ -112,7 +131,7 @@ function restartSession() {
 	restartTimer();
 }
 
-/*function that open the cards and stores his classes to an array*/
+/*Function that open the cards and stores his classes to an array*/
 
 function showCard(card) {
 
@@ -128,6 +147,8 @@ function showCard(card) {
 			cardsTry = [];
 		}
 }
+
+/*Function that compares the classes of open cards and verifies if they are equal*/
 
 function cardShowed() {
 
@@ -149,13 +170,13 @@ function cardShowed() {
 	winner();
 }
 
-/*function that attributes the match class to the opened and equal cards*/
+/*Function that attributes the match class to the opened and equal cards*/
 
 function matchCards() {
 	deck.find('.open').addClass('match disable').removeClass('open show');
 }
 
-/*function that attributes the unmatch class to the opened and different cards*/
+/*Function that attributes the unmatch class to the opened and different cards*/
 
 function unmatchCards() {
 	deck.find('.open').addClass('unmatch').removeClass('open show');
@@ -237,7 +258,7 @@ function beginTimer() {
 	};
 }
 
-/*win modal that appears when the player match all cards*/
+/*Win modal that appears when the player match all cards*/
 
 function winner() {
 	if(matches === 8) {
@@ -261,13 +282,3 @@ function closeModal() {
 }
 
 });
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */

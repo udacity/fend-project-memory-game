@@ -1,3 +1,5 @@
+/*Commom elements styles*/
+
 html {
     box-sizing: border-box;
 }
@@ -141,7 +143,7 @@ h1 {
     pointer-events: none;
 }
 
-/*Styles for the win modal*/
+/*Styles for the victory modal*/
 
 #win-modal {
     position: fixed;

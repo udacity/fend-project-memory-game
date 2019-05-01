@@ -24,6 +24,8 @@ deckCards.click(function(){
 	showCard($(this));
 });
 
+deckCards.click(cardShowed);
+
 window.onLoad = startGame();
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -65,6 +67,48 @@ function showCard(card) {
 		} else {
 			cardsTry = [];
 		}
+}
+
+function cardShowed() {
+
+	if (cardsTry.length === 2) {
+
+		if(cardsTry[0] === cardsTry[1]) {
+			matchCards();
+			cardsTry = [];
+		} else {
+			unmatchCards();
+		}
+	};
+}
+
+function matchCards() {
+	deck.find('.open').addClass('match disable').removeClass('open show');
+}
+
+function unmatchCards() {
+	deck.find('.open').addClass('unmatch').removeClass('open show');
+	disableCards();
+	setTimeout(function() {
+		deck.find('.unmatch').removeClass('unmatch');
+		activeCards();
+		cardsTry = [];
+	}, 1000);
+}
+
+function disableCards(){
+	deck.find('.card').addClass('disable');
+}
+
+function activeCards() {
+	var aCards = deck.find('.card');
+
+		for(let i = 0; i < cards.length; i++) {
+
+			if(!aCards.eq(i).hasClass('match')) {
+				aCards.eq(i).removeClass('disable');
+		};
+	}
 }
 
 });

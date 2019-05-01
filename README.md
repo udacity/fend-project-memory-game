@@ -2,19 +2,40 @@
 
 ## Table of Contents
 
+* [About this game](#about)
+* [Objective](#objective)
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Rating](#rating)
+* [Building](#building)
+
+## About
+
+Welome to the Matching Game!
+
+It's a card game that is intended to test the memory of the players in order to improve it! So enjoy!
+
+## Objective
+
+The goal of this game is to find all pairs of each card with the least number of moves.
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+The player must find the pairs of scrambled cards.
 
-To get started, open `js/app.js` and start building out the app's functionality
+If a pair is found, the two cards will be opened, otherwise they will be flipped again.
+The player can restart the game by clicking the reset button next to the timer. However, the cards will be scrambled again.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Rating
 
-## Contributing
+* 3 stars for finding all pairs in up to 16 moves;
+* 2 stars for finding all pairs in up to 23 moves;
+* 1 star by finding all pairs.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## Building
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* The deck of cards was structured and stylized with HTML and CSS;
+* The deck was created with 16 cards - being 8 pairs - that are shuffled when starting or restarting the game via Javascript and jQuery;
+* I created a motion counter that serves as the parameter for the performance rating of the player;
+* I created a timer so that the player can know the time spent in the session played;
+* I created a reset button so that the player can restart the game;
+* I created a pop-up window that appears when the player finds all the pairs, informing the time spent and their classification.

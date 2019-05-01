@@ -13,6 +13,10 @@ var deck = $('.deck');
 let deckCards = $('.card');
 let cardsTry = [];
 
+let moves = 0;
+
+let counter = $('.count');
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -74,9 +78,13 @@ function cardShowed() {
 	if (cardsTry.length === 2) {
 
 		if(cardsTry[0] === cardsTry[1]) {
+			moves++;
+			counter.html(moves);
 			matchCards();
 			cardsTry = [];
 		} else {
+			moves++;
+			counter.html(moves);
 			unmatchCards();
 		}
 	};

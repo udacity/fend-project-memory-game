@@ -96,6 +96,8 @@ h1 {
  */
 
 .score-panel {
+    display: flex;
+    flex-flow: row wrap;
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
@@ -106,6 +108,11 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+}
+
+.stars,
+.moves {
+    margin: 0 15px;
 }
 
 .score-panel .stars li {

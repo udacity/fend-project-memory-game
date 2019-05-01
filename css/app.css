@@ -140,3 +140,56 @@ h1 {
 .deck .card.disable {
     pointer-events: none;
 }
+
+/*Styles for the win modal*/
+
+#win-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.7);
+    visibility: hidden;
+    opacity: 0;
+}
+
+#win-modal .modal {
+    background: white;
+    margin: 20px;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#win-modal h2 {
+    margin: 0;
+}
+
+#win-modal .summary {
+    margin: 40px 0;
+    font-size: 1.25rem;
+}
+
+#win-modal .stars-rating li {
+    list-style: none;
+    display: inline-block;
+}
+
+#play-again {
+    background-color: #2e3d49;
+    font-size: 1.25rem;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+#play-again:hover {
+    background-color: #02ccba;
+    cursor: pointer;
+}

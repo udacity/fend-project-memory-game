@@ -28,6 +28,8 @@ let counter = $('.count');
 let rating = $('.stars');
 let starsNumber = 3;
 
+let matches = 0;
+const modal = $('#win-modal');
 
 let timer = $('div.timer');
 let minutes = $('.minutes');
@@ -133,6 +135,7 @@ function cardShowed() {
 
 		if(cardsTry[0] === cardsTry[1]) {
 			moves++;
+			matches++;
 			counter.html(moves);
 			matchCards();
 			cardsTry = [];
@@ -143,6 +146,7 @@ function cardShowed() {
 		}
 	};
 	beginRating();
+	winner();
 }
 
 /*function that attributes the match class to the opened and equal cards*/
@@ -231,6 +235,29 @@ function beginTimer() {
 			updateTimer();
 		}, 1000);
 	};
+}
+
+/*win modal that appears when the player match all cards*/
+
+function winner() {
+	if(matches === 8) {
+		clearInterval(clocker);
+		modal.addClass("show");
+		$("#session-moves").html(moves);
+		$("#session-time").html(timer.html());
+		$("#session-rating").html($(".stars").html());
+		closeModal();
+		console.log('Congratulations!');
+	};
+}
+
+/*close modal function on play again button*/
+
+function closeModal() {
+	$('#play-again').click(function() {
+		modal.removeClass('show');
+		startGame();
+	});
 }
 
 });

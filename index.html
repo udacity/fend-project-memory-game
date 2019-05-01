@@ -85,6 +85,17 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
+        <div id="win-modal" class="overlay">
+            <div class="modal">
+                <h2>Congratulations! You Win!</h2>
+                <div class="summary">
+                    <p><span id="session-moves"></span> moves</p>
+                    <p>Time: <span id="session-time"></span></p>
+                    <p>Rating: <span id="session-rating" class="stars-rating"></span></p>
+                </div>
+                <button id="play-again">Play again!</button>
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/app.js"></script>

@@ -26,25 +26,26 @@ $(document).ready(function(){
 
 /*Global variables declarations*/
 
-let cards = ['diamond', 'diamond', 'paper-plane-o', 'paper-plane-o', 'anchor', 'anchor', 'bolt', 'bolt', 'cube', 'cube', 'leaf', 'leaf', 'bicycle', 'bicycle', 'bomb', 'bomb'];
+const cards = ['diamond','paper-plane-o','anchor','bolt', 'cube', 'leaf','bicycle', 'bomb'];
+/*const cards2 = ['diamond','paper-plane-o','anchor','bolt', 'cube', 'leaf','bicycle', 'bomb'];*/
 
-let totalCards = cards.length / 2;
-var deck = $('.deck');
-let deckCards = $('.card');
+const totalCards = cards.length * 2;
+const deck = $('.deck');
+const deckCard = $('.card');
 let cardsTry = [];
 
 let moves = 0;
 let clickCard = 0;
-let counter = $('.count');
-let rating = $('.stars');
-let starsNumber = 3;
+const counter = $('.count');
+const rating = $('.stars');
+const starsNumber = 3;
 
 let matches = 0;
 const modal = $('#win-modal');
 
-let timer = $('div.timer');
-let minutes = $('.minutes');
-let seconds = $('.seconds');
+const timer = $('div.timer');
+const minutes = $('.minutes');
+const seconds = $('.seconds');
 let clocker;
 
 let second = {
@@ -57,11 +58,11 @@ let minute = {
 	label: " mins "
 };
 
- let restartButton = $('.restart');
+ const restartButton = $('.restart');
 
  /*Event listener that starts time counter, catch the card clicked*/
 
-deckCards.click(function(){
+deckCard.click(function(){
 	clickCard++;
 	beginTimer();
 	showCard($(this));
@@ -70,7 +71,7 @@ deckCards.click(function(){
 
 /*Event listener that verify if the cards can be compared*/
 
-deckCards.click(cardShowed);
+deckCard.click(cardShowed);
 
 /*Event listener that listen mouse behavior on the reset button*/
 
@@ -99,13 +100,15 @@ function shuffle(array) {
 /*start function that shuffle the cards*/
 
 function startGame() {
+
+	const deckList = cards.concat(cards);
 	
-	let deckCards = shuffle(cards);
+	let shuffleCards = shuffle(deckList);
 
-	for(let i = 0; i < cards.length; i++) {
+	for(let i = 0; i < deckList.length; i++) {
 
-		aClass = deck.find('i').eq(i).attr('class');
-		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + cards[i]);
+		let aClass = deck.find('i').eq(i).attr('class');
+		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + deckList[i]);
 	}
 	restartSession();
 }
@@ -114,8 +117,10 @@ function startGame() {
 
 function restartSession() {
 
-	for(let i=0; i<cards.length; i++)  {
-		deckCards.eq(i).removeClass('match disable show open');
+	const deckList = cards.concat(cards);
+
+	for(let i=0; i<deckList.length; i++)  {
+		deckCard.eq(i).removeClass('match disable show open');
 	}
 
 	for (i=0; i<starsNumber; i++){
@@ -198,9 +203,12 @@ function disableCards(){
 on the cards that aren't matched*/
 
 function activeCards() {
-	var aCards = deck.find('.card');
 
-		for(let i = 0; i < cards.length; i++) {
+	const deckList = cards.concat(cards);
+	
+	let aCards = deck.find('.card');
+
+		for(let i = 0; i < deckList.length; i++) {
 
 			if(!aCards.eq(i).hasClass('match')) {
 				aCards.eq(i).removeClass('disable');
@@ -268,7 +276,6 @@ function winner() {
 		$("#session-time").html(timer.html());
 		$("#session-rating").html($(".stars").html());
 		closeModal();
-		console.log('Congratulations!');
 	};
 }
 

@@ -6,6 +6,20 @@
  */
 const cardList = document.querySelectorAll('.card');
 
+
+
+// Resets all cards when refresh button hit
+const refreshButton = document.querySelector('.restart');
+
+refreshButton.addEventListener('click', function resetCards() {
+    for (i = 0; i <= 15; i++) {
+        cardList[i].classList.remove('open', 'show', 'match');
+    }
+  })
+
+
+
+
 // Adding event listener for a card to change CSS class
 
 cardList[0].addEventListener('click', function flipCard() {

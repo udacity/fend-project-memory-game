@@ -1,8 +1,23 @@
-// Michaels Memory Game 
+// Michaels Memory Game
+
 
 /*
  * Create a list that holds all of your cards
  */
+const cardList = document.querySelectorAll('.card');
+
+// Adding event listener for a card to change CSS class
+
+cardList[0].addEventListener('click', function flipCard() {
+  cardList[0].classList.add('open', 'show');
+})
+
+
+
+
+
+
+
 
 
 /*

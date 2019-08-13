@@ -12,10 +12,65 @@ cardList[0].addEventListener('click', function flipCard() {
   cardList[0].classList.add('open', 'show');
 })
 
+cardList[1].addEventListener('click', function flipCard() {
+  cardList[1].classList.add('open', 'show');
+})
 
+cardList[2].addEventListener('click', function flipCard() {
+  cardList[2].classList.add('open', 'show');
+})
 
+cardList[3].addEventListener('click', function flipCard() {
+  cardList[3].classList.add('open', 'show');
+})
 
+cardList[4].addEventListener('click', function flipCard() {
+  cardList[4].classList.add('open', 'show');
+})
 
+cardList[5].addEventListener('click', function flipCard() {
+  cardList[5].classList.add('open', 'show');
+})
+
+cardList[6].addEventListener('click', function flipCard() {
+  cardList[6].classList.add('open', 'show');
+})
+
+cardList[7].addEventListener('click', function flipCard() {
+  cardList[7].classList.add('open', 'show');
+})
+
+cardList[8].addEventListener('click', function flipCard() {
+  cardList[8].classList.add('open', 'show');
+})
+
+cardList[9].addEventListener('click', function flipCard() {
+  cardList[9].classList.add('open', 'show');
+})
+
+cardList[10].addEventListener('click', function flipCard() {
+  cardList[10].classList.add('open', 'show');
+})
+
+cardList[11].addEventListener('click', function flipCard() {
+  cardList[11].classList.add('open', 'show');
+})
+
+cardList[12].addEventListener('click', function flipCard() {
+  cardList[12].classList.add('open', 'show');
+})
+
+cardList[13].addEventListener('click', function flipCard() {
+  cardList[13].classList.add('open', 'show');
+})
+
+cardList[14].addEventListener('click', function flipCard() {
+  cardList[14].classList.add('open', 'show');
+})
+
+cardList[15].addEventListener('click', function flipCard() {
+  cardList[15].classList.add('open', 'show');
+})
 
 
 

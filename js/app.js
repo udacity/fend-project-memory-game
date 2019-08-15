@@ -4,22 +4,60 @@
 /*
  * Create a list that holds all of your cards
  */
-// let cardList = document.querySelectorAll('.card');
 
 
+const cardList = document.querySelectorAll('.card');//All class with card
+
+const deck = document.querySelector('.deck'); // Everything within deck
+
+const cardType = deck.getElementsByTagName('i'); // i tag within deck
+
+const cardTypeArray = Array.from(cardType); // turning i tag in deck to array
 
 // Resets all cards when refresh button hit
-// const refreshButton = document.querySelector('.restart');
-//
-// refreshButton.addEventListener('click', function resetCards() {
-//     for (i = 0; i <= 15; i++) {
-//         cardList[i].classList.remove('open', 'show', 'match');
-//     }
-//   })
+const refreshButton = document.querySelector('.restart');
 
-  // Testing different list with i tags
+refreshButton.addEventListener('click', function resetCards() {
+  for (i = 0; i <= 15; i++) {
+    cardList[i].classList.remove('open', 'show', 'match');
+    shuffle(cardTypeArray);
+  }
+});
 
-  // let newCardList = document.getElementsByTagName('i');
+
+/*
+ * Display the cards on the page
+ *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - loop through each card and create its HTML
+ *   - add each card's HTML to the page
+ */
+
+
+
+
+
+
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+
+
+//*** Finding the event target when clicked ***
+deck.addEventListener('click', function(e) {
+  console.log(e.target.children);
+});
 
 
 
@@ -90,43 +128,8 @@
 //   cardList[15].classList.add('open', 'show');
 // })
 
-//******************************************
-
-const deck = document.querySelector('.deck');
-
-deck.addEventListener('click', function(e) {
-  console.log(e.target.children);
-});
 
 
-
-
-
-
-//*********************************************
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
 
 
 /*

@@ -23,14 +23,16 @@ function shuffle(array) {
 //create html for cards
 function createCard() {
 	const shuffledCards = shuffle(iconList);
+	const ulFragment = document.createDocumentFragment();
 	shuffledCards.forEach(function(card) {
 		const li = document.createElement('li');
 		const i = document.createElement('i');
 		i.setAttribute('class', card);
 		li.setAttribute('class', 'card');
 		li.appendChild(i);
-		ul.appendChild(li);
+		ulFragment.appendChild(li);
 	});
+	ul.appendChild(ulFragment);
 	deck.appendChild(ul);
 }
 createCard();
@@ -84,7 +86,7 @@ deck.addEventListener('click', function(e) {
 	}
 });
 
-//add event to every card 
+//add event to every card
 for (let card of cards) {
 	card.addEventListener('click', show);
 }
@@ -96,7 +98,7 @@ function show(e) {
 		return;
 	}
 	//add classes for show
-	// 'disable' class added so one card can'be clicked more then one time in one move. 
+	// 'disable' class added so one card can'be clicked more then one time in one move.
 	e.target.classList.add('open', 'show', 'animated', 'flipInY', 'disable');
 	opendCards.push(e.target);
 	if (opendCards.length == 2) {
@@ -184,9 +186,11 @@ function restart(parentTag, fragment) {
 	});
 	parentTag.innerHTML = '';
 	cards = shuffle(newCardArr);
+	const docFragment = document.createDocumentFragment();
 	for (let card of cards) {
-		fragment.appendChild(card);
+		docFragment.appendChild(card);
 	}
+	fragment.appendChild(docFragment);
 	parentTag.appendChild(fragment);
 
 	//if no card was opened then this function do nothing

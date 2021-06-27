@@ -7,7 +7,7 @@
 * [Instructions](#instructions)
 * [Rating](#rating)
 * [Building](#building)
-* Click [**here**](https://flipefrontdev.github.io/fend-project-memory-game/), and enjoy the game!
+* Click [**here**](https://flipefrontdev.github.io/fend-project-memory-game/), and enjoy! &#127918;
 
 ## About
 

@@ -1,291 +1,197 @@
-/*jQuery Implementation*/
-
-$(document).ready(function(){
+/*
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
 
 /*
- * Create a list that holds all of your cards
- */
-
- /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
-
- /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+* set up the event listener for a card. If a card is clicked:
+*  - display the card's symbol (put this functionality in another function that you call from this one)
+*  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+*  - if the list already has another card, check to see if the two cards match
+*    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+*    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+*    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+*    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+*/
 
 /*Global variables declarations*/
 
-const cards = ['diamond','paper-plane-o','anchor','bolt', 'cube', 'leaf','bicycle', 'bomb'];
-/*const cards2 = ['diamond','paper-plane-o','anchor','bolt', 'cube', 'leaf','bicycle', 'bomb'];*/
+const container = document.querySelector('.container');
+const cards = document.querySelectorAll('.card');
+const clock = document.getElementById('clock');
+let gameOption = document.getElementById('label-game');
+const gameControl = document.getElementById('chk-game');
+const restart = document.getElementById('restart')
+const counter = document.querySelector('.count');
+const welcomeModal = document.getElementById('welcome-modal');
+const winModal = document.getElementById('win-modal');
+const playBtn = document.getElementById('play');
+const playAgain = document.getElementById('play-again');
+const stars = document.querySelector('.stars');
+let modalTime = document.getElementById('session-time');
+let modalMoves = document.getElementById('session-moves');
+let modalRating = document.getElementById('session-rating');
 
-const totalCards = cards.length * 2;
-const deck = $('.deck');
-const deckCard = $('.card');
-let cardsTry = [];
+let timer, moves = 0; gameCourse = false, seconds = 0, matches = 0;
+let hasFlippedCard = false;
+let firstCard, secondCard;
+let pauseDeck = true;
 
-let moves = 0;
-let clickCard = 0;
-const counter = $('.count');
-const rating = $('.stars');
-const starsNumber = 3;
-
-let matches = 0;
-const modal = $('#win-modal');
-
-const timer = $('div.timer');
-const minutes = $('.minutes');
-const seconds = $('.seconds');
-let clocker;
-
-let second = {
-	value: 0,
-	label: " secs"
-};
-
-let minute = {
-	value: 0,
-	label: " mins "
-};
-
- const restartButton = $('.restart');
-
- /*Event listener that starts time counter, catch the card clicked*/
-
-deckCard.click(function(){
-	clickCard++;
-	beginTimer();
-	showCard($(this));
-});
-
-
-/*Event listener that verify if the cards can be compared*/
-
-deckCard.click(cardShowed);
-
-/*Event listener that listen mouse behavior on the reset button*/
-
-restartButton.click(startGame);
-
-/*Start game function called when all elements of the page are loaded*/
-
-window.onLoad = startGame();
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-/*start function that shuffle the cards*/
-
-function startGame() {
-
-	const deckList = cards.concat(cards);
-	
-	let shuffleCards = shuffle(deckList);
-
-	for(let i = 0; i < deckList.length; i++) {
-
-		let aClass = deck.find('i').eq(i).attr('class');
-		deck.find('i').eq(i).removeClass(aClass).addClass('fa fa-' + deckList[i]);
+gameOption.onclick = () => {
+	if (!gameControl.checked) {
+		runGame();
+		pauseDeck = false;
+	} else {
+		gameOption.innerText = "Resume";
+		clearInterval(timer);
+		pauseDeck = true;
 	}
-	restartSession();
 }
 
-/*Function  that reset all variables that influence the game behaviors*/
+restart.onclick = () => {
+	restartGame();
+}
 
-function restartSession() {
+playAgain.onclick = () => {
+	restartGame();
+}
 
-	const deckList = cards.concat(cards);
+playBtn.onclick = () => {
+	welcomeModal.style.opacity = "0";
+	welcomeModal.style.visibility = "hidden";
+}
 
-	for(let i=0; i<deckList.length; i++)  {
-		deckCard.eq(i).removeClass('match disable show open');
+function runGame() {
+	gameOption.innerText = "Pause";
+	clearInterval(timer);
+	startClock();
+
+	if (gameCourse == false) {
+		restart.style.pointerEvents = 'none';
+		gameOption.style.pointerEvents = 'none';
+		setTimeout(() => {
+			restart.style.pointerEvents = 'auto';
+			gameOption.style.pointerEvents = 'auto';
+			cards.forEach(card => { card.classList.toggle('flip'); card.classList.toggle('disable') });
+		}, 5000);
+		gameCourse = true;
+		cards.forEach(card => { card.classList.toggle('flip'); card.classList.toggle('disable') });
+	}
+	/* pauseDeck = false; */
+}
+
+const startClock = () => {
+	timer = setInterval(() => {
+		seconds++;
+		clock.innerHTML = getTimeFromSeconds(seconds);
+	}, 1000)
+}
+
+const getTimeFromSeconds = seconds => {
+	const data = new Date(seconds * 1000);
+	return data.toLocaleTimeString('pt-BR', {
+		hours12: false,
+		timeZone: 'GMT'
+	})
+}
+
+function flipCard() {
+
+	if (pauseDeck) return;
+	if (this === firstCard) return;
+	this.classList.toggle('flip')
+	/* this.style.pointerEvents = "none"; */
+
+	if (!hasFlippedCard) {
+		//first click
+		hasFlippedCard = true;
+		firstCard = this;
+		return;
 	}
 
-	for (i=0; i<starsNumber; i++){
-		rating.find('i').eq(i).removeClass('lost')
-	}
-
-	cardsTry = [];
-	moves = 0;
-	counter.html(moves);
-	matches = 0;
-	clickCard = 0;
-
-	restartTimer();
+	//second click
+	secondCard = this;
+	matchCards();
+	moves++;
+	counter.innerText = moves;
 }
-
-/*Function that open the cards and stores his classes to an array*/
-
-function showCard(card) {
-
-		var $card = $(card);
-		$card.addClass('open show disable');
-
-		if(cardsTry.length < 2) {
-
-		var showedClass = $card.find('i').attr('class');
-		cardsTry.push(showedClass);
-		
-		} else {
-			cardsTry = [];
-		}
-}
-
-/*Function that compares the classes of open cards and verifies if they are equal*/
-
-function cardShowed() {
-
-	if (cardsTry.length === 2) {
-
-		if(cardsTry[0] === cardsTry[1]) {
-			moves++;
-			matches++;
-			counter.html(moves);
-			matchCards();
-			cardsTry = [];
-		} else {
-			moves++;
-			counter.html(moves);
-			unmatchCards();
-		}
-	};
-	beginRating();
-	winner();
-}
-
-/*Function that attributes the match class to the opened and equal cards*/
 
 function matchCards() {
-	deck.find('.open').addClass('match disable').removeClass('open show');
-}
-
-/*Function that attributes the unmatch class to the opened and different cards*/
-
-function unmatchCards() {
-	deck.find('.open').addClass('unmatch').removeClass('open show');
-	disableCards();
-	setTimeout(function() {
-		deck.find('.unmatch').removeClass('unmatch');
-		activeCards();
-		cardsTry = [];
-	}, 1000);
-}
-
-/*Function that block the click on the opened or matched cards*/
-
-function disableCards(){
-	deck.find('.card').addClass('disable');
-}
-
-/*Function that active the click on the cards that aren't opened and
-on the cards that aren't matched*/
-
-function activeCards() {
-
-	const deckList = cards.concat(cards);
-	
-	let aCards = deck.find('.card');
-
-		for(let i = 0; i < deckList.length; i++) {
-
-			if(!aCards.eq(i).hasClass('match')) {
-				aCards.eq(i).removeClass('disable');
-		};
+	let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+	if (isMatch) {
+		matches++;
+		disableCards();
+		matches == 8 ? endGame() : null;
+	} else {
+		unflipCards();
 	}
 }
 
-/*Function that attributes a class that hide stars to do the rating*/
-
-function beginRating() {
-
-	if(moves > 16 && moves < 23){
-		rating.find('i').eq(2).addClass('lost');
-	} else if (moves > 23){
-		rating.find('i').eq(1).addClass('lost');
-	}
+function disableCards() {
+	firstCard.removeEventListener('click', flipCard);
+	secondCard.removeEventListener('click', flipCard);
+	firstCard.classList.toggle('match')
+	secondCard.classList.toggle('match')
+	resetboard();
 }
 
-/*Function that reset minutes and seconds values*/
-
-function restartTimer() {
-	second.value = 0;
-	minute.value = 0;
-	clearInterval(clocker);
-	updateTimer();
+function unflipCards() {
+	pauseDeck = true;
+	setTimeout(() => {
+		firstCard.classList.remove('flip');
+		secondCard.classList.remove('flip');
+		firstCard.classList.toggle('unmatch')
+		secondCard.classList.toggle('unmatch')
+		resetboard();
+	}, 1500);
+	firstCard.classList.toggle('unmatch')
+	secondCard.classList.toggle('unmatch')
 }
 
-/*Function that updates the minute and second values ​​on the page*/
-
-function updateTimer() {
-	if (second.value < 10 && minute.value < 10) {
-		seconds.html("0" + second.value + second.label);
-		minutes.html("0" + minute.value + minute.label);
-	} else if (minute.value < 10) {
-			seconds.html(second.value + second.label);
-			minutes.html("0" + minute.value + minute.label);
-		} else {
-			minutes.html(minute.value + minute.label);
-			seconds.html(second.value + second.label);
-			}
+function resetboard() {
+	[hasFlippedCard, pauseDeck] = [false, false];
+	[firstCard, secondCard] = [null, null]
 }
 
-/*Function that initializes the time count*/
+function endGame() {
 
-function beginTimer() {
-	if(clickCard === 1) {
-		clocker = setInterval(function() {
-			second.value++;
-			if(second.value == 60) {
-				minute.value++;
-				second.value = 0;
-			}
-			updateTimer();
-		}, 1000);
-	};
+	setTimeout(() => {
+		clearInterval(timer);
+		winModal.classList.add('show');
+		modalTime.innerHTML = clock.innerHTML;
+		modalMoves.innerHTML = moves;
+
+	}, 1200)
 }
 
-/*Win modal that appears when the player match all cards*/
+function restartGame() {
+	seconds = 0;
+	moves = 0;
+	matches = 0;
+	gameCourse = false;
+	clearInterval(timer);
+	clock.innerHTML = '00:00:00'
+	counter.innerHTML = '0'
+	gameControl.checked = false;
+	winModal.classList.remove('show');
+	playBtn.innerText = "Play";
+	cards.forEach(card => { card.addEventListener('click', flipCard); card.classList.remove('flip'); card.classList.remove('match') });
+	gameOption.innerText = "Play";
+	pauseDeck = true;
 
-function winner() {
-	if(matches === 8) {
-		clearInterval(clocker);
-		modal.addClass("show");
-		$("#session-moves").html(moves);
-		$("#session-time").html(timer.html());
-		$("#session-rating").html($(".stars").html());
-		closeModal();
-	};
-}
-
-/*close modal function on play again button*/
-
-function closeModal() {
-	$('#play-again').click(function() {
-		modal.removeClass('show');
-		startGame();
+	cards.forEach(card => {
+		let random = Math.floor(Math.random() * 12);
+		card.style.order = random;
 	});
 }
 
-});
+let shuffle = (function () {
+	cards.forEach(card => {
+		let random = Math.floor(Math.random() * 12);
+		card.style.order = random;
+	});
+})();
+
+cards.forEach(card => card.addEventListener('click', flipCard))

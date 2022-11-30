@@ -1,6 +1,28 @@
+// Michaels Memory Game
+
+
 /*
  * Create a list that holds all of your cards
  */
+
+
+const cardList = document.querySelectorAll('.card');//All class with card
+
+const deck = document.querySelector('.deck'); // Everything within deck
+
+const cardType = deck.getElementsByTagName('i'); // i tag within deck
+
+const cardTypeArray = Array.from(cardType); // turning i tag in deck to array
+
+// Resets all cards when refresh button hit
+const refreshButton = document.querySelector('.restart');
+
+refreshButton.addEventListener('click', function resetCards() {
+  for (i = 0; i <= 15; i++) {
+    cardList[i].classList.remove('open', 'show', 'match');
+    shuffle(cardTypeArray);
+  }
+});
 
 
 /*
@@ -10,20 +32,104 @@
  *   - add each card's HTML to the page
  */
 
+
+
+
+
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
     }
 
     return array;
 }
+
+
+
+//*** Finding the event target when clicked ***
+deck.addEventListener('click', function(e) {
+  console.log(e.target.children);
+});
+
+
+
+
+// Adding event listener for a card to change CSS class
+
+// cardList[0].addEventListener('click', function flipCard() {
+//   cardList[0].classList.add('open', 'show');
+// })
+//
+// cardList[1].addEventListener('click', function flipCard() {
+//   cardList[1].classList.add('open', 'show');
+// })
+//
+// cardList[2].addEventListener('click', function flipCard() {
+//   cardList[2].classList.add('open', 'show');
+// })
+//
+// cardList[3].addEventListener('click', function flipCard() {
+//   cardList[3].classList.add('open', 'show');
+// })
+//
+// cardList[4].addEventListener('click', function flipCard() {
+//   cardList[4].classList.add('open', 'show');
+// })
+//
+// cardList[5].addEventListener('click', function flipCard() {
+//   cardList[5].classList.add('open', 'show');
+// })
+//
+// cardList[6].addEventListener('click', function flipCard() {
+//   cardList[6].classList.add('open', 'show');
+// })
+//
+// cardList[7].addEventListener('click', function flipCard() {
+//   cardList[7].classList.add('open', 'show');
+// })
+//
+// cardList[8].addEventListener('click', function flipCard() {
+//   cardList[8].classList.add('open', 'show');
+// })
+//
+// cardList[9].addEventListener('click', function flipCard() {
+//   cardList[9].classList.add('open', 'show');
+// })
+//
+// cardList[10].addEventListener('click', function flipCard() {
+//   cardList[10].classList.add('open', 'show');
+// })
+//
+// cardList[11].addEventListener('click', function flipCard() {
+//   cardList[11].classList.add('open', 'show');
+// })
+//
+// cardList[12].addEventListener('click', function flipCard() {
+//   cardList[12].classList.add('open', 'show');
+// })
+//
+// cardList[13].addEventListener('click', function flipCard() {
+//   cardList[13].classList.add('open', 'show');
+// })
+//
+// cardList[14].addEventListener('click', function flipCard() {
+//   cardList[14].classList.add('open', 'show');
+// })
+//
+// cardList[15].addEventListener('click', function flipCard() {
+//   cardList[15].classList.add('open', 'show');
+// })
+
+
+
 
 
 /*

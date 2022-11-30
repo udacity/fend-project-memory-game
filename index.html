@@ -1,86 +1,135 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Matching Game</title>
-    <meta name="description" content="">
-    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <meta name="description" content="Memory-game responsive- matching-game mobile-game">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
 
+<body>
     <div class="container">
         <header>
             <h1>Matching Game</h1>
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
 
-        	<span class="moves">3</span> Moves
+            <div class="moves"><span class="count">0</span>moves</div>
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
-        	</div>
+            <div class="timer">
+                <span id="clock">00:00:00</span>
+                <!--                 <spam class="minutes"></spam>
+                <spam>:</spam>
+                <spam class="seconds"></spam> -->
+            </div>
+
+            <label for="chk-game" id="label-game">Play</label>
+            <input type="checkbox" id="chk-game">
+            <!-- <button type="butmit" class="btn-start">Play</button> -->
+
+            <div>
+                <button id="restart">
+                    <i class="fas fa-sync"></i>
+                </button>
+            </div>
+
         </section>
 
         <ul class="deck">
-            <li class="card">
-                <i class="fa fa-diamond"></i>
+            <li class="card profile1" data-framework="gem">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="far fa-gem front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
+            <li class="card profile2" data-framework="plane">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fas fa-paper-plane front-face"></i>
             </li>
-            <li class="card match">
-                <i class="fa fa-anchor"></i>
+            <li class="card profile3" data-framework="anchor">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-anchor front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-bolt"></i>
+            <li class="card profile4" data-framework="bolt">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bolt front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
+            <li class="card profile5" data-framework="cube">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-cube front-face"></i>
             </li>
-            <li class="card match">
-                <i class="fa fa-anchor"></i>
+            <li class="card profile6" data-framework="anchor">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-anchor front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
+            <li class="card profile7" data-framework="leaf">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-leaf front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
+            <li class="card profile8" data-framework="bicycle">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bicycle front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-diamond"></i>
+            <li class="card profile9" data-framework="gem">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="far fa-gem front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
+            <li class="card profile10" data-framework="bomb">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bomb front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-leaf"></i>
+            <li class="card profile11" data-framework="leaf">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-leaf front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-bomb"></i>
+            <li class="card profile12" data-framework="bomb">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bomb front-face"></i>
             </li>
-            <li class="card open show">
-                <i class="fa fa-bolt"></i>
+            <li class="card profile13" data-framework="bolt">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bolt front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-bicycle"></i>
+            <li class="card profile14" data-framework="bicycle">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-bicycle front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-paper-plane-o"></i>
+            <li class="card profile15" data-framework="plane">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fas fa-paper-plane front-face"></i>
             </li>
-            <li class="card">
-                <i class="fa fa-cube"></i>
+            <li class="card profile16" data-framework="cube">
+                <i class="fab fa-js-square back-face"></i>
+                <i class="fa fa-cube front-face"></i>
             </li>
         </ul>
-    </div>
 
+        <div id="welcome-modal" class="overlay">
+            <div class="modal">
+                <h2>Welcome!</h2>
+                <div class="summary">
+                    <p>The goal of this game is to find all pairs of each card with the least number of moves.</p>
+                </div>
+                <button id="play">Ok! Got it!</button>
+            </div>
+        </div>
+
+        <div id="win-modal" class="overlay">
+            <div class="modal">
+                <h2>Congratulations! You Win!</h2>
+                <div class="summary">
+                    <p><span id="session-moves"></span> moves</p>
+                    <p>Time: <span id="session-time"></span></p>
+                </div>
+                <button id="play-again">Play again!</button>
+            </div>
+        </div>
+    </div>
     <script src="js/app.js"></script>
 </body>
+
 </html>
